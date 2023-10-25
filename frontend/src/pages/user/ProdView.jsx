@@ -262,6 +262,31 @@ export default function ProdView() {
                               </MDBCol>
                          </MDBRow>
                          <br />
+                         <div className="grid">
+                              <h2>What People Say</h2>
+                              <h3>Testimonials</h3>
+                              <div className="testimonials">
+                                   <div className="testimonial">
+                                        <div class="testimonial-content">
+                                             <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                                             <p class="user-name">John Doe</p>
+                                        </div>
+                                   </div>
+                                   <div className="testimonial">
+                                        <div class="testimonial-content">
+                                             <p>Nullam nec purus non libero tincidunt posuere.</p>
+                                             <p class="user-name">Jane Smith</p>
+                                        </div>
+                                   </div>
+                                   <div className="testimonial">
+                                        <div class="testimonial-content">
+                                             <p>Curabitur vel eros a erat vestibulum varius.</p>
+                                             <p class="user-name">Mike Johnson</p>
+                                        </div>
+                                   </div>
+                              </div>
+                         </div>
+
                          <MDBRow className="prod-row">
                               <MDBCol md="8" lg="2" className="product-column mb-4 mb-lg-0">
                                    <MDBCard className="product-card">
