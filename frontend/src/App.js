@@ -11,11 +11,12 @@ import SingleProdView from './pages/user/SingleProdView';
 import ShoppingCart from './pages/user/ShoppingCart';
 import PharmacyAdDashBoard from './pages/admin/PharmacyAdDashBoard';
 import SuperAdDashBoard from './pages/admin/SuperAdDashBoard';
+import Prescription from './pages/user/Prescription';
+
 
 function App() {
   return (
     <>
-      
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<Homepage />} />
@@ -29,6 +30,7 @@ function App() {
           <Route path="/ShoppingCart" element={<ShoppingCart />} />
           <Route path="/Pharmacydashboard" element={<PharmacyAdDashBoard />} />
           <Route path="/Superdashboard" element={<SuperAdDashBoard />} />
+          <Route path="/Prescription" element={<Prescription />} />
         </Routes>
       </BrowserRouter>
     </>
