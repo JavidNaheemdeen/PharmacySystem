@@ -11,6 +11,8 @@ import {
      MDBBtn,
 } from "mdb-react-ui-kit";
 import Footer from '../../components/user/Footer';
+import bug from '../../images/bug.png'
+import cog from '../../images/cog.png'
 // import "./ecommerce-category-product.css";
 
 
@@ -262,30 +264,58 @@ export default function ProdView() {
                               </MDBCol>
                          </MDBRow>
                          <br />
-                         <div className="grid">
-                              <h2>What People Say</h2>
-                              <h3>Testimonials</h3>
-                              <div className="testimonials">
-                                   <div className="testimonial">
-                                        <div class="testimonial-content">
-                                             <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-                                             <p class="user-name">John Doe</p>
+
+                         <div className="container-fluid">
+
+                              <div className="row text-center ">
+
+                                   <div className="col-md-6 bg-color-whitesmoke ">
+                                        <div className="docOrder-image">
+
+                                             <div className="bg-trans">
+                                                  <br /> <br /> <br />
+                                                  <h1 className="hone white">
+                                                       Doctor Prescription
+                                                  </h1>
+                                                  <br /> <br />
+                                                  <p className="prodpara pr-5 pl-5 white">
+                                                       Online order
+                                                  </p>
+                                                  <div className="btn btn-curved">
+                                                       Order Now
+                                                  </div>
+                                                  <br /> <br /> <br />
+                                             </div>
+
                                         </div>
                                    </div>
-                                   <div className="testimonial">
-                                        <div class="testimonial-content">
-                                             <p>Nullam nec purus non libero tincidunt posuere.</p>
-                                             <p class="user-name">Jane Smith</p>
+                                   <div className="col-md-6">
+
+                                        <div className="medShop-image">
+                                             <div className="bg-trans">
+
+                                                  <br /> <br /> <br />
+                                                  <h1 className="hone white">
+                                                       Medical Equipments
+                                                  </h1>
+                                                  <br /> <br />
+                                                  <p className="prodpara pr-5 pl-5 white">
+                                                       Deliver services
+                                                  </p>
+                                                  <div className="btn btn-curved">
+                                                       Shop Now
+                                                  </div>
+                                                  <br /> <br /> <br />
+
+
+                                             </div>
                                         </div>
+
                                    </div>
-                                   <div className="testimonial">
-                                        <div class="testimonial-content">
-                                             <p>Curabitur vel eros a erat vestibulum varius.</p>
-                                             <p class="user-name">Mike Johnson</p>
-                                        </div>
-                                   </div>
+
                               </div>
                          </div>
+
 
                          <MDBRow className="prod-row">
                               <MDBCol md="8" lg="2" className="product-column mb-4 mb-lg-0">

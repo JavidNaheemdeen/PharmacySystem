@@ -7,6 +7,7 @@ import Header from '../../components/user/Header'
 import Footer from '../../components/user/Footer'
 import { FaLocationDot } from 'react-icons/fa6';
 import { FcClock } from 'react-icons/fc';
+import { BsPrescription2 } from 'react-icons/bs';
 
 export default function Homepage() {
      return (
@@ -163,11 +164,33 @@ export default function Homepage() {
                          </div>
                     </div>
 
-
-
-
-
-
+                    <div className="grid">
+                         <h2 className="grid-title">What People Say</h2>
+                         <h3 className="grid-sub">Testimonials</h3>
+                         <div className="testimonials">
+                              <div className="testimonial">
+                                   <div class="testimonial-content">
+                                        <img src="https://images.unsplash.com/photo-1603415526960-f7e0328c63b1?auto=format&fit=crop&q=80&w=1000&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxjb2xsZWN0aW9uLXBhZ2V8MXw4NjYyMzA3MXx8ZW58MHx8fHx8" alt="profile" />
+                                        <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Ex alias accusantium distinctio optio, quidem, atque modi, ad eligendi nemo quibusdam odit reiciendis. Fugiat, quo! Laboriosam dolorem maxime aliquid culpa. Consequatur!</p>
+                                        <p class="user-name">John Doe</p>
+                                   </div>
+                              </div>
+                              <div className="testimonial">
+                                   <div class="testimonial-content">
+                                        <img src="https://media.istockphoto.com/id/1304581885/photo/portrait-of-young-woman-smiling.jpg?s=612x612&w=0&k=20&c=szq9mHVYt-iWL6TebJ6BfxSX8e9WR1HqF-PbR5oma4Y=" alt="" />
+                                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolorem blanditiis excepturi quasi, totam, impedit officia similique, consequatur magni eos harum voluptas eligendi aspernatur assumenda rem placeat natus sequi earum aliquid?.</p>
+                                        <p class="user-name">Jane Smith</p>
+                                   </div>
+                              </div>
+                              <div className="testimonial">
+                                   <div class="testimonial-content">
+                                        <img className="testi-img" src="https://t3.ftcdn.net/jpg/03/53/59/46/360_F_353594684_Ca3p9RIc3xgQ1Y6ff7Jk6nVe54v9NbpQ.jpg" alt="" />
+                                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Repudiandae, cupiditate eos sapiente ullam dolores non sed vitae odit provident quia perspiciatis nulla neque quam, consequatur a eveniet, repellendus dolore dolorum.</p>
+                                        <p class="user-name">Mike Johnson</p>
+                                   </div>
+                              </div>
+                         </div>
+                    </div>
 
                     <div className="container-fluid bg-gradient-yellow">
                          <br /> <br />
@@ -185,6 +208,26 @@ export default function Homepage() {
                          </div>
                          <br />
                     </div>
+
+                    <a className="btn btn-curve"
+                         href="link-to-whatsapp"
+                         style={{
+                              position: 'fixed',
+                              bottom: '20px', 
+                              right: '20px', 
+                              background: 'yellow', 
+                              color: 'black', 
+                              fontSize: '22px',
+                              borderRadius: '2rem',
+                              padding: '10px',
+                              textAlign: 'center',
+                              cursor: 'pointer',
+                         }}
+                    >
+                         <BsPrescription2 /> Prescription{/* Use the WhatsApp icon */}
+                    </a>
+
+                    
                     <Footer />
 
                </div>

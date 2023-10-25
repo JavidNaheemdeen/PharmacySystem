@@ -7,6 +7,7 @@
     scroll-behavior: smooth;
 }
 
+
 .hpimage {
     background-image: url(./images/back.jpg);
     background-repeat: no-repeat;
@@ -131,7 +132,7 @@
 }
 
 h2 {
-    font-size: 24px;
+    font-size: 34px;
     color: #0a0a0a;
 }
 
@@ -148,17 +149,21 @@ h3 {
 
 .testimonial {
     flex: 1;
-    margin: 5rem 5rem 2rem 5rem;
-    padding: 10px;
-    padding-bottom: 250px;
+    margin: 2rem 5rem 2rem 5rem;
+    padding: 5px;
+    /* padding-bottom: 200px; */
     background: rgba(255, 255, 255, 0.8);
     border-radius: 10px;
     text-align: center;
     box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.3);
 }
 
+.testimonial img {
+    width: 100%;
+    border-radius: 1rem;
+}
+
 .testimonial-content {
-    padding: 10px;
     text-align: center;
     color: #333;
 }
@@ -252,6 +257,22 @@ h3 {
         width: 100%;
     }
 }
+
+.medShop-image {
+    background-image: url(images/equip.jpeg);
+    background-size: cover;
+}
+
+.docOrder-image {
+    background-image: url(images/medi.jpg);
+    background-size: cover;
+}
+
+
+.prodpara{
+    font-size: 27px;
+}
+
 
 
 
@@ -447,6 +468,8 @@ li {
     background: linear-gradient(80deg, rgba(58, 66, 94, 0.671), rgba(99, 96, 70, 0.37));
 }
 
+
+
 .how-image {
     background-repeat: no-repeat;
     background-image: url("images/3.jpg");
@@ -458,6 +481,8 @@ li {
     background-position: center;
     background-size: cover;
 }
+
+
 
 .pay-image{
     background: linear-gradient(80deg, rgba(29, 33, 48, 0.671), rgba(88, 87, 70, 0.37));
