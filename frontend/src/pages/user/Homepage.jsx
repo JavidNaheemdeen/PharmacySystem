@@ -210,7 +210,7 @@ export default function Homepage() {
                     </div>
 
                     <a className="btn btn-curve"
-                         href="link-to-whatsapp"
+                         href="/Prescription"
                          style={{
                               position: 'fixed',
                               bottom: '20px', 

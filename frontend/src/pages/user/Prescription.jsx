@@ -13,7 +13,6 @@ export default function Prescription() {
      return (
           <div>
                <Header />
-               <br />
                <div className="prescription-form-container">
                     <h2>Prescription Form</h2>
                     <div className="form-columns">
