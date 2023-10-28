@@ -224,7 +224,7 @@ export default function Homepage() {
                               cursor: 'pointer',
                          }}
                     >
-                         <BsPrescription2 /> Prescription{/* Use the WhatsApp icon */}
+                         <BsPrescription2 /> Prescription
                     </a>
 
                     
