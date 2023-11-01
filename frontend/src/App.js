@@ -9,9 +9,12 @@ import SuperAdmReg from './pages/user/SuperAdmReg';
 import ProdView from './pages/user/ProdView';
 import SingleProdView from './pages/user/SingleProdView';
 import ShoppingCart from './pages/user/ShoppingCart';
-import PharmacyAdDashBoard from './pages/admin/PharmacyAdDashBoard';
-import SuperAdDashBoard from './pages/admin/SuperAdDashBoard';
+import ProductDashBoard from './pages/admin/ProductDashBoard';
+import PharmacyDashBoard from './pages/admin/PharmacyDashBoard';
 import Prescription from './pages/user/Prescription';
+import AdminDashboard from './pages/admin/AdminDashboard';
+import SuperAdminDashboard from './pages/admin/SuperAdminDashboard';
+import PharmLogin from './pages/admin/PharmLogin';
 
 
 function App() {
@@ -28,8 +31,11 @@ function App() {
           <Route path="/ProductView" element={<ProdView />} />
           <Route path="/SingleProdView" element={<SingleProdView />} />
           <Route path="/ShoppingCart" element={<ShoppingCart />} />
-          <Route path="/Pharmacydashboard" element={<PharmacyAdDashBoard />} />
-          <Route path="/Superdashboard" element={<SuperAdDashBoard />} />
+          <Route path="/Productdashboard" element={<ProductDashBoard />} />
+          <Route path="/Admindashboard" element={<AdminDashboard />} />
+          <Route path="/Pharmacydashboard" element={<PharmacyDashBoard />} />
+          <Route path="/Supadmindashboard" element={<SuperAdminDashboard />} />
+          <Route path="/Pharmlogin" element={<PharmLogin />} />
           <Route path="/Prescription" element={<Prescription />} />
         </Routes>
       </BrowserRouter>

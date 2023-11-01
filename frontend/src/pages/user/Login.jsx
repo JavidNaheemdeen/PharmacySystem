@@ -5,24 +5,7 @@ import axios from "axios";
 // import "../style.css"
 
 export default function Login() {
-     // const userRef = useRef();
-     // const passwordRef = useRef();
-     // const { user, dispatch, isFetching } = useContext(Context)
 
-     // const handleSubmit = async (e) => {
-     //      e.preventDefault();
-     //      dispatch({ type: "LOGIN_START" })
-     //      try {
-     //           const res = await axios.post("/StudentAuth/login/", {
-     //                username: userRef.current.value,
-     //                password: passwordRef.current.value,
-     //           })
-     //           dispatch({ type: "LOGIN_SUCCESS", payload: res.data });
-     //      } catch (err) {
-     //           dispatch({ type: "LOGIN_FAILURE" });
-     //      }
-     // };
-     // console.log(user);
      return (
           <div>
                <div class="container-fluid">
@@ -49,7 +32,7 @@ export default function Login() {
                                         <span class=" card-body">
                                              <br /><br />
                                              <span class=" card-title">
-                                                  Log In
+                                                  Log In As A User
                                              </span>
                                              <br /><br />
                                              <span class="card-text">
@@ -67,7 +50,9 @@ export default function Login() {
 
                                                        </div>
                                                        <a href=""> Forgot Password</a>
-                                                       <br /> <br />
+                                                       <br /> 
+                                                       <a href="/Pharmlogin"> Login as a Pharmacist</a>
+                                                       <br />
                                                        <input type="submit" value="Login" class="btn btn-curved" role="button" style={{ width: '100%' }} />
 
                                                   </form>

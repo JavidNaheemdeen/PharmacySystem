@@ -6,6 +6,8 @@ import { CgProfile } from 'react-icons/cg';
 import { MdLocalPharmacy } from 'react-icons/md';
 import { FaUser } from 'react-icons/fa';
 import { FaBell } from 'react-icons/fa';
+import { FaHome } from 'react-icons/fa';
+
 
 
 export default function SidenavSuperAd() {
@@ -14,7 +16,7 @@ export default function SidenavSuperAd() {
                <Navbar variant="dark" bg="dark" expand="lg" className='sidenav navbar navbar-vertical fixed-left navbar-expand-xs navbar-dark bg-dark navbar-expand-lg'>
                     <Navbar.Toggle aria-controls="navbar-dark-example" />
                     <div className="text-center">
-                         <a className="brand" href="/Superdashboard">
+                         <a className="brand" href="/Supadmindashboard">
                               <img src={logo} style={{ width: '150px', height: '50px' }} alt="image" />
                          </a><br />
                     </div>
@@ -22,8 +24,9 @@ export default function SidenavSuperAd() {
                          <Navbar.Collapse id="navbar-dark-example">
                               <div className="navbar-collapse row m-auto ">
                                    <div className="navbar-nav col-md-10">
-                                        <a href="#" className="nav-item dash-link nav-link "> <CgProfile /> Profile </a>
-                                        <a href="#" className="nav-item nav-link dash-link active bg-secondary"> <MdLocalPharmacy /> Pharmacy Information </a>
+                                        <a href="/Supadmindashboard" className="nav-item dash-link nav-link active bg-secondary"><FaHome/> Super Admin Dashboard </a>
+                                        <a href="Pharmacydashboard" className="nav-item nav-link dash-link "> <MdLocalPharmacy /> Pharmacy Dashboard </a>
+                                        <a href="#" className="nav-item nav-link dash-link "> <CgProfile /> User Dashboard </a>
                                         <a href="#" className="nav-item nav-link dash-link"><FiSettings /> Settings </a>
                                    </div>
                               </div>

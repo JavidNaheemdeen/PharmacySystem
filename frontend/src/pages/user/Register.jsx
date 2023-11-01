@@ -61,7 +61,6 @@ export default function Register() {
                                                        </div>
                                                        {/* <a href=""> Forgot Password</a> */}
                                                        <a href="/Pharmacist"> Register As Pharmacist</a> <br />
-                                                       <a href="/SuperAdmin"> Register As SuperAdmin</a>
                                                        <br /> <br />
                                                        <input type="submit" value="Register" class="btn btn-curved" role="button" style={{ width: '100%' }} />
 
