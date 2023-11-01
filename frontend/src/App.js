@@ -15,6 +15,7 @@ import Prescription from './pages/user/Prescription';
 import AdminDashboard from './pages/admin/AdminDashboard';
 import SuperAdminDashboard from './pages/admin/SuperAdminDashboard';
 import PharmLogin from './pages/admin/PharmLogin';
+import ProfileAd from './pages/admin/ProfileAd';
 
 
 function App() {
@@ -36,6 +37,7 @@ function App() {
           <Route path="/Pharmacydashboard" element={<PharmacyDashBoard />} />
           <Route path="/Supadmindashboard" element={<SuperAdminDashboard />} />
           <Route path="/Pharmlogin" element={<PharmLogin />} />
+          <Route path="/Profilead" element={<ProfileAd />} />
           <Route path="/Prescription" element={<Prescription />} />
         </Routes>
       </BrowserRouter>

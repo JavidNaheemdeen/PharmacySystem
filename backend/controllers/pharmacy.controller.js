@@ -1,10 +1,14 @@
 const Pharmacy = require("../models/pharmacy.js");
+const bcrypt = require("bcrypt");
 
 // Function to add a new pharmacy
 exports.addPharmacy = async (req, res) => {
   try {
     const { name, email, address, town, logo, contact, opentime, password } =
       req.body;
+
+    // Hash the password before saving it
+    const hashedPassword = await bcrypt.hash(password, 10); // 10 is the salt rounds, you can adjust it
 
     const newPharmacy = new Pharmacy({
       name,
@@ -14,7 +18,7 @@ exports.addPharmacy = async (req, res) => {
       logo,
       contact,
       opentime,
-      password,
+      password: hashedPassword, // Store the hashed password
     });
 
     const savedPharmacy = await newPharmacy.save();
@@ -129,5 +133,31 @@ exports.searchPharmaciesByName = async (req, res) => {
     res
       .status(500)
       .json({ error: "Could not perform the pharmacy name search" });
+  }
+};
+
+// Function to authenticate a pharmacist
+exports.authenticatePharmacist = async (req, res) => {
+  try {
+    const { email, password } = req.body;
+
+    // Find the pharmacist by email
+    const pharmacist = await Pharmacy.findOne({ email });
+
+    if (!pharmacist) {
+      return res.status(401).json({ error: "Pharmacist not found" });
+    }
+
+    // Compare the provided password with the hashed password in the database
+    const passwordMatch = await bcrypt.compare(password, pharmacist.password);
+
+    if (!passwordMatch) {
+      return res.status(401).json({ error: "Invalid password" });
+    }
+
+    // Authentication successful
+    res.status(200).json({ message: "Logged in successfully", _id: pharmacist._id });
+  } catch (error) {
+    res.status(500).json({ error: "Could not authenticate pharmacist" });
   }
 };

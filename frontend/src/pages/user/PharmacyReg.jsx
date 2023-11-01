@@ -106,7 +106,11 @@ export default function PharmacyReg() {
             text: "Successfully registered as a Pharmacist",
             icon: "success",
             confirmButtonText: "Ok",
-          });
+          }).then((result) => {
+               if (result.isConfirmed) {
+                 window.location.href = '/Pharmlogin';
+               }
+             });
         })
         .catch(function (error) {
           console.log(error);

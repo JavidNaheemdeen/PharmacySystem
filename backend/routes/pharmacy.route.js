@@ -8,5 +8,6 @@ router.delete('/deletepharmacy/:id', pharmacyController.deletePharmacy);
 router.get('/', pharmacyController.getAllPharmacies);
 router.get('/:id', pharmacyController.getPharmacyById);
 router.get('/town/:town', pharmacyController.getPharmaciesByTown);
+router.post('/authenticate', pharmacyController.authenticatePharmacist);
 
 module.exports = router;
