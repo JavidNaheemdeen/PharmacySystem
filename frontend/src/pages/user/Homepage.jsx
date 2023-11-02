@@ -14,6 +14,7 @@ import axios from "axios";
 export default function Homepage() {
 
      const [pharmacy, setPharmacy] = useState([]);
+     const [searchTerm, setSearchTerm] = useState("");
 
      useEffect(() => {
           axios
@@ -25,6 +26,11 @@ export default function Homepage() {
                     console.log(err);
                });
      }, []);
+
+     // Filter pharmacies based on the search term
+     const filteredPharmacies = pharmacy.filter((pm) =>
+          pm.town.toLowerCase().includes(searchTerm.toLowerCase())
+     );
 
      return (
           <div>
@@ -44,10 +50,13 @@ export default function Homepage() {
                                    <br /><br />
                                    <div className="container" style={{ padding: '10px' }}>
                                         <h2 style={{ fontSize: '30px', fontFamily: 'fredoka one', fontWeight: 'bold' }} >Select Pharmacy</h2>
-                                        <input type="text" placeholder="Search by Town" style={{ width: '100%', padding: '10px', marginBottom: '3px', borderRadius: '20px' }} />
+                                        <input type="text"
+                                             placeholder="Search by Town"
+                                             style={{ width: '100%', padding: '10px', marginBottom: '3px', borderRadius: '20px' }}
+                                             value={searchTerm}
+                                             onChange={(e) => setSearchTerm(e.target.value)} />
                                         <ul className="list-group" style={{ height: '400px', overflowY: 'auto' }}>
-                                             {/* {pharmacies.map((pharmacy, index) => ( */}
-                                             {pharmacy.map((pm) => (
+                                             {filteredPharmacies.map((pm) => (
                                                   <li className="list-group-item" key={pm._id}>
                                                        <a href="/ProductView" style={{ textDecoration: 'none', color: 'black' }}>
                                                             <h3>{pm.name}</h3>
@@ -56,13 +65,13 @@ export default function Homepage() {
                                                        </a>
                                                   </li>
                                              ))}
-                                             {/* ))} */}
+                                             
                                         </ul>
                                    </div>
                               </div>
                          </div>
                     </div>
-                    {/* </div> */}
+
 
                     <section className="fdb-block" id="1">
                          <br /><br />
