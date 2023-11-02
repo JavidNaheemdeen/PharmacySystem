@@ -31,6 +31,10 @@ const productSchema = mongoose.Schema({
     default:
       "https://res.cloudinary.com/dfmnpw0yp/image/upload/v1679235307/assets/tsuh9f6v1reihgqxwxrz.ico",
   },
+  pharmacyId: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "Pharmacy", // Reference the Pharmacy model
+  },
 });
 
 const Product = mongoose.model("Product", productSchema);

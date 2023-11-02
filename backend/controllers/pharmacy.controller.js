@@ -156,7 +156,9 @@ exports.authenticatePharmacist = async (req, res) => {
     }
 
     // Authentication successful
-    res.status(200).json({ message: "Logged in successfully", _id: pharmacist._id });
+    res
+      .status(200)
+      .json({ message: "Logged in successfully", _id: pharmacist._id });
   } catch (error) {
     res.status(500).json({ error: "Could not authenticate pharmacist" });
   }
