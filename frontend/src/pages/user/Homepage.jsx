@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect, useState } from "react";
 import "../../style.css"
 import pin from '../../images/svg.png'
 import bug from '../../images/bug.png'
@@ -8,8 +8,24 @@ import Footer from '../../components/user/Footer'
 import { FaLocationDot } from 'react-icons/fa6';
 import { FcClock } from 'react-icons/fc';
 import { BsPrescription2 } from 'react-icons/bs';
+import axios from "axios";
+// import Swal from 'sweetalert2';
 
 export default function Homepage() {
+
+     const [pharmacy, setPharmacy] = useState([]);
+
+     useEffect(() => {
+          axios
+               .get("http://localhost:3000/api/pharmacy/")
+               .then((res) => {
+                    setPharmacy(res.data);
+               })
+               .catch((err) => {
+                    console.log(err);
+               });
+     }, []);
+
      return (
           <div>
                <Header />
@@ -28,65 +44,18 @@ export default function Homepage() {
                                    <br /><br />
                                    <div className="container" style={{ padding: '10px' }}>
                                         <h2 style={{ fontSize: '30px', fontFamily: 'fredoka one', fontWeight: 'bold' }} >Select Pharmacy</h2>
-                                        <input type="text" placeholder="Search by city" style={{ width: '100%', padding: '10px', marginBottom: '3px', borderRadius: '20px' }} />
+                                        <input type="text" placeholder="Search by Town" style={{ width: '100%', padding: '10px', marginBottom: '3px', borderRadius: '20px' }} />
                                         <ul className="list-group" style={{ height: '400px', overflowY: 'auto' }}>
                                              {/* {pharmacies.map((pharmacy, index) => ( */}
-                                             <li className="list-group-item">
-                                                  <a href="/ShoppingCart" style={{ textDecoration: 'none', color: 'black' }}>
-                                                       <h3>Kiyome Pharmacy</h3>
-                                                       <p style={{ position: 'absolute', top: '0', right: '0', margin: '9px', fontSize: '19px' }}><FcClock /> 8.00 AM - 6.00 PM</p>
-                                                       <p style={{ fontSize: '19px' }}><FaLocationDot style={{ color: 'blue' }} /> 7C3W+5GX, Rambukkana - Mawanella Rd, Mawanella</p>
-                                                  </a>
-                                             </li>
-                                             <li className="list-group-item">
-                                                  <a href="/ShoppingCart" style={{ textDecoration: 'none', color: 'black' }}>
-                                                       <h3>Raj Pharmacy</h3>
-                                                       <p style={{ position: 'absolute', top: '0', right: '0', margin: '9px', fontSize: '19px' }}><FcClock /> 8.00 AM - 6.00 PM</p>
-                                                       <p style={{ fontSize: '19px' }}><FaLocationDot style={{ color: 'blue' }} /> 688 Peradeniya Rd, Kandy 20000</p>
-                                                  </a>
-                                             </li>
-                                             <li className="list-group-item">
-                                                  <a href="/ShoppingCart" style={{ textDecoration: 'none', color: 'black' }}>
-                                                       <h3>kandy medicals</h3>
-                                                       <p style={{ position: 'absolute', top: '0', right: '0', margin: '9px', fontSize: '19px' }}><FcClock /> 8.00 AM - 6.00 PM</p>
-                                                       <p style={{ fontSize: '19px' }}><FaLocationDot style={{ color: 'blue' }} />  7C3W+3M4, Mawanella</p>
-                                                  </a>
-                                             </li>
-                                             <li className="list-group-item">
-                                                  <a href="/ShoppingCart" style={{ textDecoration: 'none', color: 'black' }}>
-                                                       <h3>Lanka Pharmacy</h3>
-                                                       <p style={{ position: 'absolute', top: '0', right: '0', margin: '9px', fontSize: '19px' }}><FcClock /> 8.00 AM - 6.00 PM</p>
-                                                       <p style={{ fontSize: '19px' }}><FaLocationDot style={{ color: 'blue' }} /> 5H79+WQG, Gampola</p>
-                                                  </a>
-                                             </li>
-                                             <li className="list-group-item">
-                                                  <a href="/ShoppingCart" style={{ textDecoration: 'none', color: 'black' }}>
-                                                       <h3>Kegalla pharmacy</h3>
-                                                       <p style={{ position: 'absolute', top: '0', right: '0', margin: '9px', fontSize: '19px' }}><FcClock /> 8.00 AM - 6.00 PM</p>
-                                                       <p style={{ fontSize: '19px' }}><FaLocationDot style={{ color: 'blue' }} /> 119 Colombo - Kandy Rd, Kegalle</p>
-                                                  </a>
-                                             </li>
-                                             <li className="list-group-item">
-                                                  <a href="/ShoppingCart" style={{ textDecoration: 'none', color: 'black' }}>
-                                                       <h3>University Rajya Osu Sala</h3>
-                                                       <p style={{ position: 'absolute', top: '0', right: '0', margin: '9px', fontSize: '19px' }}><FcClock /> 8.00 AM - 6.00 PM</p>
-                                                       <p style={{ fontSize: '19px' }}><FaLocationDot style={{ color: 'blue' }} /> 7H9X+4FX, Kandy</p>
-                                                  </a>
-                                             </li>
-                                             <li className="list-group-item">
-                                                  <a href="/ShoppingCart" style={{ textDecoration: 'none', color: 'black' }}>
-                                                       <h3>Rathna pharmacy-රත්න</h3>
-                                                       <p style={{ position: 'absolute', top: '0', right: '0', margin: '9px', fontSize: '19px' }}><FcClock /> 8.00 AM - 6.00 PM</p>
-                                                       <p style={{ fontSize: '19px' }}><FaLocationDot style={{ color: 'blue' }} /> 748/B Kandy Rd, Kadugannawa 20300</p>
-                                                  </a>
-                                             </li>
-                                             <li className="list-group-item">
-                                                  <a href="/ShoppingCart" style={{ textDecoration: 'none', color: 'black' }}>
-                                                       <h3>Discount Pharmacy</h3>
-                                                       <p style={{ position: 'absolute', top: '0', right: '0', margin: '9px', fontSize: '19px' }}><FcClock /> 8.00 AM - 6.00 PM</p>
-                                                       <p style={{ fontSize: '19px' }}><FaLocationDot style={{ color: 'blue' }} /> 7GCX+87P, Pilimathalawa</p>
-                                                  </a>
-                                             </li>
+                                             {pharmacy.map((pm) => (
+                                                  <li className="list-group-item" key={pm._id}>
+                                                       <a href="/ProductView" style={{ textDecoration: 'none', color: 'black' }}>
+                                                            <h3>{pm.name}</h3>
+                                                            <p style={{ position: 'absolute', top: '0', right: '0', margin: '9px', fontSize: '19px' }}><FcClock /> {pm.opentime}</p>
+                                                            <p style={{ fontSize: '19px' }}><FaLocationDot style={{ color: 'blue' }} /> {pm.address}</p>
+                                                       </a>
+                                                  </li>
+                                             ))}
                                              {/* ))} */}
                                         </ul>
                                    </div>
@@ -213,10 +182,10 @@ export default function Homepage() {
                          href="/Prescription"
                          style={{
                               position: 'fixed',
-                              bottom: '20px', 
-                              right: '20px', 
-                              background: 'yellow', 
-                              color: 'black', 
+                              bottom: '20px',
+                              right: '20px',
+                              background: 'yellow',
+                              color: 'black',
                               fontSize: '22px',
                               borderRadius: '2rem',
                               padding: '10px',
@@ -227,7 +196,7 @@ export default function Homepage() {
                          <BsPrescription2 /> Prescription
                     </a>
 
-                    
+
                     <Footer />
 
                </div>

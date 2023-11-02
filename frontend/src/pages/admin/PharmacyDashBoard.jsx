@@ -19,34 +19,34 @@ export default function PharmacyDashboard() {
   }, []);
 
   const handleDeletePharmacy = (pharmacyId) => {
-     Swal.fire({
-       title: 'Confirm Deletion',
-       text: 'Are you sure you want to delete this pharmacy?',
-       icon: 'warning',
-       showCancelButton: true,
-       confirmButtonText: 'Yes',
-       cancelButtonText: 'No',
-     }).then((result) => {
-       if (result.isConfirmed) {
-         axios
-           .delete(`http://localhost:3000/api/pharmacy/deletepharmacy/${pharmacyId}`)
-           .then(() => {
-             setPharmacy((prevPharmacy) =>
-               prevPharmacy.filter((pm) => pm._id !== pharmacyId)
-             );
- 
-             Swal.fire({
-               title: 'Success',
-               text: 'Pharmacy deleted successfully!',
-               icon: 'success',
-             });
-           })
-           .catch((err) => {
-             console.log(err);
-           });
-       }
-     });
-   };
+    Swal.fire({
+      title: 'Confirm Deletion',
+      text: 'Are you sure you want to delete this pharmacy?',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonText: 'Yes',
+      cancelButtonText: 'No',
+    }).then((result) => {
+      if (result.isConfirmed) {
+        axios
+          .delete(`http://localhost:3000/api/pharmacy/deletepharmacy/${pharmacyId}`)
+          .then(() => {
+            setPharmacy((prevPharmacy) =>
+              prevPharmacy.filter((pm) => pm._id !== pharmacyId)
+            );
+
+            Swal.fire({
+              title: 'Success',
+              text: 'Pharmacy deleted successfully!',
+              icon: 'success',
+            });
+          })
+          .catch((err) => {
+            console.log(err);
+          });
+      }
+    });
+  };
 
   return (
     <div>
@@ -91,7 +91,7 @@ export default function PharmacyDashboard() {
                   <td>{pm.opentime}</td>
                   <td className="text-center">
                     <UpdatePharmModal pmid={pm._id} />
-                    <br/>
+                    <br />
                     <button
                       onClick={() => handleDeletePharmacy(pm._id)}
                       className="btn btn-danger btn-sm"
