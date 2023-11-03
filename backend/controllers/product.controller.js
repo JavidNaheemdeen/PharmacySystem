@@ -33,7 +33,6 @@ exports.addProduct = async (req, res) => {
   }
 };
 
-
 // Function to update a product by ID
 exports.updateProduct = async (req, res) => {
   try {
@@ -111,11 +110,9 @@ exports.searchProductsByProductname = async (req, res) => {
     });
 
     if (products.length === 0) {
-      return res
-        .status(404)
-        .json({
-          error: "No products found matching the provided product name",
-        });
+      return res.status(404).json({
+        error: "No products found matching the provided product name",
+      });
     }
 
     res.json(products);
@@ -125,8 +122,6 @@ exports.searchProductsByProductname = async (req, res) => {
       .json({ error: "Could not perform the product name search" });
   }
 };
-
-
 
 // Function to get products by pharmacyId
 exports.getProductsByPharmacyId = async (req, res) => {
