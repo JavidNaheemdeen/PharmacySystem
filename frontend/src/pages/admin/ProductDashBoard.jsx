@@ -1,10 +1,58 @@
-import React from 'react'
+import React, { useEffect, useState } from "react";
 import Sidenav from '../../components/admin/SidenavAd'
 // import "../../style.css"
 import AddProdModal from '../../components/modals/AddProdModal'
 import UpdateProdModal from '../../components/modals/UpdateProdModal'
+import axios from "axios";
+import Swal from "sweetalert2";
 
 export default function ProductDashBoard() {
+
+     const [products, setProducts] = useState([]);
+
+     const pharmacyId = localStorage.getItem("pharmacyId");
+
+     useEffect(() => {
+          axios
+               .get("http://localhost:3000/api/product/pharmacy/" + pharmacyId)
+               .then((res) => {
+                    setProducts(res.data);
+               })
+               .catch((err) => {
+                    console.log(err);
+               });
+     }, []);
+
+     const handleDeleteProduct = (productId) => {
+          Swal.fire({
+               title: "Confirm Deletion",
+               text: "Are you sure you want to delete this product?",
+               icon: "warning",
+               showCancelButton: true,
+               confirmButtonText: "Yes",
+               cancelButtonText: "No",
+          }).then((result) => {
+               if (result.isConfirmed) {
+                    axios
+                         .delete(`http://localhost:3000/api/product/deleteproduct/${productId}`)
+                         .then(() => {
+                              setProducts((prevProducts) =>
+                                   prevProducts.filter((product) => product._id !== productId)
+                              );
+
+                              Swal.fire({
+                                   title: "Success",
+                                   text: "Product deleted successfully!",
+                                   icon: "success",
+                              });
+                         })
+                         .catch((err) => {
+                              console.log(err);
+                         });
+               }
+          });
+     };
+
      return (
           <div>
                <Sidenav />
@@ -30,20 +78,33 @@ export default function ProductDashBoard() {
                                    </tr>
                               </thead>
                               <tbody>
-                                   <tr >
-                                        {/* <th scope="row">{x}</th> */}
-                                        <td>Panadol</td>
-                                        <td>Paracitamol</td>
-                                        <td>Tablets</td>
-                                        <td>01</td>
-                                        <td>100</td>
-                                        <td>Rs.3</td>
-                                        <td>Image</td>
-                                        <td className="text-center">
-                                             <UpdateProdModal />
-                                             <a href='#' className='btn btn-danger btn-sm' >Delete</a>
-                                        </td>
-                                   </tr>
+                                   {products.map((product) => (
+                                        <tr key={product._id}>
+                                             <td>{product.productname}</td>
+                                             <td>{product.genericname}</td>
+                                             <td>{product.form}</td>
+                                             <td>{product.batchnumber}</td>
+                                             <td>{product.quantity}</td>
+                                             <td>{product.unitprice}</td>
+                                             <td>
+                                                  <img
+                                                       src={product.logo}
+                                                       style={{ width: "50px", height: "50px" }}
+                                                       alt="Product Logo"
+                                                  />
+                                             </td>
+                                             <td className="text-center">
+                                                  <UpdateProdModal productId={product._id} />
+                                                  <br />
+                                                  <button
+                                                       onClick={() => handleDeleteProduct(product._id)}
+                                                       className="btn btn-danger btn-sm"
+                                                  >
+                                                       Delete
+                                                  </button>
+                                             </td>
+                                        </tr>
+                                   ))}
                               </tbody>
                          </table>
                          <br />

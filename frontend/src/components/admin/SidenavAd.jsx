@@ -1,5 +1,6 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Navbar, NavDropdown, Container, Nav } from "react-bootstrap";
+import axios from "axios";
 import logo from "../../images/logo.png";
 // import "../../style.css"
 import { FaUser } from "react-icons/fa";
@@ -12,21 +13,38 @@ import { FaHome } from "react-icons/fa";
 import Swal from 'sweetalert2';
 
 export default function SidenavAd() {
-     const handleLogout = () => {
-          // Remove the pharmacistId from local storage
-          localStorage.removeItem("pharmacistId");
-        
-          // Show a success Swal notification
-          Swal.fire({
-            icon: 'success',
-            title: 'Logout Successful',
-            text: 'You have been successfully logged out.',
-          }).then(() => {
-            // Redirect the user to the login or home page
-            window.location.href = "/Pharmlogin"; // You can replace '/Pharmlogin' with the desired logout destination
-          });
-        };
-        
+
+  const [pharmacy, setPharmacy] = useState({});
+
+  const pharmacyId = localStorage.getItem("pharmacyId");
+
+  useEffect(() => {
+    axios
+      .get(`http://localhost:3000/api/pharmacy/${pharmacyId}`)
+      .then((res) => {
+        setPharmacy(res.data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }, []);
+
+
+  const handleLogout = () => {
+    // Remove the pharmacyId from local storage
+    localStorage.removeItem("pharmacyId");
+
+    // Show a success Swal notification
+    Swal.fire({
+      icon: 'success',
+      title: 'Logout Successful',
+      text: 'You have been successfully logged out.',
+    }).then(() => {
+      // Redirect the user to the login or home page
+      window.location.href = "/Pharmlogin";
+    });
+  };
+
   return (
     <div>
       <Navbar
@@ -86,7 +104,7 @@ export default function SidenavAd() {
           </div>
           <div className="col-md-7">
             <br />
-            <h1 className="fredoka"> Hello Admin ! </h1>
+            <h1 className="fredoka"> Hello {pharmacy.name} ! </h1>
           </div>
           <div className="col-md-2 ">
             <br />

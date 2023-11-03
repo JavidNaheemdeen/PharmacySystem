@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate  } from 'react-router-dom';
 import Swal from 'sweetalert2';
 
@@ -6,6 +6,14 @@ export default function PharmLogin() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const navigate = useNavigate(); // Initialize useNavigate
+
+  useEffect(() => {
+    // Check if the user is already logged in (e.g., check if a token or user data exists in local storage)
+    const pharmacyId = localStorage.getItem('pharmacyId');
+    if (pharmacyId) {
+      navigate('/Admindashboard'); // Redirect to the dashboard if logged in
+    }
+  }, [navigate]);
 
   const handleLogin = async (e) => {
      e.preventDefault();
@@ -22,10 +30,10 @@ export default function PharmLogin() {
        if (response.status === 200) {
          // Authentication successful, get the pharmacist _id from the response (assuming your API returns the _id)
          const data = await response.json();
-         const pharmacistId = data._id;
+         const pharmacyId = data._id;
    
          // Store the pharmacist _id in local storage
-         localStorage.setItem('pharmacistId', pharmacistId);
+         localStorage.setItem('pharmacyId', pharmacyId);
    
          // Show a success Swal notification
          Swal.fire({

@@ -14,7 +14,7 @@ import axios from "axios";
 
 export default function ProfileAd() {
   const [pharmacy, setPharmacy] = useState({});
-  const pharmId = localStorage.getItem("pharmacistId");
+  const pharmId = localStorage.getItem("pharmacyId");
   console.log(pharmId);
 
   useEffect(() => {
