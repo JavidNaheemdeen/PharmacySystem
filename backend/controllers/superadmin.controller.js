@@ -96,3 +96,22 @@ exports.deleteSuperadmin = async (req, res) => {
     res.status(500).json({ error: 'Could not delete Superadmin' });
   }
 };
+
+// Function to get a Superadmin by ID
+exports.getSuperadmin = async (req, res) => {
+  try {
+    const superadminId = req.params.id; // Extract Superadmin ID from request parameters
+
+    // Find the Superadmin by ID
+    const superadmin = await Superadmin.findById(superadminId);
+
+    if (!superadmin) {
+      return res.status(404).json({ error: 'Superadmin not found' });
+    }
+
+    // Return the Superadmin
+    res.status(200).json(superadmin);
+  } catch (error) {
+    res.status(500).json({ error: 'Could not get Superadmin' });
+  }
+};

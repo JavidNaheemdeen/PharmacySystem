@@ -44,7 +44,7 @@ export default function AdminLogin() {
                          text: 'You have been successfully logged in as a Superadmin.',
                     }).then(() => {
                          // Redirect to the Superadmin dashboard
-                         navigate('/Superadmindashboard');
+                         navigate('/Supadmindashboard');
                     });
                } else {
                     // Authentication failed, show an error Swal notification

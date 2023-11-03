@@ -16,6 +16,8 @@ export default function SidenavSuperAd() {
 
      const [superadmin, setSuperadmin] = useState({});
 
+     const superadminId = localStorage.getItem("superadminId");
+
      useEffect(() => {
           axios
                .get(`http://localhost:3000/api/superadmin/${superadminId}`)
@@ -38,7 +40,7 @@ export default function SidenavSuperAd() {
                text: 'You have been successfully logged out.',
           }).then(() => {
                // Redirect the user to the login or home page
-               window.location.href = '/Supadmindashboard';
+               window.location.href = '/Adminlogin';
           });
      };
 
