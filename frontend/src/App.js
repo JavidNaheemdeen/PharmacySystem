@@ -17,6 +17,7 @@ import SuperAdminDashboard from './pages/admin/SuperAdminDashboard';
 import PharmLogin from './pages/admin/PharmLogin';
 import ProfileAd from './pages/admin/ProfileAd';
 import AdminLogin from './pages/admin/AdminLogin';
+import UserDashboard from './pages/admin/UserDashboard';
 
 
 function App() {
@@ -41,6 +42,7 @@ function App() {
           <Route path="/Profilead" element={<ProfileAd />} />
           <Route path="/Prescription" element={<Prescription />} />
           <Route path="/Adminlogin" element={<AdminLogin />} />
+          <Route path="/UserDashboard" element={<UserDashboard />} />
         </Routes>
       </BrowserRouter>
     </>

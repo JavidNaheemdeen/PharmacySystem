@@ -1,10 +1,66 @@
-import React from 'react'
-import { useContext, useRef } from "react";
-// import { Context } from "../context/Context";
+import React, { useState, useEffect } from 'react';
+import { useRef } from "react";
+import { useNavigate } from 'react-router-dom';
 import axios from "axios";
 // import "../style.css"
+import Swal from 'sweetalert2';
 
 export default function Login() {
+
+
+     const [email, setEmail] = useState('');
+     const [password, setPassword] = useState('');
+     const navigate = useNavigate();
+
+     useEffect(() => {
+          // Check if the user is already logged in (e.g., check if a token or user data exists in local storage)
+          const userId = localStorage.getItem('userId');
+          if (userId) {
+               navigate('/Userdashboard'); // Redirect to the user dashboard if already logged in
+          }
+     }, [navigate]);
+
+     const handleLogin = async (e) => {
+          e.preventDefault();
+
+          try {
+               const response = await fetch('http://localhost:3000/api/user/authenticate', {
+                    method: 'POST',
+                    headers: {
+                         'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({ email, password }),
+               });
+
+               if (response.status === 200) {
+                    // Authentication successful, get the user _id from the response (assuming your API returns the _id)
+                    const data = await response.json();
+                    const userId = data._id;
+
+                    // Store the user _id in local storage
+                    localStorage.setItem('userId', userId);
+
+                    // Show a success Swal notification
+                    Swal.fire({
+                         icon: 'success',
+                         title: 'Login Successful',
+                         text: 'You have been successfully logged in.',
+                    }).then(() => {
+                         // Redirect to the user dashboard
+                         navigate('/Userdashboard');
+                    });
+               } else {
+                    // Authentication failed, show an error Swal notification
+                    Swal.fire({
+                         icon: 'error',
+                         title: 'Login Failed',
+                         text: 'Authentication error. Please check your credentials and try again.',
+                    });
+               }
+          } catch (error) {
+               console.error('API call error', error);
+          }
+     };
 
      return (
           <div>
@@ -36,24 +92,28 @@ export default function Login() {
                                              </span>
                                              <br /><br />
                                              <span class="card-text">
-                                                  <form className="loginForm">
+                                                  <form className="loginForm" >
 
 
                                                        <div class="form group">
                                                             <label for="" > Email </label>
-                                                            <input type="username" class="form-control" placeholder="Enter your username" />
+                                                            <input type="username" class="form-control" placeholder="Enter your username"
+                                                                 value={email}
+                                                                 onChange={(e) => setEmail(e.target.value)}/>
 
                                                        </div>
                                                        <div class="form group">
                                                             <label for="" > Password </label>
-                                                            <input type="password" class="form-control" placeholder="Enter your password" />
+                                                            <input type="password" class="form-control" placeholder="Enter your password"
+                                                                 value={password}
+                                                                 onChange={(e) => setPassword(e.target.value)}/>
 
                                                        </div>
                                                        <a href=""> Forgot Password</a>
                                                        <br /> 
                                                        <a href="/Pharmlogin"> Login as a Pharmacist</a>
                                                        <br />
-                                                       <input type="submit" value="Login" class="btn btn-curved" role="button" style={{ width: '100%' }} />
+                                                       <input type="submit" value="Login" class="btn btn-curved" role="button" style={{ width: '100%' }} onClick={handleLogin} />
 
                                                   </form>
                                              </span>

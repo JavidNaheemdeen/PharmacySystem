@@ -111,11 +111,9 @@ exports.authenticateUser = async (req, res) => {
       return res.status(401).json({ error: 'Invalid password' });
     }
 
-    // Generate a JWT (JSON Web Token) for user authentication
-    const token = jwt.sign({ _id: user._id }, 'your_secret_key'); // Replace 'your_secret_key' with a secret key for JWT
 
     // Authentication successful
-    res.status(200).json({ message: 'Logged in successfully', token, _id: user._id });
+    res.status(200).json({ message: 'Logged in successfully',  _id: user._id });
   } catch (error) {
     res.status(500).json({ error: 'Could not authenticate user' });
   }
