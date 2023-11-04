@@ -18,12 +18,13 @@ exports.authenticateSuperadmin = async (req, res) => {
     }
 
     // Authentication successful
-    res.status(200).json({ message: "Logged in successfully", _id: superadmin._id });
+    res
+      .status(200)
+      .json({ message: "Logged in successfully", _id: superadmin._id });
   } catch (error) {
     res.status(500).json({ error: "Could not authenticate Superadmin" });
   }
 };
-
 
 // Function to add a Superadmin
 exports.addSuperadmin = async (req, res) => {
@@ -34,7 +35,9 @@ exports.addSuperadmin = async (req, res) => {
     const existingSuperadmin = await Superadmin.findOne({ email });
 
     if (existingSuperadmin) {
-      return res.status(400).json({ error: 'Superadmin with this email already exists' });
+      return res
+        .status(400)
+        .json({ error: "Superadmin with this email already exists" });
     }
 
     // Create a new Superadmin instance
@@ -48,9 +51,9 @@ exports.addSuperadmin = async (req, res) => {
     await superadmin.save();
 
     // Return a success message
-    res.status(201).json({ message: 'Superadmin added successfully' });
+    res.status(201).json({ message: "Superadmin added successfully" });
   } catch (error) {
-    res.status(500).json({ error: 'Could not add Superadmin' });
+    res.status(500).json({ error: "Could not add Superadmin" });
   }
 };
 
@@ -87,18 +90,18 @@ exports.deleteSuperadmin = async (req, res) => {
     const deletedSuperadmin = await Superadmin.findByIdAndRemove(superadminId);
 
     if (!deletedSuperadmin) {
-      return res.status(404).json({ error: 'Superadmin not found' });
+      return res.status(404).json({ error: "Superadmin not found" });
     }
 
     // Return a success message
-    res.status(200).json({ message: 'Superadmin deleted successfully' });
+    res.status(200).json({ message: "Superadmin deleted successfully" });
   } catch (error) {
-    res.status(500).json({ error: 'Could not delete Superadmin' });
+    res.status(500).json({ error: "Could not delete Superadmin" });
   }
 };
 
 // Function to get a Superadmin by ID
-exports.getSuperadmin = async (req, res) => {
+exports.getSuperadminById = async (req, res) => {
   try {
     const superadminId = req.params.id; // Extract Superadmin ID from request parameters
 
@@ -106,12 +109,12 @@ exports.getSuperadmin = async (req, res) => {
     const superadmin = await Superadmin.findById(superadminId);
 
     if (!superadmin) {
-      return res.status(404).json({ error: 'Superadmin not found' });
+      return res.status(404).json({ error: "Superadmin not found" });
     }
 
     // Return the Superadmin
     res.status(200).json(superadmin);
   } catch (error) {
-    res.status(500).json({ error: 'Could not get Superadmin' });
+    res.status(500).json({ error: "Could not get Superadmin" });
   }
 };
