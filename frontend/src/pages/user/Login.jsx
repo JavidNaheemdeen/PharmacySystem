@@ -40,7 +40,7 @@ export default function Login() {
 
 
                                                        <div class="form group">
-                                                            <label for="" > Username </label>
+                                                            <label for="" > Email </label>
                                                             <input type="username" class="form-control" placeholder="Enter your username" />
 
                                                        </div>

@@ -107,10 +107,10 @@ export default function PharmacyReg() {
             icon: "success",
             confirmButtonText: "Ok",
           }).then((result) => {
-               if (result.isConfirmed) {
-                 window.location.href = '/Pharmlogin';
-               }
-             });
+            if (result.isConfirmed) {
+              window.location.href = '/Pharmlogin';
+            }
+          });
         })
         .catch(function (error) {
           console.log(error);
