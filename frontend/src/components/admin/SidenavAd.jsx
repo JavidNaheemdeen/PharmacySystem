@@ -81,7 +81,7 @@ export default function SidenavAd() {
                 >
                   <MdInventory2 /> Product Dashboard{" "}
                 </a>
-                <a href="#" className="nav-item nav-link dash-link">
+                <a href="/OrderManagement" className="nav-item nav-link dash-link">
                   <AiOutlineShoppingCart /> Order Management{" "}
                 </a>
                 <a href="/Profilead" className="nav-item dash-link nav-link ">
