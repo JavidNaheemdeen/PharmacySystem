@@ -9,6 +9,7 @@ import Swal from "sweetalert2";
 export default function ProductDashBoard() {
 
      const [products, setProducts] = useState([]);
+     const [searchTerm, setSearchTerm] = useState("");
 
      const pharmacyId = localStorage.getItem("pharmacyId");
 
@@ -53,6 +54,18 @@ export default function ProductDashBoard() {
           });
      };
 
+     const handleSearch = () => {
+          // Send a request to search products using the searchTerm
+          axios
+               .get(`http://localhost:3000/api/product/search?name=${searchTerm}`)
+               .then((res) => {
+                    setProducts(res.data);
+               })
+               .catch((err) => {
+                    console.log(err);
+               });
+     };
+     
      return (
           <div>
                <Sidenav />
@@ -63,6 +76,13 @@ export default function ProductDashBoard() {
                          <h2 className='text-center'>Product Dashboard</h2>
                          <br />
                          <div className='text-center'><AddProdModal /></div>
+                         <div className="text-center">
+                              <input type="text"
+                                   placeholder="Search by name or batch number"
+                                   value={searchTerm}
+                                   onChange={(e) => setSearchTerm(e.target.value)}/>
+                         </div>
+                         <button onClick={handleSearch}>Search</button>
                          <br />
                          <table className="table">
                               <thead className="thead-dark">
