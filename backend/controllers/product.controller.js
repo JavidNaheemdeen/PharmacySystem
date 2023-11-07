@@ -131,25 +131,24 @@ exports.searchProductsByNameAndBatchNo = async (req, res) => {
 
     const products = await Product.find({
       $or: [
-        { productname: { $regex: partialName, $options: 'i' } },
-        { batchnumber: { $regex: partialBatchNo, $options: 'i' } },
+        { productname: { $regex: partialName, $options: "i" } },
+        { batchnumber: { $regex: partialBatchNo, $options: "i" } },
       ],
     });
 
     if (products.length === 0) {
       return res.status(404).json({
-        error: 'No products found matching the provided name and batch number',
+        error: "No products found matching the provided name and batch number",
       });
     }
 
     res.json(products);
   } catch (error) {
     res.status(500).json({
-      error: 'Could not perform the product name and batch number search',
+      error: "Could not perform the product name and batch number search",
     });
   }
 };
-
 
 // Function to get products by pharmacyId
 exports.getProductsByPharmacyId = async (req, res) => {
