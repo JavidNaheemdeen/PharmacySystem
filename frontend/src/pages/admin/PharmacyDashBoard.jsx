@@ -3,6 +3,7 @@ import SidenavSuperAd from "../../components/admin/SidenavSuperAd";
 import UpdatePharmModal from "../../components/modals/UpdatePharmModal";
 import axios from "axios";
 import Swal from 'sweetalert2';
+import { BsFillTrashFill, BsFillPencilFill } from 'react-icons/bs'
 
 export default function PharmacyDashboard() {
   const [pharmacy, setPharmacy] = useState([]);
@@ -90,7 +91,7 @@ export default function PharmacyDashboard() {
                 </th>
               </tr>
             </thead>
-            <tbody>
+            <tbody className="tbl-body">
               {filteredPharmacies.map((pm) => (
                 <tr key={pm._id}>
                   <td>{pm.name}</td>
@@ -108,7 +109,7 @@ export default function PharmacyDashboard() {
                   <td className="text-center">
                     <UpdatePharmModal pmid={pm._id} />
                     <br />
-                    <button
+                    <button 
                       onClick={() => handleDeletePharmacy(pm._id)}
                       className="btn btn-danger btn-sm"
                     >
