@@ -4,10 +4,21 @@ import UpdatePharmModal from "../../components/modals/UpdatePharmModal";
 import axios from "axios";
 import Swal from 'sweetalert2';
 import { BsFillTrashFill, BsFillPencilFill } from 'react-icons/bs'
+import { useNavigate  } from 'react-router-dom';
 
 export default function PharmacyDashboard() {
   const [pharmacy, setPharmacy] = useState([]);
   const [searchTerm, setSearchTerm] = useState("");
+
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    // Check if the user is already logged in (e.g., check if a token or user data exists in local storage)
+    const superadminId = localStorage.getItem("superadminId");
+    if (!superadminId) {
+      navigate('/Adminlogin'); // Redirect to the dashboard if logged in
+    }
+  }, [navigate]);
 
 
   useEffect(() => {
@@ -108,12 +119,11 @@ export default function PharmacyDashboard() {
                   <td>{pm.opentime}</td>
                   <td className="text-center">
                     <UpdatePharmModal pmid={pm._id} />
-                    <br />
                     <button 
                       onClick={() => handleDeletePharmacy(pm._id)}
                       className="btn btn-danger btn-sm"
                     >
-                      Delete
+                      <BsFillTrashFill/>
                     </button>
                   </td>
                 </tr>

@@ -4,6 +4,7 @@ import Modal from 'react-bootstrap/Modal';
 import Button from 'react-bootstrap/Button';
 import axios from 'axios';
 import Swal from 'sweetalert2';
+import { BsFillTrashFill, BsFillPencilFill } from 'react-icons/bs'
 
 export default function UpdateUserModal(props) {
      const [show, setShow] = useState(false);
@@ -75,8 +76,8 @@ export default function UpdateUserModal(props) {
 
      return (
           <>
-               <Button className="btn btn-primary btn-sm me-1" onClick={updateUserShow}>
-                    Update
+               <Button className="btn btn-success btn-sm me-1" onClick={updateUserShow}>
+                    <BsFillPencilFill/>
                </Button>
 
                <Modal show={show} size="lg" centered>

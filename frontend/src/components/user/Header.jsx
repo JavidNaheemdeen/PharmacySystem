@@ -1,16 +1,44 @@
 import { Navbar, NavDropdown, Container, Nav } from "react-bootstrap";
 import "../../style.css";
 import logo from "../../images/logo.png"
-import React, { useContext } from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 // import { Context } from '../context/Context';
 import { AiOutlineShoppingCart } from 'react-icons/ai';
 import Swal from 'sweetalert2';
+import axios from "axios";
 
 
 export default function Header() {
 
+     const [pharmacy, setPharmacy] = useState([]);
+     const [searchTerm, setSearchTerm] = useState("");
+     const [filteredPharmacies, setFilteredPharmacies] = useState([]);
      const userId = localStorage.getItem('userId');
+
+     useEffect(() => {
+          axios
+               .get("http://localhost:3000/api/pharmacy/")
+               .then((res) => {
+                    setPharmacy(res.data);
+               })
+               .catch((err) => {
+                    console.log(err);
+               });
+     }, []);
+
+     // const filteredPharmacies = pharmacy.filter((pm) =>
+     //      pm.name.toLowerCase().includes(searchTerm.toLowerCase())
+     // );
+
+     useEffect(() => {
+          // Filter the list of pharmacies based on the search term
+          const filtered = pharmacy.filter((pm) =>
+            pm.name.toLowerCase().includes(searchTerm.toLowerCase())
+          );
+          setFilteredPharmacies(filtered);
+        }, [searchTerm, pharmacy]);
+
 
      const handleLogout = () => {
           Swal.fire({
@@ -66,33 +94,14 @@ export default function Header() {
                                              title="Pharmacy"
                                              menuVariant="dark"
                                         >
-                                             <NavDropdown.Item href="/ProductView">Cure ME</NavDropdown.Item>
-                                             <NavDropdown.Item href="#action/3.2">Kandy Pharmacy</NavDropdown.Item>
-                                             <NavDropdown.Item href="#action/3.3">Raj Medicals</NavDropdown.Item>
-                                             <NavDropdown.Item href="#action/3.4">Lanka Pharmacy</NavDropdown.Item>
+                                             {pharmacy.map((pm) => (
+                                             <NavDropdown.Item key={pm._id} href={"/ProductView/" + pm._id}>
+                                                  {pm.name}
+                                             </NavDropdown.Item>
+                                             ))}
                                         </NavDropdown>
                                    </Nav>
                               </Navbar.Collapse>
-                              {/* <Navbar.Collapse id="navbar-dark-example">
-                                   <Nav>
-                                        <NavDropdown
-                                             id="nav-dropdown-dark-example"
-                                             title="Pharmacy"
-                                             menuVariant="dark"
-                                        >
-                                             <NavDropdown.Item href="/ProductView">Cure ME</NavDropdown.Item>
-                                             <NavDropdown.Item href="#">
-                                                  Kandy Pharmacy
-                                             </NavDropdown.Item>
-                                             <NavDropdown.Item href="#">
-                                                  Raj Medicals
-                                             </NavDropdown.Item>
-                                             <NavDropdown.Item href="#">
-                                                  Lanka Pharmacy
-                                             </NavDropdown.Item>
-                                        </NavDropdown>
-                                   </Nav>
-                              </Navbar.Collapse> */}
                               <Navbar.Collapse id="navbar-dark-example">
                                    <li className="nav-item">
                                         <a href="#" className="nav-link">
@@ -111,17 +120,19 @@ export default function Header() {
                                    </li>
 
                               </Navbar.Collapse>
-
+{/* 
                               <Navbar.Collapse id="navbar-dark-example">
                                    <li className="nav-item">
                                         <input
                                              className="form-control"
                                              type="text"
                                              placeholder="Search"
+                                             value={searchTerm}
                                              aria-label="Search"
+                                             onChange={(e) => setSearchTerm(e.target.value)}
                                         />
                                    </li>
-                              </Navbar.Collapse>
+                              </Navbar.Collapse> */}
                          </ul>
                          {/* <div className="me-4">
                               <a href="/ShoppingCart" style={{ fontSize: '25px' }}><AiOutlineShoppingCart /></a>

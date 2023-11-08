@@ -33,8 +33,8 @@ function App() {
           <Route path="/contactus" element={<ContactUs />} />
           <Route path="/Pharmacist" element={<PharmacyReg />} />
           <Route path="/SuperAdmin" element={<SuperAdmReg />} />
-          <Route path="/ProductView" element={<ProdView />} />
-          <Route path="/SingleProdView" element={<SingleProdView />} />
+          <Route path="/ProductView/:id" element={<ProdView />} />
+          <Route path="/SingleProdView/:id" element={<SingleProdView />} />
           <Route path="/ShoppingCart" element={<ShoppingCart />} />
           <Route path="/Productdashboard" element={<ProductDashBoard />} />
           <Route path="/Admindashboard" element={<AdminDashboard />} />

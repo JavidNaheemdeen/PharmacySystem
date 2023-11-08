@@ -16,6 +16,8 @@ export default function Homepage() {
           const [pharmacy, setPharmacy] = useState([]);
           const [searchTerm, setSearchTerm] = useState("");
 
+          const userId = localStorage.getItem('userId');
+
      useEffect(() => {
           axios
                .get("http://localhost:3000/api/pharmacy/")
@@ -58,7 +60,7 @@ export default function Homepage() {
                                         <ul className="list-group" style={{ height: '400px', overflowY: 'auto' }}>
                                              {filteredPharmacies.map((pm) => (
                                                   <li className="list-group-item" key={pm._id}>
-                                                       <a href="/ProductView" style={{ textDecoration: 'none', color: 'black' }}>
+                                                       <a href={"/ProductView/" + pm._id} style={{ textDecoration: 'none', color: 'black' }}>
                                                             <h3>{pm.name}</h3>
                                                             <p style={{ position: 'absolute', top: '0', right: '0', margin: '9px', fontSize: '19px' }}><FcClock /> {pm.opentime}</p>
                                                             <p style={{ fontSize: '19px' }}><FaLocationDot style={{ color: 'blue' }} /> {pm.address}</p>
@@ -187,9 +189,11 @@ export default function Homepage() {
                          <br />
                     </div>
 
-                    <a className="btn btn-curve"
-                         href="/Prescription"
-                         style={{
+                    {userId && (
+                         <a
+                              className="btn btn-curve"
+                              href="/Prescription"
+                              style={{
                               position: 'fixed',
                               bottom: '20px',
                               right: '20px',
@@ -200,11 +204,11 @@ export default function Homepage() {
                               padding: '10px',
                               textAlign: 'center',
                               cursor: 'pointer',
-                         }}
-                    >
-                         <BsPrescription2 /> Prescription
-                    </a>
-
+                              }}
+                         >
+                              <BsPrescription2 /> Prescription
+                         </a>
+                    )}
 
                     <Footer />
 

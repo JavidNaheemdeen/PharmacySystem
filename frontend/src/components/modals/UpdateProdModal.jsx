@@ -5,6 +5,7 @@ import Modal from 'react-bootstrap/Modal';
 import Button from 'react-bootstrap/Button';
 import axios from "axios";
 import Swal from "sweetalert2";
+import { BsFillTrashFill, BsFillPencilFill } from 'react-icons/bs'
 
 export default function UpdateProdModal(props) {
   const [show, setShow] = useState(false);
@@ -133,8 +134,8 @@ export default function UpdateProdModal(props) {
 
   return (
     <>
-      <Button className="btn btn-success btn-sm mb-1" onClick={updateShow}>
-        Update
+      <Button className="btn btn-success btn-sm me-1" onClick={updateShow}>
+        <BsFillPencilFill/>
       </Button>
 
       <Modal show={show} size="lg" centered>

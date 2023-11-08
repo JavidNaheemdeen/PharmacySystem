@@ -356,11 +356,11 @@ h3 {
     flex-wrap: nowrap;
     overflow-x: auto;
     margin: 5rem;
-    padding: 1rem;
+    /* padding: 1rem; */
 }
 
 .product-column {
-    flex: 1;
+    /* flex: 1; */
     flex-wrap: wrap;
     width: 19%;
     justify-content: center;
@@ -369,7 +369,7 @@ h3 {
 }
 
 .product-card {
-    flex: 1;
+    /* flex: 1; */
     margin: 15px;
     box-sizing: border-box;
     text-align: center;

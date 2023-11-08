@@ -5,14 +5,25 @@ import AddProdModal from '../../components/modals/AddProdModal'
 import UpdateProdModal from '../../components/modals/UpdateProdModal'
 import axios from "axios";
 import Swal from "sweetalert2";
+import { useNavigate  } from 'react-router-dom';
+import { BsFillTrashFill, BsFillPencilFill } from 'react-icons/bs'
 
 export default function ProductDashBoard() {
 
      const [products, setProducts] = useState([]);
      const [searchTerm, setSearchTerm] = useState("");
-
+     const navigate = useNavigate();
 
      const pharmacyId = localStorage.getItem("pharmacyId");
+
+     useEffect(() => {
+          // Check if the user is already logged in (e.g., check if a token or user data exists in local storage)
+          const pharmacyId = localStorage.getItem('pharmacyId');
+          if (!pharmacyId) {
+            navigate('/Pharmlogin'); // Redirect to the dashboard if logged in
+          }
+        }, [navigate]);
+
 
      useEffect(() => {
           axios
@@ -111,12 +122,11 @@ export default function ProductDashBoard() {
                                              </td>
                                              <td className="text-center">
                                                   <UpdateProdModal productId={pr._id} />
-                                                  <br />
                                                   <button
                                                        onClick={() => handleDeleteProduct(pr._id)}
                                                        className="btn btn-danger btn-sm"
                                                   >
-                                                       Delete
+                                                       <BsFillTrashFill/>
                                                   </button>
                                              </td>
                                         </tr>
