@@ -84,6 +84,9 @@ export default function SidenavAd() {
                 <a href="/OrderManagement" className="nav-item nav-link dash-link">
                   <AiOutlineShoppingCart /> Order Management{" "}
                 </a>
+                <a href="/PrescriptionManagement" className="nav-item nav-link dash-link">
+                  <AiOutlineShoppingCart /> Prescription Management{" "}
+                </a>
                 <a href="/Profilead" className="nav-item dash-link nav-link ">
                   {" "}
                   <CgProfile /> Profile

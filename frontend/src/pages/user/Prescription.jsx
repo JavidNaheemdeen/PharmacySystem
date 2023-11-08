@@ -49,20 +49,14 @@ export default function Prescription() {
                                         <input type="tel" id="whatsappNumber" name="whatsappNumber" required />
                                    </div>
                                    <div className="form-group">
-                                        <label>Delivery Type:</label>
-                                        <div className="radio-group">
-                                             <input type="radio" id="homeDelivery" name="deliveryType" value="home" required />
-                                             <label htmlFor="homeDelivery">Home Delivery</label>
-                                             <input type="radio" id="corporateDelivery" name="deliveryType" value="corporate" required />
-                                             <label htmlFor="corporateDelivery">Corporate Delivery</label>
-                                        </div>
+                                        <label>Only Home Delivery available for Prescription</label>
                                    </div>
                                    <div className="form-group">
                                         <label htmlFor="address">Address:</label>
                                         <input type="text" id="address" name="address" required />
                                    </div>
                                    <div className="form-group">
-                                        <label htmlFor="deliveryLocation">Delivery Location:</label>
+                                        <label htmlFor="deliveryLocation">Choose Pharmacy:</label>
                                         <select id="deliveryLocation" name="deliveryLocation" required>
                                              <option value="option1">Option 1</option>
                                              <option value="option2">Option 2</option>
