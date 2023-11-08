@@ -200,7 +200,8 @@ button:hover {
     grid-area: main;
     overflow-y: auto;
     padding: 20px 20px;
-    color: rgb(255, 255, 255, 0.95);
+    color: rgba(8, 8, 8, 0.95);
+    font-weight: 1rem;
 }
 
 .main-title {
@@ -210,38 +211,55 @@ button:hover {
 
 .main-cards{
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr 1fr;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
     gap: 20px;
-    margin: 15px 0;
+    margin-top: 36px 0;
 }
 
 .cards{
     display: flex;
-    flex-direction: column;
-    justify-content: space-around;
-    padding: 8px 15px;
-    border-radius: 5px;
+    background: var(--light);
+    padding: 20px;
+    border-radius: 20px;
+    align-items: center;
+    grid-gap: 24px;
+}
+
+.cards .bx {
+    width: 80px;
+    height: 80px;
+    border-radius: 10px;
+    background: var(--grey);
+    font-size: 36px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.cards span h3 {
+    font-size: 30px;
+    font-weight: bold;
+}
+.cards span p{
+    font-size: 36px;
 }
 
 .cards:first-child{
-    background-color: #2962ff;
+    background-color: #29bbff;
 }
 
 .cards:nth-child(2){
-    background-color: #ff6d00;
+    background-color: #f07c24;
 }
 
 .cards:nth-child(3){
-    background-color: #2e7d32;
+    background-color: #71c274;
 }
 
 .cards:nth-child(4){
     background-color: red;
 }
 
-.card-inner{
-    font-size: 25px;
-}
 
 .charts{
     display: grid;

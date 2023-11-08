@@ -1,6 +1,9 @@
 import React from 'react'
 import Sidenav from '../../components/admin/SidenavAd'
 import { LineChart, Line, BarChart, Bar, Rectangle, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
+import { GrNotes } from 'react-icons/gr'
+import { AiOutlineShoppingCart } from "react-icons/ai";
+import { BsPrescription2 } from "react-icons/bs";
 
 
 export default function AdminDashboard() {
@@ -62,28 +65,26 @@ export default function AdminDashboard() {
             <br />
             <div className="main-cards">
               <div className="cards">
-                <div className="card-inner">
+                <i className="bx"><GrNotes /></i>
+                <span>
                   <h3>Products</h3>
-                  <h1>20</h1>
-                </div>
+                  <p>20</p>
+                </span>  
               </div>
               <div className="cards">
-                <div className="card-inner">
+                <i className="bx"><AiOutlineShoppingCart /></i>
+                <span>
                   <h3>Orders</h3>
-                  <h1>20</h1>
-                </div>
+                  <p>20</p>
+                </span>
+                  
               </div>
               <div className="cards">
-                <div className="card-inner">
-                  <h3>Pharmacies</h3>
-                  <h1>20</h1>
-                </div>
-              </div>
-              <div className="cards">
-                <div className="card-inner">
-                  <h3>Alerts</h3>
-                  <h1>20</h1>
-                </div>
+                <i className="bx"><BsPrescription2 /></i>
+                  <span>
+                    <h3>Prescriptions</h3>
+                    <p>20</p>
+                  </span>
               </div>
 
             </div>

@@ -2,6 +2,8 @@ import React, { useEffect, useState } from "react";
 import SidenavSuperAd from '../../components/admin/SidenavSuperAd'
 import { LineChart, Line, BarChart, Bar, Rectangle, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
 import axios from "axios";
+import {MdLocalPharmacy } from 'react-icons/md'
+import { BiUserCircle } from 'react-icons/bi'
 
 
 export default function SuperAdminDashboard() {
@@ -91,16 +93,18 @@ export default function SuperAdminDashboard() {
             <br />
             <div className="main-cards">
               <div className="cards">
-                <div className="card-inner">
+                <i className="bx"><MdLocalPharmacy /></i>
+                <span>
                   <h3>Pharmacies</h3>
-                  <h1>{pharmacyCount}</h1>
-                </div>
+                  <p>{pharmacyCount}</p>
+                </span>
               </div>
               <div className="cards">
-                <div className="card-inner">
+                <i className="bx"><BiUserCircle /></i>
+                <span>
                   <h3>Users</h3>
-                  <h1>{userCount}</h1>
-                </div>
+                  <p>{userCount}</p>
+                </span>
               </div>
               {/* <div className="cards">
                 <div className="card-inner">

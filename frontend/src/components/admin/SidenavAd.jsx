@@ -10,6 +10,7 @@ import { FiSettings } from "react-icons/fi";
 import { MdInventory2 } from "react-icons/md";
 import { AiOutlineShoppingCart } from "react-icons/ai";
 import { FaHome } from "react-icons/fa";
+import { BsPrescription2 } from "react-icons/bs";
 import Swal from 'sweetalert2';
 
 export default function SidenavAd() {
@@ -85,7 +86,7 @@ export default function SidenavAd() {
                   <AiOutlineShoppingCart /> Order Management{" "}
                 </a>
                 <a href="/PrescriptionManagement" className="nav-item nav-link dash-link">
-                  <AiOutlineShoppingCart /> Prescription Management{" "}
+                  <BsPrescription2 /> Prescription Management{" "}
                 </a>
                 <a href="/Profilead" className="nav-item dash-link nav-link ">
                   {" "}
