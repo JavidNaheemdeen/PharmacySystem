@@ -6,6 +6,8 @@ import Swal from 'sweetalert2';
 
 export default function PharmacyDashboard() {
   const [pharmacy, setPharmacy] = useState([]);
+  const [searchTerm, setSearchTerm] = useState("");
+
 
   useEffect(() => {
     axios
@@ -48,6 +50,13 @@ export default function PharmacyDashboard() {
     });
   };
 
+  // Filter pharmacies based on the search term
+  const filteredPharmacies = pharmacy.filter((pm) =>
+    pm.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+    pm.town.toLowerCase().includes(searchTerm.toLowerCase())
+  );
+
+
   return (
     <div>
       <SidenavSuperAd />
@@ -58,6 +67,13 @@ export default function PharmacyDashboard() {
         <div className="col-md-8">
           <h2 className="text-center">Pharmacy Dashboard</h2>
           <br />
+          <div className="text-center">
+            <input type="text"
+              placeholder="Search by name or town"
+              value={searchTerm}
+              onChange={(e) => setSearchTerm(e.target.value)}
+            />
+          </div>
           <br />
           <table className="table">
             <thead className="thead-dark">
@@ -75,7 +91,7 @@ export default function PharmacyDashboard() {
               </tr>
             </thead>
             <tbody>
-              {pharmacy.map((pm) => (
+              {filteredPharmacies.map((pm) => (
                 <tr key={pm._id}>
                   <td>{pm.name}</td>
                   <td>{pm.email}</td>

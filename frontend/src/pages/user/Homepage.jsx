@@ -13,8 +13,8 @@ import axios from "axios";
 
 export default function Homepage() {
 
-     const [pharmacy, setPharmacy] = useState([]);
-     const [searchTerm, setSearchTerm] = useState("");
+          const [pharmacy, setPharmacy] = useState([]);
+          const [searchTerm, setSearchTerm] = useState("");
 
      useEffect(() => {
           axios

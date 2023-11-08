@@ -75,7 +75,7 @@ export default function UpdateUserModal(props) {
 
      return (
           <>
-               <Button className="btn btn-primary btn-sm" onClick={updateUserShow}>
+               <Button className="btn btn-primary btn-sm me-1" onClick={updateUserShow}>
                     Update
                </Button>
 

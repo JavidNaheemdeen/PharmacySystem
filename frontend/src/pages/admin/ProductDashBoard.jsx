@@ -9,6 +9,8 @@ import Swal from "sweetalert2";
 export default function ProductDashBoard() {
 
      const [products, setProducts] = useState([]);
+     const [searchTerm, setSearchTerm] = useState("");
+
 
      const pharmacyId = localStorage.getItem("pharmacyId");
 
@@ -53,6 +55,10 @@ export default function ProductDashBoard() {
           });
      };
 
+     const filteredProducts = products.filter((pr) =>
+          pr.productname.toLowerCase().includes(searchTerm.toLowerCase())
+     );
+
      return (
           <div>
                <Sidenav />
@@ -63,9 +69,13 @@ export default function ProductDashBoard() {
                          <h2 className='text-center'>Product Dashboard</h2>
                          <br />
                          <div className='text-center'><AddProdModal /></div>
+                         <br/>
                          <div className="text-center">
                               <input type="text"
-                                   placeholder="Search by name or batch number" />
+                                   placeholder="Search by name"
+                                   value={searchTerm}
+                                   onChange={(e) => setSearchTerm(e.target.value)}
+                              />
                          </div>
                          <br />
                          <table className="table">
@@ -82,26 +92,26 @@ export default function ProductDashBoard() {
                                    </tr>
                               </thead>
                               <tbody>
-                                   {products.map((product) => (
-                                        <tr key={product._id}>
-                                             <td>{product.productname}</td>
-                                             <td>{product.genericname}</td>
-                                             <td>{product.form}</td>
-                                             <td>{product.batchnumber}</td>
-                                             <td>{product.quantity}</td>
-                                             <td>{product.unitprice}</td>
+                                   {filteredProducts.map((pr) => (
+                                        <tr key={pr._id}>
+                                             <td>{pr.productname}</td>
+                                             <td>{pr.genericname}</td>
+                                             <td>{pr.form}</td>
+                                             <td>{pr.batchnumber}</td>
+                                             <td>{pr.quantity}</td>
+                                             <td>{pr.unitprice}</td>
                                              <td>
                                                   <img
-                                                       src={product.logo}
+                                                       src={pr.logo}
                                                        style={{ width: "50px", height: "50px" }}
                                                        alt="Product Logo"
                                                   />
                                              </td>
                                              <td className="text-center">
-                                                  <UpdateProdModal productId={product._id} />
+                                                  <UpdateProdModal productId={pr._id} />
                                                   <br />
                                                   <button
-                                                       onClick={() => handleDeleteProduct(product._id)}
+                                                       onClick={() => handleDeleteProduct(pr._id)}
                                                        className="btn btn-danger btn-sm"
                                                   >
                                                        Delete

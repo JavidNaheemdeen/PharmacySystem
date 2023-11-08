@@ -8,6 +8,7 @@ export default function UserDashboard() {
 
 
      const [users, setUsers] = useState([]);
+     const [searchTerm, setSearchTerm] = useState("");
 
      useEffect(() => {
           axios
@@ -50,6 +51,12 @@ export default function UserDashboard() {
           });
      };
 
+     // Filter pharmacies based on the search term
+     const filteredUser = users.filter((us) =>
+          us.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+          us.contact.toLowerCase().includes(searchTerm.toLowerCase())
+     );
+
      return (
           <div>
                <SidenavSuperAd />
@@ -60,6 +67,13 @@ export default function UserDashboard() {
                     <div className="col-md-8">
                          <h2 className="text-center">User Dashboard</h2>
                          <br />
+                         <div className="text-center">
+                              <input type="text"
+                                   placeholder="Search by name"
+                                   value={searchTerm}
+                                   onChange={(e) => setSearchTerm(e.target.value)}
+                              />
+                         </div>
                          <br />
                          <table className="table">
                               <thead className="thead-dark">
@@ -74,16 +88,16 @@ export default function UserDashboard() {
                                    </tr>
                               </thead>
                               <tbody>
-                                   {users.map((user) => (
-                                        <tr key={user._id}>
-                                             <td>{user.name}</td>
-                                             <td>{user.address}</td>
-                                             <td>{user.contact}</td>
-                                             <td>{user.email}</td>
+                                   {filteredUser.map((us) => (
+                                        <tr key={us._id}>
+                                             <td>{us.name}</td>
+                                             <td>{us.address}</td>
+                                             <td>{us.contact}</td>
+                                             <td>{us.email}</td>
                                              <td className="text-center">
-                                                  <UpdateUser userId={user._id} />
+                                                  <UpdateUser userId={us._id} />
                                                   <button
-                                                       onClick={() => handleDeleteUser(user._id)}
+                                                       onClick={() => handleDeleteUser(us._id)}
                                                        className="btn btn-danger btn-sm"
                                                   >
                                                        Delete
