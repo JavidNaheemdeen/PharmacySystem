@@ -47,7 +47,7 @@ export default function Login() {
                          text: 'You have been successfully logged in.',
                     }).then(() => {
                          // Redirect to the user dashboard
-                         navigate('/Userdashboard');
+                         navigate('/');
                     });
                } else {
                     // Authentication failed, show an error Swal notification

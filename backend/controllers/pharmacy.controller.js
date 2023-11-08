@@ -163,3 +163,16 @@ exports.authenticatePharmacist = async (req, res) => {
     res.status(500).json({ error: "Could not authenticate pharmacist" });
   }
 };
+
+// Function to get the number of pharmacies
+exports.getPharmacyCount = async (req, res) => {
+  try {
+    const pharmacyCount = await Pharmacy.countDocuments(); // Use countDocuments
+
+    res.json({ count: pharmacyCount });
+  } catch (error) {
+    res
+      .status(500)
+      .json({ error: "Could not retrieve the number of pharmacies" });
+  }
+};

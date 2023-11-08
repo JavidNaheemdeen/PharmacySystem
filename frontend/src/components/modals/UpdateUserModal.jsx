@@ -5,7 +5,7 @@ import Button from 'react-bootstrap/Button';
 import axios from 'axios';
 import Swal from 'sweetalert2';
 
-export default function UpdateUser(props) {
+export default function UpdateUserModal(props) {
      const [show, setShow] = useState(false);
 
      const [userId, setUserId] = useState('');
@@ -13,7 +13,7 @@ export default function UpdateUser(props) {
      const [address, setAddress] = useState('');
      const [contact, setContact] = useState('');
      const [email, setEmail] = useState('');
-     const [password, setPassword] = useState('');
+     // const [password, setPassword] = useState('');
 
      const [isLoading, setIsLoading] = useState(false);
 
@@ -22,7 +22,7 @@ export default function UpdateUser(props) {
           address,
           contact,
           email,
-          password,
+          // password,
      };
 
      const updateUserShow = () => {
@@ -36,7 +36,7 @@ export default function UpdateUser(props) {
                     setAddress(response.data.address);
                     setContact(response.data.contact);
                     setEmail(response.data.email);
-                    setPassword(response.data.password);
+                    // setPassword(response.data.password);
                     setShow(true);
                })
                .catch(function (error) {
@@ -54,7 +54,7 @@ export default function UpdateUser(props) {
                     setAddress('');
                     setContact('');
                     setEmail('');
-                    setPassword('');
+                    // setPassword('');
                     setShow(false);
                     Swal.fire({
                          title: 'Success!',
@@ -154,7 +154,7 @@ export default function UpdateUser(props) {
                                    </Form.Group>
                               </fieldset>
 
-                              <fieldset>
+                              {/* <fieldset>
                                    <Form.Group as={Row} className="mb-3" controlId="formPlaintextEmail">
                                         <Col sm={2}>
                                              <Form.Label>Password:</Form.Label>
@@ -169,7 +169,7 @@ export default function UpdateUser(props) {
                                              />
                                         </Col>
                                    </Form.Group>
-                              </fieldset>
+                              </fieldset> */}
                          </Modal.Body>
                          <Modal.Footer>
                               <Button variant="primary" type="submit" onClick={submitForm}>

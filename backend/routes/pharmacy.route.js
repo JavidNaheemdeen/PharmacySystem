@@ -6,6 +6,7 @@ router.post("/addpharmacy", pharmacyController.addPharmacy);
 router.put("/updatepharmacy/:id", pharmacyController.updatePharmacy);
 router.delete("/deletepharmacy/:id", pharmacyController.deletePharmacy);
 router.get("/", pharmacyController.getAllPharmacies);
+router.get("/getpharmacycount", pharmacyController.getPharmacyCount);
 router.get("/:id", pharmacyController.getPharmacyById);
 router.get("/town/:town", pharmacyController.getPharmaciesByTown);
 router.post("/authenticate", pharmacyController.authenticatePharmacist);

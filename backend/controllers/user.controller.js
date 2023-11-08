@@ -118,3 +118,16 @@ exports.authenticateUser = async (req, res) => {
     res.status(500).json({ error: 'Could not authenticate user' });
   }
 };
+
+// Function to get the number of users
+exports.getUserCount = async (req, res) => {
+  try {
+    const userCount = await User.countDocuments(); // Use countDocuments
+
+    res.json({ count: userCount });
+  } catch (error) {
+    res
+      .status(500)
+      .json({ error: "Could not retrieve the number of users" });
+  }
+};

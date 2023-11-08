@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import SidenavSuperAd from '../../components/admin/SidenavSuperAd'
-import UpdateUser from '../../components/modals/UpdateUser'
+import UpdateUser from '../../components/modals/UpdateUserModal'
 import axios from 'axios';
 import Swal from 'sweetalert2';
 

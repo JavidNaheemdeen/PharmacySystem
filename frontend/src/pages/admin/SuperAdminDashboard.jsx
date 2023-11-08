@@ -1,6 +1,7 @@
-import React from 'react'
+import React, { useEffect, useState } from "react";
 import SidenavSuperAd from '../../components/admin/SidenavSuperAd'
 import { LineChart, Line, BarChart, Bar, Rectangle, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
+import axios from "axios";
 
 
 export default function SuperAdminDashboard() {
@@ -50,6 +51,34 @@ export default function SuperAdminDashboard() {
     },
   ];
 
+  const [pharmacyCount, setPharmacyCount] = useState(0);
+  const [userCount, setUserCount] = useState(0);
+
+
+  useEffect(() => {
+    axios
+      .get("http://localhost:3000/api/pharmacy/getpharmacycount") // Replace with your actual API URL
+      .then((res) => {
+        setPharmacyCount(res.data.count);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }, []);
+
+  useEffect(() => {
+    axios
+      .get("http://localhost:3000/api/user/getusercount") // Replace with your actual API URL
+      .then((res) => {
+        setUserCount(res.data.count);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }, []);
+
+
+
   return (
     <div>
       <SidenavSuperAd />
@@ -64,16 +93,16 @@ export default function SuperAdminDashboard() {
               <div className="cards">
                 <div className="card-inner">
                   <h3>Pharmacies</h3>
-                  <h1>20</h1>
+                  <h1>{pharmacyCount}</h1>
                 </div>
               </div>
               <div className="cards">
                 <div className="card-inner">
                   <h3>Users</h3>
-                  <h1>20</h1>
+                  <h1>{userCount}</h1>
                 </div>
               </div>
-              <div className="cards">
+              {/* <div className="cards">
                 <div className="card-inner">
                   <h3>Pharmacies</h3>
                   <h1>20</h1>
@@ -84,7 +113,7 @@ export default function SuperAdminDashboard() {
                   <h3>Alerts</h3>
                   <h1>20</h1>
                 </div>
-              </div>
+              </div> */}
 
             </div>
             <div className="charts">
