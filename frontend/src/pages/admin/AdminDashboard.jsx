@@ -86,7 +86,7 @@ export default function AdminDashboard() {
                 <i className="bx"><AiOutlineShoppingCart /></i>
                 <span>
                   <h3>Orders</h3>
-                  <p>20</p>
+                  <p>6</p>
                 </span>
                   
               </div>
@@ -94,7 +94,7 @@ export default function AdminDashboard() {
                 <i className="bx"><BsPrescription2 /></i>
                   <span>
                     <h3>Prescriptions</h3>
-                    <p>20</p>
+                    <p>8</p>
                   </span>
               </div>
 
