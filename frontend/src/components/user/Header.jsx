@@ -3,8 +3,9 @@ import "../../style.css";
 import logo from "../../images/logo.png"
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-// import { Context } from '../context/Context';
 import { AiOutlineShoppingCart } from 'react-icons/ai';
+import { CgProfile } from 'react-icons/cg';
+import { SlLogout } from 'react-icons/sl';
 import Swal from 'sweetalert2';
 import axios from "axios";
 
@@ -141,16 +142,19 @@ export default function Header() {
                          <div className="me-3">
                               {userId ? (
                                    <>
-                                        <a href="/profile" className="btn btn-def">
-                                             Profile
+                                        <a href="/ShoppingCart" className="me-3" style={{ fontSize: '25px' }}>
+                                             <AiOutlineShoppingCart />
                                         </a>
-                                        <a href="#" className="btn btn-def" onClick={handleLogout}>
-                                             Logout
+                                        <a href="/profile" className="me-3" style={{ fontSize: '25px' }}>
+                                             <CgProfile/>
+                                        </a>
+                                        <a href="#" className="btn btn-def"  onClick={handleLogout}>
+                                             <SlLogout /> Logout
                                         </a>
                                    </>
                               ) : (
                                    <>
-                                        <a href="/login" className="btn btn-def">
+                                        <a href="/login" className="btn btn-def me-2">
                                              Login
                                         </a>
                                         <a href="/register" className="btn btn-def">

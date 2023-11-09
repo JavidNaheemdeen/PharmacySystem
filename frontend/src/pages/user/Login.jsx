@@ -88,7 +88,7 @@ export default function Login() {
                                         <span class=" card-body">
                                              <br /><br />
                                              <span class=" card-title">
-                                                  Log In As A User
+                                                  Log In
                                              </span>
                                              <br /><br />
                                              <span class="card-text">
@@ -111,7 +111,9 @@ export default function Login() {
                                                        </div>
                                                        <a href=""> Forgot Password</a>
                                                        <br /> 
+                                                       <br />
                                                        <a href="/Pharmlogin"> Login as a Pharmacist</a>
+                                                       <br />
                                                        <br />
                                                        <input type="submit" value="Login" class="btn btn-curved" role="button" style={{ width: '100%' }} onClick={handleLogin} />
 

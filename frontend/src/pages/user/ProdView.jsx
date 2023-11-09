@@ -18,7 +18,7 @@ export default function ProdView() {
 
      const params = useParams();
      const [product, setProduct] = useState([]);
-     
+
      const [searchTerm, setSearchTerm] = useState("");
      const pharmacyId = params.id;
 
@@ -36,56 +36,56 @@ export default function ProdView() {
      }, []);
 
      const filteredProducts = product.filter((pr) =>
-     pr.productname.toLowerCase().includes(searchTerm.toLowerCase())
+          pr.productname.toLowerCase().includes(searchTerm.toLowerCase())
 
-);
+     );
 
      return (
-          <div>
+          <div style={{ backgroundColor: '#f0f0f0' }}>
                <Header />
                <div>
                     <Header />
                     <br />
                     <MDBContainer fluid className="product-container my-5">
-                         <br/>
-                    <div className="text-center">
-                         <input
-                         type="text"
-                         placeholder="Search by product name"
-                         value={searchTerm}
-                         onChange={(e) => setSearchTerm(e.target.value)}
-                         style={{ width: '50%' }} // Adjust the width as needed
-                         />
-                    </div>
-                         <MDBRow className="prod-row">
-                         {filteredProducts.map((pr) => (
-                              <MDBCol md="8" lg="2" className="product-column mb-4 mb-lg-0" key={pr._id}>
-                              <a href={"/SingleProdView/" + pr._id} className="text-muted" style={{ textDecoration: 'none' }}>
-                                <MDBCard className="product-card">
-                                  <MDBCardImage className="prod-img" src={pr.logo} position="top" alt="img" />
-                                  <MDBCardBody className="card-body">
-                                    <div className="d-flex justify-content-between">
-                                      <p className="large black">{pr.productname}</p>
-                                    </div>
-                                    <div className="d-flex justify-content-between mb-0">
-                                      <h5 className="text-dark mb-0">LKR {pr.unitprice}</h5>
-                                    </div>
-                                    <div class="d-flex justify-content-between mb-0">
-                                      <p class="text-muted mb-0 small">
-                                        Available: <span class="fw-bold small">{pr.quantity}</span>
-                                      </p>
-                                    </div>
-                                    {userId && (
-                                    <MDBBtn color="primary" className="flex-fill ms-1">
-                                      Add to cart
-                                    </MDBBtn>
-                                    )}
-                                  </MDBCardBody>
-                                </MDBCard>
-                              </a>
-                            </MDBCol>
-                               ))}
-                              
+                         <br />
+                         <div className="text-center">
+                              <input
+                                   type="text"
+                                   placeholder="Search by product name"
+                                   value={searchTerm}
+                                   onChange={(e) => setSearchTerm(e.target.value)}
+                                   style={{ width: '50%', borderRadius: '20px', borderColor:'blue' }} // Adjust the width as needed
+                              />
+                         </div>
+                         <MDBRow className="prod-row mt-2">
+                              {filteredProducts.map((pr) => (
+                                   <MDBCol md="8" lg="2" className="product-column mb-4 mb-lg-0" key={pr._id}>
+                                        <a href={"/SingleProdView/" + pr._id} className="text-muted" style={{ textDecoration: 'none' }}>
+                                             <MDBCard className="product-card">
+                                                  <MDBCardImage className="prod-img" src={pr.logo} position="top" alt="img" />
+                                                  <MDBCardBody className="card-body">
+                                                       <div className="d-flex justify-content-between">
+                                                            <p className="large black"><b>{pr.productname}</b></p>
+                                                       </div>
+                                                       <div className="d-flex justify-content-between mb-0">
+                                                            <h5 className="text-dark mb-0">LKR {pr.unitprice}</h5>
+                                                       </div>
+                                                       <div class="d-flex justify-content-between mb-0">
+                                                            <p class="text-muted mb-0 small">
+                                                                 Available: <span class="fw-bold small">{pr.quantity}</span>
+                                                            </p>
+                                                       </div>
+                                                       {userId && (
+                                                            <MDBBtn color="primary" className="flex-fill ms-1">
+                                                                 Add to cart
+                                                            </MDBBtn>
+                                                       )}
+                                                  </MDBCardBody>
+                                             </MDBCard>
+                                        </a>
+                                   </MDBCol>
+                              ))}
+
                          </MDBRow>
                          <br />
 

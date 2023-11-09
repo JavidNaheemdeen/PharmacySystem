@@ -40,68 +40,57 @@ export default function SingleProdView() {
      }, []);
 
      return (
-          <div>
+          <div style={{ backgroundColor: '#f0f0f0' }}>
                <Header />
                <div>
                     <Header />
                     <br />
                     <MDBContainer fluid>
-                         <br/>
+                         <br />
+                         <br />
                          <MDBRow className="justify-content-center mb-0">
                               <MDBCol md="12" xl="10">
-                                   <MDBCard className="shadow-0 border rounded-3 mt-5 mb-3">
-                                        <MDBCardBody>
-                                             <MDBRow>
-                                                  <MDBCol md="12" lg="3" className="mb-4 mb-lg-0">
-                                                       <MDBRipple
-                                                            rippleColor="light"
-                                                            rippleTag="div"
-                                                            className="bg-image rounded hover-zoom hover-overlay"
-                                                       >
-                                                            <MDBCardImage
-                                                                 src={product.logo}
-                                                                 fluid
-                                                                 className="w-100"
-                                                            />
-                                                            <a href="#!">
-                                                                 <div
-                                                                      className="mask"
-                                                                      style={{ backgroundColor: "rgba(251, 251, 251, 0.15)" }}
-                                                                 ></div>
-                                                            </a>
-                                                       </MDBRipple>
-                                                  </MDBCol>
-                                                  <MDBCol md="6">
-                                                       <h5>{product.productname}</h5>
-                                                       <div className="d-flex flex-row align-items-center mb-1">
-                                                            <h4 className="mb-1 me-1">LKR {product.unitprice}</h4>
-                                                       </div>
-                                                       <div class="d-flex flex-row align-items-right">
-                                                       Quantity : 
-                                                            <MDBInput
-                                                                 min={0}
-                                                                 type="number"
-                                                                 size="sm"
-                                                                 style={{ width: "50px" }}
-                                                                 defaultValue={2}
-                                                            />
-                                                            {/* <AiOutlineShoppingCart /> */}
-                                                       </div>
-                                                       {userId && (
-                                                       <div className="d-flex flex-column mt-4">
-                                                            <MDBBtn color="primary" size="sm">
-                                                                 Add to Cart
-                                                            </MDBBtn>
-                                                       </div>
-                                                        )}
-                                                  </MDBCol>
-                                             </MDBRow>
-                                        </MDBCardBody>
+                                   <MDBCard className="shadow-0 border rounded-3 mt-5 mb-4 align-items-center bg-light-grey">
+                                        <MDBCol md="12" lg="6" className="mb-4 mb-lg-4 p-5 text-center">
+                                             <MDBCardImage
+                                                  src={product.logo}
+                                                  fluid
+                                                  className="w-100"
+                                             />
+                                             <a href="#!">
+                                                  <div
+                                                       className="mask"
+                                                       style={{ backgroundColor: "rgba(251, 251, 251, 0.15)" }}
+                                                  ></div>
+                                             </a>
+                                             <br />
+                                             <h5 style={{ fontSize: '30px' }}><b>{product.productname}</b></h5>
+                                             <div className="d-flex flex-row align-items-center mb-1 justify-content-center">
+                                                  <h4 className="mb-1 me-1">LKR {product.unitprice}</h4>
+                                             </div>
+                                             <div class="d-flex flex-row justify-content-center align-items-center">
+                                                  <span style={{ fontSize: '16px' }}>No. of Items : &nbsp;</span>
+                                                  <MDBInput
+                                                       min={0}
+                                                       type="number"
+                                                       size="sm"
+                                                       style={{ width: "50px", marginRight: "40px", fontSize: "16px" }}
+                                                       defaultValue={1}
+                                                  />
+                                             </div>
+                                             {userId && (
+                                                  <div className="d-flex flex-column mt-4">
+                                                       <MDBBtn color="primary" size="lg">
+                                                            Add to Cart
+                                                       </MDBBtn>
+                                                  </div>
+                                             )}
+                                        </MDBCol>
                                    </MDBCard>
                               </MDBCol>
                          </MDBRow>
                     </MDBContainer>
-                    <br/>
+                    <br />
                     <Footer />
                </div>
           </div>
