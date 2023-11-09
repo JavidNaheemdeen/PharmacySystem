@@ -14,15 +14,15 @@ const productSchema = mongoose.Schema({
     required: false,
   },
   batchnumber: {
-    type: String,
+    type: Number,
     required: false,
   },
   quantity: {
-    type: String,
+    type: Number,
     required: false,
   },
   unitprice: {
-    type: String,
+    type: Number,
     required: false,
   },
   logo: {
