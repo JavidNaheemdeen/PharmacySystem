@@ -18,11 +18,13 @@ import { FaPlus } from 'react-icons/fa'
 import { FaMinus } from 'react-icons/fa'
 import { useParams } from "react-router";
 import axios from "axios";
+import Swal from "sweetalert2";
 
 export default function SingleProdView() {
 
      const params = useParams();
      const [product, setProduct] = useState([]);
+     const [quantity, setQuantity] = useState(1);
 
      const productId = params.id;
 
@@ -38,6 +40,33 @@ export default function SingleProdView() {
                     console.log(err);
                });
      }, []);
+
+     const cartData = {
+          userId:localStorage.getItem('userId'),
+          products: [
+            {
+              product: productId,
+              quantity: quantity,
+            },
+          ],
+        };
+
+        const handleAddCart = () => {
+          axios
+            .post("http://localhost:3000/api/cart/addcart", cartData)
+            .then(function (response) {
+              Swal.fire({
+                title: "Success!",
+                text: "Added to Cart",
+                icon: "success",
+                confirmButtonText: "Ok",
+              });
+              console.log(response);
+            })
+            .catch(function (err) {
+              console.log(err);
+            });
+        };
 
      return (
           <div style={{ backgroundColor: '#f0f0f0' }}>
@@ -74,13 +103,17 @@ export default function SingleProdView() {
                                                        min={0}
                                                        type="number"
                                                        size="sm"
+                                                       value={quantity}
                                                        style={{ width: "50px", marginRight: "40px", fontSize: "16px" }}
                                                        defaultValue={1}
+                                                       onChange={(e) => {
+                                                            setQuantity(e.target.value);
+                                                          }}
                                                   />
                                              </div>
                                              {userId && (
                                                   <div className="d-flex flex-column mt-4">
-                                                       <MDBBtn color="primary" size="lg">
+                                                       <MDBBtn color="primary" size="lg" onClick={handleAddCart}>
                                                             Add to Cart
                                                        </MDBBtn>
                                                   </div>
