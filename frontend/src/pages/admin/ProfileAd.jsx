@@ -48,7 +48,7 @@ export default function ProfileAd() {
         <div className="col-md-3"></div>
         <div className="col-md-8">
           <section style={{ backgroundColor: "#eee" }}>
-            <MDBContainer className="py-5">
+            <MDBContainer className="py-5" style={{fontSize:'20px'}}>
               <MDBRow>
                 <MDBCol lg="4">
                   <MDBCard className="mb-4">
@@ -60,10 +60,7 @@ export default function ProfileAd() {
                         style={{ width: "150px" }}
                         fluid
                       />
-                      <p className="text-muted mb-1">Full Stack Developer</p>
-                      <p className="text-muted mb-4">
-                        Bay Area, San Francisco, CA
-                      </p>
+                      <br /><br /><br /><br />
                       <div className="d-flex justify-content-center mb-2">
                         <MDBBtn className="btn btn-success me-1">Edit</MDBBtn>
                         <MDBBtn className="btn btn-danger">Delete</MDBBtn>
@@ -80,7 +77,7 @@ export default function ProfileAd() {
                         </MDBCol>
                         <MDBCol sm="9">
                           <MDBCardText className="text-muted">
-                            {pharmacy.name}
+                            <b>{pharmacy.name}</b>
                           </MDBCardText>
                         </MDBCol>
                       </MDBRow>
@@ -91,7 +88,7 @@ export default function ProfileAd() {
                         </MDBCol>
                         <MDBCol sm="9">
                           <MDBCardText className="text-muted">
-                            {pharmacy.email}
+                            <b>{pharmacy.email}</b>
                           </MDBCardText>
                         </MDBCol>
                       </MDBRow>
@@ -102,7 +99,7 @@ export default function ProfileAd() {
                         </MDBCol>
                         <MDBCol sm="9">
                           <MDBCardText className="text-muted">
-                            {pharmacy.address}
+                            <b>{pharmacy.address}</b>
                           </MDBCardText>
                         </MDBCol>
                       </MDBRow>
@@ -113,7 +110,7 @@ export default function ProfileAd() {
                         </MDBCol>
                         <MDBCol sm="9">
                           <MDBCardText className="text-muted">
-                            {pharmacy.town}
+                            <b>{pharmacy.town}</b>
                           </MDBCardText>
                         </MDBCol>
                       </MDBRow>
@@ -124,7 +121,7 @@ export default function ProfileAd() {
                         </MDBCol>
                         <MDBCol sm="9">
                           <MDBCardText className="text-muted">
-                            {pharmacy.contact}
+                            <b>{pharmacy.contact}</b>
                           </MDBCardText>
                         </MDBCol>
                       </MDBRow>
@@ -135,7 +132,7 @@ export default function ProfileAd() {
                         </MDBCol>
                         <MDBCol sm="9">
                           <MDBCardText className="text-muted">
-                            {pharmacy.opentime}
+                            <b>{pharmacy.opentime}</b>
                           </MDBCardText>
                         </MDBCol>
                       </MDBRow>
