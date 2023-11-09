@@ -6,28 +6,24 @@ exports.addPrescription = async (req, res) => {
   try {
     const {
       patientname,
-      email,
       age,
       yourphone,
-      whatsappnumber,
       address,
       choosepharmacy,
       gender,
-      allergry,
-      logo, // Assuming logo is part of the prescription
+      allergy,
+      pic, // Assuming logo is part of the prescription
     } = req.body;
 
     const newPrescription = new Prescription({
       patientname,
-      email,
       age,
       yourphone,
-      whatsappnumber,
       address,
       choosepharmacy,
       gender,
-      allergry,
-      logo, // Store the prescription logo
+      allergy,
+      pic, // Store the prescription logo
     });
 
     const savedPrescription = await newPrescription.save();
@@ -42,7 +38,9 @@ exports.deletePrescription = async (req, res) => {
   try {
     const prescriptionId = req.params.id; // Extract the prescription ID from the URL
 
-    const deletedPrescription = await Prescription.findByIdAndRemove(prescriptionId);
+    const deletedPrescription = await Prescription.findByIdAndRemove(
+      prescriptionId
+    );
 
     if (!deletedPrescription) {
       return res.status(404).json({ error: "Prescription not found" });
@@ -60,7 +58,7 @@ exports.getAllPrescriptions = async (req, res) => {
     const prescriptions = await Prescription.find();
     res.json(prescriptions);
   } catch (error) {
-    res.status(500).json({ error: 'Could not retrieve prescriptions' });
+    res.status(500).json({ error: "Could not retrieve prescriptions" });
   }
 };
 
@@ -72,12 +70,12 @@ exports.getPrescriptionById = async (req, res) => {
     const prescription = await Prescription.findById(prescriptionId);
 
     if (!prescription) {
-      return res.status(404).json({ error: 'Prescription not found' });
+      return res.status(404).json({ error: "Prescription not found" });
     }
 
     res.json(prescription);
   } catch (error) {
-    res.status(500).json({ error: 'Could not retrieve the prescription' });
+    res.status(500).json({ error: "Could not retrieve the prescription" });
   }
 };
 
@@ -94,11 +92,36 @@ exports.updatePrescriptionById = async (req, res) => {
     );
 
     if (!updatedPrescription) {
-      return res.status(404).json({ error: 'Prescription not found' });
+      return res.status(404).json({ error: "Prescription not found" });
     }
 
     res.json(updatedPrescription);
   } catch (error) {
-    res.status(500).json({ error: 'Could not update the prescription' });
+    res.status(500).json({ error: "Could not update the prescription" });
+  }
+};
+
+// Function to get prescriptions by pharmacy
+exports.getPrescriptionsByPharmacy = async (req, res) => {
+  const pharmacyId = req.params.pharmacyId;
+
+  try {
+    const prescriptions = await Prescription.find({
+      choosepharmacy: pharmacyId,
+    });
+
+    if (!prescriptions || prescriptions.length === 0) {
+      return res
+        .status(404)
+        .json({ error: "No prescriptions found for the specified pharmacy" });
+    }
+
+    res.json(prescriptions);
+  } catch (error) {
+    res
+      .status(500)
+      .json({
+        error: "Could not retrieve prescriptions for the specified pharmacy",
+      });
   }
 };

@@ -5,10 +5,6 @@ const prescriptionSchema = mongoose.Schema({
     type: String,
     required: true,
   },
-  email: {
-    type: String,
-    required: false,
-  },
   age: {
     type: String,
     required: false,
@@ -17,27 +13,23 @@ const prescriptionSchema = mongoose.Schema({
     type: String,
     required: false,
   },
-  whatsappnumber: {
-    type: String,
-    required: false,
-  },
   address: {
     type: String,
     required: false,
   },
   choosepharmacy: {
-    type: String,
-    required: false,
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "Pharmacy", // Reference the Pharmacy model
   },
   gender: {
     type: String,
     required: false,
   },
-  allergry: {
+  allergy: {
     type: String,
     required: false,
   },
-  logo: {
+  pic: {
     type: String,
     required: false,
     default:

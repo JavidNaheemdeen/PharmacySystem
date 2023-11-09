@@ -8,6 +8,7 @@ router.delete("/deleteprescription/:id", prescriptionController.deletePrescripti
 router.put("/updprescription/:id",prescriptionController.updatePrescriptionById);
 router.get("/", prescriptionController.getAllPrescriptions);
 router.get("/:id", prescriptionController.getPrescriptionById);
+router.get('/pharmacy/:pharmacyId', prescriptionController.getPrescriptionsByPharmacy);
 
 
 

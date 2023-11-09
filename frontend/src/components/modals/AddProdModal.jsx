@@ -127,39 +127,7 @@ export default function AddProdModal() {
         });
     }
   };
-  // const addProduct = async () => {
-  //   // After a successful login:
-  //   const pharmacistId = localStorage.getItem("pharmacistId"); // Get the pharmacist ID from the login response
 
-  //   try {
-  //     const formData = new FormData();
-  //     formData.append("productname", productName);
-  //     formData.append("genericname", genericName);
-  //     formData.append("form", form);
-  //     formData.append("batchnumber", batchNumber);
-  //     formData.append("quantity", quantity);
-  //     formData.append("unitprice", unitPrice);
-  //     formData.append("image", image);
-
-  //     // Send a POST request to add the product to the pharmacy identified by pharmacistId
-  //     const response = await axios.post(`http://localhost:3000/api/pharmacy/${pharmacistId}/addproduct`, formData);
-  //     console.log("Product added:", response.data);
-
-  //     // Reset form fields
-  //     setProductName("");
-  //     setGenericName("");
-  //     setForm("");
-  //     setBatchNumber("");
-  //     setQuantity("");
-  //     setUnitPrice("");
-  //     setImage(null);
-
-  //     setShow(false);
-  //   } catch (error) {
-  //     console.error("Error adding product:", error);
-  //     // Handle the error appropriately, e.g., show an error message to the user
-  //   }
-  // };
 
 
   return (
