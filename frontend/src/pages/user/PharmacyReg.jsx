@@ -133,6 +133,8 @@ export default function PharmacyReg() {
               <div class="pic-body">
                 <br />
                 <br />
+                <a href="/" className="btn btn-def me-1" style={{ fontSize: "20px", textDecoration: "none" }}>Home</a>
+                <a href="/Pharmlogin" className="btn btn-def" style={{ fontSize: "20px", textDecoration: "none" }}>Login as a Pharmacist</a>
                 <br />
                 <br />
                 <br />

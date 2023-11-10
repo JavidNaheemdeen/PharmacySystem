@@ -82,7 +82,10 @@ export default function Register() {
                               <div class="col-md-8 ">
 
                                    <div class="pic-body">
-                                        <br /><br /><br /><br /><br /><br /><br /><br /><br />
+                                        <br /><br />
+                                        <a href="/" className="btn btn-def me-1" style={{ fontSize: "20px", textDecoration: "none" }}>Home</a>
+                                        <a href="/login" className="btn btn-def" style={{ fontSize: "20px", textDecoration: "none" }}>Login</a>
+                                        <br /><br /><br /><br /><br /><br /><br />
                                         <div class="topic">
                                              Switch to a simpler <span class="blue"> pharmacy </span> today
                                         </div>

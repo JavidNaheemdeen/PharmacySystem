@@ -125,3 +125,20 @@ exports.getPrescriptionsByPharmacy = async (req, res) => {
       });
   }
 };
+
+// Function to get the number of prescriptions
+exports.getPrescriptionCount = async (req, res) => {
+  const pharmacyId = req.params.pharmacyId;
+
+  try {
+    const prescriptionCount = await Prescription.countDocuments({
+      choosepharmacy: pharmacyId,
+    });
+
+    res.json({ count: prescriptionCount });
+  } catch (error) {
+    res.status(500).json({
+      error: "Could not retrieve the number of prescriptions for the specified pharmacy",
+    });
+  }
+};

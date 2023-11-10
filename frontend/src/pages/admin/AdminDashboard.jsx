@@ -5,6 +5,7 @@ import { GrNotes } from 'react-icons/gr'
 import { AiOutlineShoppingCart } from "react-icons/ai";
 import { BsPrescription2 } from "react-icons/bs";
 import { useNavigate  } from 'react-router-dom';
+import axios from "axios";
 
 
 export default function AdminDashboard() {
@@ -65,6 +66,34 @@ export default function AdminDashboard() {
     },
   ];
 
+  const [prescriptionCount, setPrescriptionCount] = useState(0);
+  const [productCount, setProductCount] = useState(0);
+
+  const pharmacyId = localStorage.getItem("pharmacyId");
+  console.log(pharmacyId)
+
+  useEffect(() => {
+    axios
+      .get("http://localhost:3000/api/prescription/getprescriptioncount/" + pharmacyId) 
+      .then((res) => {
+        setPrescriptionCount(res.data.count);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }, []);
+
+  useEffect(() => {
+    axios
+      .get("http://localhost:3000/api/product/getproductcount/" + pharmacyId) 
+      .then((res) => {
+        setProductCount(res.data.count);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }, []);
+
   return (
     <div>
       <Sidenav />
@@ -79,7 +108,7 @@ export default function AdminDashboard() {
                 <i className="bx"><GrNotes /></i>
                 <span>
                   <h3>Products</h3>
-                  <p>20</p>
+                  <p>{productCount}</p>
                 </span>  
               </div>
               <div className="cards">
@@ -94,7 +123,7 @@ export default function AdminDashboard() {
                 <i className="bx"><BsPrescription2 /></i>
                   <span>
                     <h3>Prescriptions</h3>
-                    <p>8</p>
+                    <p>{prescriptionCount}</p>
                   </span>
               </div>
 

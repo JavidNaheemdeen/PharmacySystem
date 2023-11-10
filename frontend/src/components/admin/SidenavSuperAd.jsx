@@ -78,9 +78,6 @@ export default function SidenavSuperAd() {
                                    <a href="/Userdashboard" className="nav-item nav-link dash-link">
                                         <CgProfile /> User Dashboard
                                    </a>
-                                   <a href="#" className="nav-item nav-link dash-link">
-                                        <FiSettings /> Settings
-                                   </a>
                               </div>
                          </div>
                     </Container>

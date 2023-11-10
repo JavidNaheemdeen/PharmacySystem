@@ -68,7 +68,7 @@ export default function AdminLogin() {
                                 <div className="pic-body">
                                      <br />
                                      <br />
-                                     <a href="/" style={{ fontSize: "30px", textDecoration: "none" }}>Back to home</a>
+                                     {/* <a href="/" style={{ fontSize: "30px", textDecoration: "none" }}>Back to home</a> */}
                                      <br />
                                      <br />
                                      <br />

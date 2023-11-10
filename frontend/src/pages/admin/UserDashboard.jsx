@@ -34,7 +34,7 @@ export default function UserDashboard() {
   const handleDeleteUser = (userId) => {
     Swal.fire({
       title: "Confirm Deletion",
-      text: "Are you sure you want to delete this user?",
+      text: "Are you sure you want to delete your profile?",
       icon: "warning",
       showCancelButton: true,
       confirmButtonText: "Yes",
@@ -50,7 +50,7 @@ export default function UserDashboard() {
 
             Swal.fire({
               title: "Success",
-              text: "User deleted successfully!",
+              text: "Profile deleted successfully!",
               icon: "success",
             });
           })

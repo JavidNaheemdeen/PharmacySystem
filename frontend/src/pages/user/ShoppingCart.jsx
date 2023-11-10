@@ -12,25 +12,24 @@ import {
   MDBTypography,
   MDBRadio,
 } from "mdb-react-ui-kit";
-import Header from '../../components/user/Header';
-import Footer from '../../components/user/Footer';
+import Header from "../../components/user/Header";
+import Footer from "../../components/user/Footer";
 import { Button } from "react-bootstrap";
 import axios from "axios";
-import { BsFillTrashFill, BsFillPencilFill } from 'react-icons/bs'
+import { BsFillTrashFill, BsFillPencilFill } from "react-icons/bs";
 import Swal from "sweetalert2";
 
 export default function ShoppingCart() {
-
   const [cart, setCart] = useState([]);
   const userid = localStorage.getItem("userId");
   const [totalPrice, setTotalPrice] = useState(0);
   const [noOfItems, setNoOfItems] = useState(0);
 
-  const [hasAllergy, setHasAllergy] = useState('no');
+  const [paymentMethod, setPaymentMethod] = useState("no");
 
-  const handleAllergyChange = (e) => {
-    setHasAllergy(e.target.value);
-  }
+  const handlePaymentChange = (e) => {
+    setPaymentMethod(e.target.value);
+  };
 
   useEffect(() => {
     axios
@@ -69,11 +68,11 @@ export default function ShoppingCart() {
   axios
     .get(`http://localhost:3000/api/cart/${userid}/count`)
     .then((response) => {
-      setNoOfItems(response.data.count)
+      setNoOfItems(response.data.count);
     })
     .catch((error) => {
-      console.log(error)
-    })
+      console.log(error);
+    });
 
   const handleRemove = () => {
     axios
@@ -88,7 +87,7 @@ export default function ShoppingCart() {
           confirmButtonText: "Ok",
         }).then((result) => {
           if (result.isConfirmed) {
-            window.location.href = '/';
+            window.location.href = "/";
           }
         });
       })
@@ -120,7 +119,9 @@ export default function ShoppingCart() {
 
                       <div className="d-flex justify-content-between align-items-center mb-4">
                         <div>
-                          <p className="mb-0">You have {noOfItems} items in your cart</p>
+                          <p className="mb-0">
+                            You have {noOfItems} items in your cart
+                          </p>
                         </div>
                       </div>
                       {cart &&
@@ -142,7 +143,9 @@ export default function ShoppingCart() {
                                     <MDBTypography tag="h5">
                                       {ct.product?.productname}
                                     </MDBTypography>
-                                    <p className="small mb-0">{ct.product?.form}</p>
+                                    <p className="small mb-0">
+                                      {ct.product?.form}
+                                    </p>
                                   </div>
                                 </div>
                                 <div className="d-flex flex-row align-items-center">
@@ -159,16 +162,24 @@ export default function ShoppingCart() {
                                       LKR {ct.product?.unitprice}
                                     </MDBTypography>
                                   </div>
-                                  <a href="#!" onClick={(e) =>
-                                    handleRemoveProduct(ct.product._id, e)
-                                  } style={{ color: "#cecece" }}>
-                                    <span style={{ color: "red" }}><BsFillTrashFill /></span>
+                                  <a
+                                    href="#!"
+                                    onClick={(e) =>
+                                      handleRemoveProduct(ct.product._id, e)
+                                    }
+                                    style={{ color: "#cecece" }}
+                                  >
+                                    <span style={{ color: "red" }}>
+                                      <BsFillTrashFill />
+                                    </span>
                                   </a>
                                 </div>
                               </div>
                               <div className="d-flex justify-content-between">
                                 <h6 className="mb-2">Sub Total</h6>
-                                <h6 className="mb-2">LKR {ct.product?.unitprice * ct.quantity}</h6>
+                                <h6 className="mb-2">
+                                  LKR {ct.product?.unitprice * ct.quantity}
+                                </h6>
                               </div>
                             </MDBCardBody>
                           </MDBCard>
@@ -180,8 +191,11 @@ export default function ShoppingCart() {
                       <Button onClick={handleRemove}>Discard Cart</Button>
                     </MDBCol>
 
-
-                    <MDBCol lg="5" className="px-5 py-4" style={{ backgroundColor:"#eee", borderRadius:"15px" }}>
+                    <MDBCol
+                      lg="5"
+                      className="px-5 py-4"
+                      style={{ backgroundColor: "#eee", borderRadius: "15px" }}
+                    >
                       <MDBTypography
                         tag="h3"
                         className="mb-5 pt-2 text-center fw-bold text-uppercase"
@@ -190,35 +204,45 @@ export default function ShoppingCart() {
                       </MDBTypography>
 
                       <form className="mb-5">
-                        <label style={{ display: 'block', marginBottom: '25px' }}>Name</label>
+                        <label
+                          style={{ display: "block", marginBottom: "25px" }}
+                        >
+                          Address
+                        </label>
                         <MDBInput
                           className="mb-5"
                           // label="Delivery Address"
-                          type="text"
+                          type="address"
                           size="lg"
                           placeholder="Address"
-                          style={{ display: 'block', marginBottom: '10px' }}
+                          style={{ display: "block", marginBottom: "10px" }}
                         />
 
-                        <label style={{ display: 'block', marginBottom: '25px' }}>Contact No</label>
+                        <label
+                          style={{ display: "block", marginBottom: "25px" }}
+                        >
+                          Contact No
+                        </label>
                         <MDBInput
                           className="mb-5"
                           // label="Contact No"
-                          type="text"
+                          type="tel"
                           size="lg"
                           placeholder="01234567899"
-                          style={{ display: 'block', marginBottom: '10px' }}
+                          style={{ display: "block", marginBottom: "10px" }}
                         />
 
-                        <label style={{ marginBottom: '25px' }}>Payment Method</label>
+                        <label style={{ marginBottom: "25px" }}>
+                          Payment Method
+                        </label>
                         <div className="radio-group">
                           <input
                             type="radio"
                             id="allergyYes"
                             name="hasAllergy"
                             value="yes"
-                            checked={hasAllergy === 'yes'}
-                            onChange={handleAllergyChange}
+                            checked={paymentMethod === "yes"}
+                            onChange={handlePaymentChange}
                           />
                           <label htmlFor="allergyYes">Cash on delivery</label>
                           <input
@@ -226,22 +250,21 @@ export default function ShoppingCart() {
                             id="allergyNo"
                             name="hasAllergy"
                             value="no"
-                            checked={hasAllergy === 'no'}
-                            onChange={handleAllergyChange}
+                            checked={paymentMethod === "no"}
+                            onChange={handlePaymentChange}
                           />
                           <label htmlFor="allergyNo">Online Payment</label>
                         </div>
                         <br />
-                        {hasAllergy === 'yes' && (
-                          <div className="form-group">
-                            <label htmlFor="allergyNote">Delivery Address</label>
-                            <textarea id="allergyNote" name="allergyNote"></textarea>
-                          </div>
-                        )}
-                        {hasAllergy === 'no' && (
+                        {paymentMethod === "no" && (
                           <MDBCard
                             className="shadow-2-strong mb-5"
-                            style={{ borderRadius: "16px", background: "linear-gradient(to right, #3498db, #6bb9f0)", color: "white", }}
+                            style={{
+                              borderRadius: "16px",
+                              background:
+                                "linear-gradient(to right, #3498db, #6bb9f0)",
+                              color: "white",
+                            }}
                           >
                             <MDBTypography
                               tag="h3"
@@ -250,42 +273,42 @@ export default function ShoppingCart() {
                               Payment
                             </MDBTypography>
                             <MDBCardBody className="p-4 justify-content-center align-center">
-                                <MDBCol>
+                              <MDBCol>
                                 <MDBCol className="justify-content-center align-center">
-                                      <label>Name on Card</label>
-                                      <MDBInput
-                                        className="mb-2"
-                                        placeholder="John Smiths"
-                                        size="lg"
-                                      />
-                                      <label>Expiration</label>
-                                      <MDBInput
-                                        className="mb-2"
-                                        label=""
-                                        placeholder="MM/YY"
-                                        size="lg"
-                                        maxLength={7}
-                                        minLength={7}
-                                      />
-                                      <label >Card Number</label>
-                                      <MDBInput
-                                        className="mb-2"
-                                        placeholder="1111 2222 3333 4444"
-                                        size="lg"
-                                        minlength="19"
-                                        maxlength="19"
-                                      />
-                                      <label >Cvv</label>
-                                      <MDBInput
-                                        className="mb-2"
-                                        placeholder="&#9679;&#9679;&#9679;"
-                                        size="lg"
-                                        minlength="3"
-                                        maxlength="3"
-                                        type="password"
-                                      />
-                                    </MDBCol>
+                                  <label>Name on Card</label>
+                                  <MDBInput
+                                    className="mb-2"
+                                    placeholder="John Smiths"
+                                    size="lg"
+                                  />
+                                  <label>Expiration</label>
+                                  <MDBInput
+                                    className="mb-2"
+                                    label=""
+                                    placeholder="MM/YY"
+                                    size="lg"
+                                    maxLength={7}
+                                    minLength={7}
+                                  />
+                                  <label>Card Number</label>
+                                  <MDBInput
+                                    className="mb-2"
+                                    placeholder="1111 2222 3333 4444"
+                                    size="lg"
+                                    minlength="19"
+                                    maxlength="19"
+                                  />
+                                  <label>Cvv</label>
+                                  <MDBInput
+                                    className="mb-2"
+                                    placeholder="&#9679;&#9679;&#9679;"
+                                    size="lg"
+                                    minlength="3"
+                                    maxlength="3"
+                                    type="password"
+                                  />
                                 </MDBCol>
+                              </MDBCol>
                             </MDBCardBody>
                           </MDBCard>
                         )}
@@ -302,7 +325,7 @@ export default function ShoppingCart() {
                         <MDBTypography
                           tag="h5"
                           className="fw-bold pr-5"
-                          style={{ marginTop:"2" }}
+                          style={{ marginTop: "2" }}
                         >
                           <a href="/">
                             <MDBIcon fas icon="angle-left me-2" />
@@ -379,8 +402,6 @@ export default function ShoppingCart() {
       </section>
 
       <Footer />
-
-
     </div>
-  )
+  );
 }

@@ -165,3 +165,17 @@ exports.getProductsByPharmacyId = async (req, res) => {
       .json({ error: "Could not retrieve products by pharmacyId" });
   }
 };
+
+// Function to get the number of products
+exports.getProductCount = async (req, res) => {
+  try {
+    const pharmacyId = req.params.pharmacyId;
+
+    // Assuming your product schema has a 'pharmacy' field
+    const productCount = await Product.countDocuments({ pharmacyId: pharmacyId });
+
+    res.json({ count: productCount });
+  } catch (error) {
+    res.status(500).json({ error: "Could not retrieve the number of products" });
+  }
+};

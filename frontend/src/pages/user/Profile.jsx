@@ -136,7 +136,7 @@ export default function Profile() {
 
                                         <div className="d-flex justify-content-center mb-2">
                                              {/* <MDBBtn className="btn btn-success me-1"> */}
-                                             <UsprofEditModal usid={user._id} />
+                                             <UsprofEditModal userId={user._id} />
                                              <button
                                                   onClick={() => handleDeleteUser(user._id)}
                                                   className="btn btn-danger btn-sm"

@@ -92,10 +92,6 @@ export default function SidenavAd() {
                   {" "}
                   <CgProfile /> Profile
                 </a>
-                <a href="#" className="nav-item nav-link dash-link">
-                  {" "}
-                  <FiSettings /> Settings{" "}
-                </a>
               </div>
             </div>
           </Navbar.Collapse>

@@ -28,7 +28,7 @@ export default function UsprofEditModal(props) {
   };
 
   const updateUserShow = () => {
-    console.log(props.userId);
+    console.log(props.usid);
     setUserId(props.userId);
 
     axios
@@ -60,7 +60,7 @@ export default function UsprofEditModal(props) {
         setShow(false);
         Swal.fire({
           title: 'Success!',
-          text: 'User updated Successfully',
+          text: 'Profile updated Successfully',
           icon: 'success',
           confirmButtonText: 'Ok',
         }).then(() => {

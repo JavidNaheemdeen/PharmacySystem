@@ -74,7 +74,8 @@ export default function Login() {
 
                                    <div class="pic-body">
                                         <br /><br />
-                                        <a href="/" style={{ fontSize: "30px", textDecoration: "none" }}>Back to home</a>
+                                        <a href="/" className="btn btn-def me-1" style={{ fontSize: "20px", textDecoration: "none" }}>Home</a>
+                                        <a href="/register" className="btn btn-def" style={{ fontSize: "20px", textDecoration: "none" }}>Register</a>
                                         <br /><br /><br /><br /><br /><br />
                                         <div class="topic">
                                              Simplify your <span class="blue"> life </span>
