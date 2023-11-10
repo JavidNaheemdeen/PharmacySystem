@@ -16,6 +16,7 @@ import Swal from 'sweetalert2';
 import { BsFillTrashFill, BsFillPencilFill } from 'react-icons/bs'
 import Header from "../../components/user/Header";
 import Footer from "../../components/user/Footer";
+import UsprofEditModal from "../../components/modals/UsprofEditModal";
 
 export default function Profile() {
 
@@ -44,7 +45,7 @@ export default function Profile() {
                });
      }, []);
 
-     const handleDeletePharmacy = (userId) => {
+     const handleDeleteUser = (userId) => {
           Swal.fire({
                title: 'Confirm Deletion',
                text: 'Are you sure you want to delete this Profile?',
@@ -55,10 +56,10 @@ export default function Profile() {
           }).then((result) => {
                if (result.isConfirmed) {
                     axios
-                         .delete(`http://localhost:3000/api/user/deletepuser/${userId}`)
+                         .delete(`http://localhost:3000/api/user/deleteuser/${userId}`)
                          .then(() => {
                               setUser((prevUser) =>
-                                   prevUser.filter((pm) => pm._id !== userId)
+                                   prevUser.filter((userId) => userId._id !== userId)
                               );
 
                               Swal.fire({
@@ -135,9 +136,9 @@ export default function Profile() {
 
                                         <div className="d-flex justify-content-center mb-2">
                                              {/* <MDBBtn className="btn btn-success me-1"> */}
-                                             <AdminEditModal usid={user._id} />
+                                             <UsprofEditModal usid={user._id} />
                                              <button
-                                                  onClick={() => handleDeletePharmacy(user._id)}
+                                                  onClick={() => handleDeleteUser(user._id)}
                                                   className="btn btn-danger btn-sm"
                                              >
                                                   <BsFillTrashFill />
