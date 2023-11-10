@@ -59,7 +59,7 @@ export default function SuperAdminDashboard() {
 
   useEffect(() => {
     axios
-      .get("http://localhost:3000/api/pharmacy/getpharmacycount") // Replace with your actual API URL
+      .get("http://localhost:3000/api/pharmacy/getpharmacycount") 
       .then((res) => {
         setPharmacyCount(res.data.count);
       })
@@ -70,7 +70,7 @@ export default function SuperAdminDashboard() {
 
   useEffect(() => {
     axios
-      .get("http://localhost:3000/api/user/getusercount") // Replace with your actual API URL
+      .get("http://localhost:3000/api/user/getusercount") 
       .then((res) => {
         setUserCount(res.data.count);
       })

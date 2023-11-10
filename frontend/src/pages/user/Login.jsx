@@ -73,7 +73,9 @@ export default function Login() {
                               <div class="col-md-8 ">
 
                                    <div class="pic-body">
-                                        <br /><br /><br /><br /><br /><br /><br /><br /><br />
+                                        <br /><br />
+                                        <a href="/" style={{ fontSize: "30px", textDecoration: "none" }}>Back to home</a>
+                                        <br /><br /><br /><br /><br /><br />
                                         <div class="topic">
                                              Simplify your <span class="blue"> life </span>
                                         </div>

@@ -130,7 +130,7 @@
     border: 1px solid #ddd;
     border-radius: 10px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
-    background-color: #42c5b8;
+    background-color: #c1ffc1;
 }
 
 .form-columns {
@@ -146,7 +146,7 @@
 .prescription-form {
     background-color: white;
     border: 1px solid #ddd;
-    border-radius: 5px;
+    border-radius: 15px;
     padding: 20px;
     margin-bottom: 20px;
 }

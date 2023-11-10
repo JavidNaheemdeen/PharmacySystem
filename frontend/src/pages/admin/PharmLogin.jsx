@@ -67,7 +67,7 @@ export default function PharmLogin() {
               <div className="pic-body">
                 <br />
                 <br />
-                <br />
+                <a href="/" style={{ fontSize: "30px", textDecoration:"none" }}>Back to home</a>
                 <br />
                 <br />
                 <br />

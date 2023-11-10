@@ -11,7 +11,10 @@ import {
 } from "mdb-react-ui-kit";
 import SidenavAd from "../../components/admin/SidenavAd";
 import axios from "axios";
-import { useNavigate  } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
+import AdminEditModal from "../../components/modals/AdprofEditModal";
+import Swal from 'sweetalert2';
+import { BsFillTrashFill, BsFillPencilFill } from 'react-icons/bs'
 
 export default function ProfileAd() {
   const [pharmacy, setPharmacy] = useState({});
@@ -39,6 +42,37 @@ export default function ProfileAd() {
       });
   }, []);
 
+  const handleDeletePharmacy = (pharmacyId) => {
+    Swal.fire({
+      title: 'Confirm Deletion',
+      text: 'Are you sure you want to delete this Profile?',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonText: 'Yes',
+      cancelButtonText: 'No',
+    }).then((result) => {
+      if (result.isConfirmed) {
+        axios
+          .delete(`http://localhost:3000/api/pharmacy/deletepharmacy/${pharmacyId}`)
+          .then(() => {
+            setPharmacy((prevPharmacy) =>
+              prevPharmacy.filter((pm) => pm._id !== pharmacyId)
+            );
+
+            Swal.fire({
+              title: 'Success',
+              text: 'Profile deleted successfully!',
+              icon: 'success',
+            });
+            navigate('/');
+          })
+          .catch((err) => {
+            console.log(err);
+          });
+      }
+    });
+  };
+
   return (
     <div>
       <SidenavAd />
@@ -47,8 +81,10 @@ export default function ProfileAd() {
       <div className="row">
         <div className="col-md-3"></div>
         <div className="col-md-8">
-          <section style={{ backgroundColor: "#eee" }}>
-            <MDBContainer className="py-5" style={{fontSize:'20px'}}>
+          <h2 className="text-center">Pharmacy Profile</h2>
+          <br />
+          <section style={{ backgroundColor: "#e0ffe0", borderRadius: "16px" }}>
+            <MDBContainer className="py-5" style={{ fontSize: '20px', borderRadius: "16px" }}>
               <MDBRow>
                 <MDBCol lg="4">
                   <MDBCard className="mb-4">
@@ -61,9 +97,16 @@ export default function ProfileAd() {
                         fluid
                       />
                       <br /><br /><br /><br />
+
                       <div className="d-flex justify-content-center mb-2">
-                        <MDBBtn className="btn btn-success me-1">Edit</MDBBtn>
-                        <MDBBtn className="btn btn-danger">Delete</MDBBtn>
+                        {/* <MDBBtn className="btn btn-success me-1"> */}
+                        <AdminEditModal pmid={pharmacy._id} />
+                        <button
+                          onClick={() => handleDeletePharmacy(pharmacy._id)}
+                          className="btn btn-danger btn-sm"
+                        >
+                          <BsFillTrashFill />
+                        </button>
                       </div>
                     </MDBCardBody>
                   </MDBCard>

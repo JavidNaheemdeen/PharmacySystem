@@ -145,7 +145,7 @@ export default function Header() {
                                         <a href="/ShoppingCart" className="me-3" style={{ fontSize: '25px' }}>
                                              <AiOutlineShoppingCart />
                                         </a>
-                                        <a href="/profile" className="me-3" style={{ fontSize: '25px' }}>
+                                        <a href="/Profile" className="me-3" style={{ fontSize: '25px' }}>
                                              <CgProfile/>
                                         </a>
                                         <a href="#" className="btn btn-def"  onClick={handleLogout}>

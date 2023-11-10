@@ -20,6 +20,7 @@ import AdminLogin from './pages/admin/AdminLogin';
 import UserDashboard from './pages/admin/UserDashboard';
 import OrderManagement from './pages/admin/OrderManagement';
 import PrescriptionManagement from './pages/admin/PrescriptionManagement';
+import Profile from './pages/user/Profile';
 
 
 function App() {
@@ -47,6 +48,7 @@ function App() {
           <Route path="/UserDashboard" element={<UserDashboard />} />
           <Route path="/OrderManagement" element={<OrderManagement />} />
           <Route path="/PrescriptionManagement" element={<PrescriptionManagement />} />
+          <Route path="/Profile" element={<Profile />} />
         </Routes>
       </BrowserRouter>
     </>
