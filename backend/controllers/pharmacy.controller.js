@@ -8,7 +8,7 @@ exports.addPharmacy = async (req, res) => {
       req.body;
 
     // Hash the password before saving it
-    const hashedPassword = await bcrypt.hash(password, 10); // 10 is the salt rounds, you can adjust it
+    const hashedPassword = await bcrypt.hash(password, 10);
 
     const newPharmacy = new Pharmacy({
       name,

@@ -8,6 +8,7 @@ const superadminRoutes = require("./routes/superadmin.route.js");
 const userRoutes = require("./routes/user.route.js");
 const prescriptionRoutes = require("./routes/prescription.route.js");
 const cartRoutes = require("./routes/cart.route.js");
+const orderRoutes = require("./routes/order.route.js");
 
 const PORT = process.env.PORT || 3000;
 
@@ -37,6 +38,7 @@ app.use("/api/superadmin", superadminRoutes);
 app.use("/api/user", userRoutes);
 app.use("/api/prescription", prescriptionRoutes);
 app.use("/api/cart", cartRoutes);
+app.use("/api/order", orderRoutes);
 
 app.listen(PORT, () => {
   console.log(`listening on ${PORT}`);

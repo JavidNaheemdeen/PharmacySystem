@@ -18,18 +18,50 @@ import { Button } from "react-bootstrap";
 import axios from "axios";
 import { BsFillTrashFill, BsFillPencilFill } from "react-icons/bs";
 import Swal from "sweetalert2";
+// import { useHistory } from "react-router-dom"; 
+
 
 export default function ShoppingCart() {
   const [cart, setCart] = useState([]);
   const userid = localStorage.getItem("userId");
+  const pharmacyId = localStorage.getItem("pharmacyId");
   const [totalPrice, setTotalPrice] = useState(0);
   const [noOfItems, setNoOfItems] = useState(0);
+  const [patientAddress, setPatientAddress] = useState("");
+  const [contactNumber, setContactNumber] = useState("");
+  const [orderDate, setOrderDate] = useState(getSriLankanDateTime());
 
-  const [paymentMethod, setPaymentMethod] = useState("no");
+  const [paymentMethod, setPaymentMethod] = useState("yes");
 
   const handlePaymentChange = (e) => {
     setPaymentMethod(e.target.value);
   };
+
+  // Function to get the formatted current date and time
+  function getSriLankanDateTime() {
+    const currentDateTime = new Date();
+    const options = {
+      timeZone: "Asia/Colombo",
+      year: "numeric",
+      month: "numeric",
+      day: "numeric",
+      hour: "numeric",
+      minute: "numeric",
+      second: "numeric",
+    };
+    const formattedDateTime = new Intl.DateTimeFormat("en-US", options).format(currentDateTime);
+    return formattedDateTime;
+  }
+
+  // Update the time every second
+  useEffect(() => {
+    const intervalId = setInterval(() => {
+      setOrderDate(getSriLankanDateTime());
+    }, 1000);
+
+    // Clear the interval when the component is unmounted
+    return () => clearInterval(intervalId);
+  }, []);
 
   useEffect(() => {
     axios
@@ -95,6 +127,43 @@ export default function ShoppingCart() {
         console.log(error);
       });
   };
+
+  // Inside your component function
+  const handleCheckout = async () => {
+    try {
+      const orderData = {
+        pharmacyId: localStorage.getItem('pharmacyId'),
+        products: cart,
+        deliveryInfo: {
+          address: patientAddress,
+          contactNo: contactNumber,
+        },
+        orderDate,
+        paymentDetails: {
+          method: paymentMethod,
+          // Add other payment details here based on the selected payment method
+        },
+      };
+
+      const response = await axios.post('http://localhost:3000/api/order/addorder', orderData);
+
+      // Check if the order was successfully created
+      if (response.status === 200) {
+        // Discard the cart (you can implement this logic)
+        // For example, call a function to clear the cart in your backend
+        await axios.delete(`http://localhost:3000/api/cart/deletecart/${userid}`);
+
+        // Redirect to the home page or any other page
+        window.location.href = '/';
+      } else {
+        // Handle error, show a message, etc.
+        console.error('Failed to create the order');
+      }
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
 
   return (
     <div>
@@ -196,9 +265,19 @@ export default function ShoppingCart() {
                       className="px-5 py-4"
                       style={{ backgroundColor: "#eee", borderRadius: "15px" }}
                     >
+                      <MDBInput
+                        className="mb-5"
+                        type="text"
+                        size="lg"
+                        placeholder="Address"
+                        value={orderDate}
+                        onChange={(e) => setOrderDate(e.target.value)}
+                        // style={{ display: "block", marginBottom: "6px" }}
+                        disabled
+                      />
                       <MDBTypography
                         tag="h3"
-                        className="mb-5 pt-2 text-center fw-bold text-uppercase"
+                        className="mb-5 pt-0 text-center fw-bold text-uppercase"
                       >
                         Delivery Details
                       </MDBTypography>
@@ -231,6 +310,7 @@ export default function ShoppingCart() {
                           placeholder="01234567899"
                           style={{ display: "block", marginBottom: "10px" }}
                         />
+                    
 
                         <label style={{ marginBottom: "25px" }}>
                           Payment Method
@@ -318,7 +398,7 @@ export default function ShoppingCart() {
                           <a href="#!"> obcaecati sapiente</a>.
                         </p>
 
-                        <MDBBtn block size="lg mb-3">
+                        <MDBBtn block size="lg mb-3" onClick={handleCheckout}>
                           Checkout
                         </MDBBtn>
 
