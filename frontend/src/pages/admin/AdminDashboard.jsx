@@ -67,7 +67,8 @@ export default function AdminDashboard() {
   ];
 
   const [prescriptionCount, setPrescriptionCount] = useState(0);
-  const [productCount, setProductCount] = useState(0);
+  const [productCount, setProductCount] = useState();
+  const [orderCount, setOrdersCount] = useState(0);
 
   const pharmacyId = localStorage.getItem("pharmacyId");
   console.log(pharmacyId)
@@ -88,6 +89,17 @@ export default function AdminDashboard() {
       .get("http://localhost:3000/api/product/getproductcount/" + pharmacyId) 
       .then((res) => {
         setProductCount(res.data.count);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }, []);
+
+  useEffect(() => {
+    axios
+      .get("http://localhost:3000/api/order/ordercount/" + pharmacyId)
+      .then((res) => {
+        setOrdersCount(res.data.count);
       })
       .catch((err) => {
         console.log(err);
@@ -115,7 +127,7 @@ export default function AdminDashboard() {
                 <i className="bx"><AiOutlineShoppingCart /></i>
                 <span>
                   <h3>Orders</h3>
-                  <p>6</p>
+                  <p>{orderCount}</p>
                 </span>
                   
               </div>

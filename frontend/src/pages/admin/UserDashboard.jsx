@@ -61,7 +61,6 @@ export default function UserDashboard() {
     });
   };
 
-  // Filter pharmacies based on the search term
   const filteredUser = users.filter(
     (us) =>
       us.name.toLowerCase().includes(searchTerm.toLowerCase()) ||

@@ -21,6 +21,7 @@ import UserDashboard from './pages/admin/UserDashboard';
 import OrderManagement from './pages/admin/OrderManagement';
 import PrescriptionManagement from './pages/admin/PrescriptionManagement';
 import Profile from './pages/user/Profile';
+import Checkout from './pages/user/Checkout';
 
 
 function App() {
@@ -49,6 +50,7 @@ function App() {
           <Route path="/OrderManagement" element={<OrderManagement />} />
           <Route path="/PrescriptionManagement" element={<PrescriptionManagement />} />
           <Route path="/Profile" element={<Profile />} />
+          <Route path="/checkout" element={<Checkout />} />
         </Routes>
       </BrowserRouter>
     </>

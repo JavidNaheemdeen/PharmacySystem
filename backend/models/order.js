@@ -1,51 +1,74 @@
-const mongoose = require("mongoose");
+const mongoose = require('mongoose');
 
-const orderSchema = new mongoose.Schema(
-  {
-    pharmacyId: {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: "Pharmacy", // Reference to the Pharmacy model, adjust accordingly
-      required: true,
-    },
-    products: [
-      {
-        product: {
-          type: mongoose.Schema.Types.ObjectId,
-          ref: "Product", // Reference to the Product model, adjust accordingly
-          required: true,
-        },
-        quantity: {
-          type: Number,
-          required: true,
-        },
-      },
-    ],
-    deliveryInfo: {
-      address: {
-        type: String,
-        required: true,
-      },
-      contactNo: {
-        type: String,
-        required: true,
-      },
-    },
-    orderDate: {
-      type: Date,
-      required: true,
-    },
-    paymentDetails: {
-      method: {
-        type: String,
-        enum: ["Cash on Delivery", "Online Payment"], // Adjust based on your payment methods
-        required: true,
-      },
-      // Add other payment details here based on the selected payment method
-    },
+const orderProductSchema = new mongoose.Schema({
+  productId: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'Product', // Assuming you have a Product model
+    required: true,
   },
-  { timestamps: true }
-);
+  productname: {
+    type: String,
+    required: true,
+  },
+  pharmacyId: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'Pharmacy', // Assuming you have a Pharmacy model
+    required: true,
+  },
+  quantity: {
+    type: Number,
+    required: true,
+  },
+  subtotal: {
+    type: Number,
+    required: true,
+  },
+});
 
-const Order = mongoose.model("Order", orderSchema);
+const orderSchema = new mongoose.Schema({
+  products: [orderProductSchema],
+  noOfItems: {
+    type: Number,
+    required: true,
+  },
+  totalPrice: {
+    type: Number,
+    required: true,
+  },
+  contactNumber: {
+    type: String,
+    required: true,
+  },
+  patientAddress: {
+    type: String,
+    required: true,
+  },
+  paymentMethod: {
+    type: String,
+    required: true,
+  },
+  orderDate: {
+    type: String,
+    default: getSriLankanDateTime(),
+  },
+});
+
+// Function to get the formatted current date and time in Sri Lankan format
+function getSriLankanDateTime() {
+  const currentDateTime = new Date();
+  const options = {
+    timeZone: 'Asia/Colombo',
+    year: 'numeric',
+    month: 'numeric',
+    day: 'numeric',
+    hour: 'numeric',
+    minute: 'numeric',
+    second: 'numeric',
+  };
+  const formattedDateTime = new Intl.DateTimeFormat('en-US', options).format(currentDateTime);
+  return formattedDateTime;
+}
+
+const Order = mongoose.model('Order', orderSchema);
 
 module.exports = Order;

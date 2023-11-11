@@ -18,7 +18,7 @@ import { Button } from "react-bootstrap";
 import axios from "axios";
 import { BsFillTrashFill, BsFillPencilFill } from "react-icons/bs";
 import Swal from "sweetalert2";
-// import { useHistory } from "react-router-dom"; 
+import { useNavigate } from "react-router-dom";
 
 
 export default function ShoppingCart() {
@@ -29,7 +29,7 @@ export default function ShoppingCart() {
   const [noOfItems, setNoOfItems] = useState(0);
   const [patientAddress, setPatientAddress] = useState("");
   const [contactNumber, setContactNumber] = useState("");
-  const [orderDate, setOrderDate] = useState(getSriLankanDateTime());
+  
 
   const [paymentMethod, setPaymentMethod] = useState("yes");
 
@@ -37,32 +37,41 @@ export default function ShoppingCart() {
     setPaymentMethod(e.target.value);
   };
 
-  // Function to get the formatted current date and time
-  function getSriLankanDateTime() {
-    const currentDateTime = new Date();
-    const options = {
-      timeZone: "Asia/Colombo",
-      year: "numeric",
-      month: "numeric",
-      day: "numeric",
-      hour: "numeric",
-      minute: "numeric",
-      second: "numeric",
+  const handlePatientAddressChange = (e) => {
+    setPatientAddress(e.target.value);
+  };
+
+  const handleContactNumberChange = (e) => {
+    setContactNumber(e.target.value);
+  };
+
+  const navigate = useNavigate();
+
+  const handleCheckout = () => {
+    // Validate that both patient address and contact number are filled
+    if (!patientAddress || !contactNumber) {
+      Swal.fire({
+        icon: 'error',
+        title: 'Validation Error',
+        text: 'Please fill in both patient address and contact number.',
+      });
+      return; // Do not proceed with checkout if validation fails
+    }
+
+    // Prepare data for the checkout
+    const checkoutData = {
+      cart,
+      noOfItems,
+      totalPrice,
+      patientAddress,
+      contactNumber,
+      // other data you want to pass
     };
-    const formattedDateTime = new Intl.DateTimeFormat("en-US", options).format(currentDateTime);
-    return formattedDateTime;
+
+    // Navigate to the checkout page with the data
+    navigate("/checkout", { state: checkoutData });
   }
-
-  // Update the time every second
-  useEffect(() => {
-    const intervalId = setInterval(() => {
-      setOrderDate(getSriLankanDateTime());
-    }, 1000);
-
-    // Clear the interval when the component is unmounted
-    return () => clearInterval(intervalId);
-  }, []);
-
+  
   useEffect(() => {
     axios
       .get(`http://localhost:3000/api/cart/${userid}`)
@@ -95,7 +104,7 @@ export default function ShoppingCart() {
     })
     .catch((error) => {
       console.log(error);
-    });
+    },[]);
 
   axios
     .get(`http://localhost:3000/api/cart/${userid}/count`)
@@ -104,7 +113,7 @@ export default function ShoppingCart() {
     })
     .catch((error) => {
       console.log(error);
-    });
+    },[]);
 
   const handleRemove = () => {
     axios
@@ -126,42 +135,6 @@ export default function ShoppingCart() {
       .catch((error) => {
         console.log(error);
       });
-  };
-
-  // Inside your component function
-  const handleCheckout = async () => {
-    try {
-      const orderData = {
-        pharmacyId: localStorage.getItem('pharmacyId'),
-        products: cart,
-        deliveryInfo: {
-          address: patientAddress,
-          contactNo: contactNumber,
-        },
-        orderDate,
-        paymentDetails: {
-          method: paymentMethod,
-          // Add other payment details here based on the selected payment method
-        },
-      };
-
-      const response = await axios.post('http://localhost:3000/api/order/addorder', orderData);
-
-      // Check if the order was successfully created
-      if (response.status === 200) {
-        // Discard the cart (you can implement this logic)
-        // For example, call a function to clear the cart in your backend
-        await axios.delete(`http://localhost:3000/api/cart/deletecart/${userid}`);
-
-        // Redirect to the home page or any other page
-        window.location.href = '/';
-      } else {
-        // Handle error, show a message, etc.
-        console.error('Failed to create the order');
-      }
-    } catch (error) {
-      console.error(error);
-    }
   };
 
 
@@ -265,16 +238,6 @@ export default function ShoppingCart() {
                       className="px-5 py-4"
                       style={{ backgroundColor: "#eee", borderRadius: "15px" }}
                     >
-                      <MDBInput
-                        className="mb-5"
-                        type="text"
-                        size="lg"
-                        placeholder="Address"
-                        value={orderDate}
-                        onChange={(e) => setOrderDate(e.target.value)}
-                        // style={{ display: "block", marginBottom: "6px" }}
-                        disabled
-                      />
                       <MDBTypography
                         tag="h3"
                         className="mb-5 pt-0 text-center fw-bold text-uppercase"
@@ -294,6 +257,7 @@ export default function ShoppingCart() {
                           type="address"
                           size="lg"
                           placeholder="Address"
+                          onChange={handlePatientAddressChange}
                           style={{ display: "block", marginBottom: "10px" }}
                         />
 
@@ -308,99 +272,18 @@ export default function ShoppingCart() {
                           type="tel"
                           size="lg"
                           placeholder="01234567899"
+                          onChange={handleContactNumberChange}
                           style={{ display: "block", marginBottom: "10px" }}
                         />
-                    
 
-                        <label style={{ marginBottom: "25px" }}>
-                          Payment Method
-                        </label>
-                        <div className="radio-group">
-                          <input
-                            type="radio"
-                            id="allergyYes"
-                            name="hasAllergy"
-                            value="yes"
-                            checked={paymentMethod === "yes"}
-                            onChange={handlePaymentChange}
-                          />
-                          <label htmlFor="allergyYes">Cash on delivery</label>
-                          <input
-                            type="radio"
-                            id="allergyNo"
-                            name="hasAllergy"
-                            value="no"
-                            checked={paymentMethod === "no"}
-                            onChange={handlePaymentChange}
-                          />
-                          <label htmlFor="allergyNo">Online Payment</label>
-                        </div>
-                        <br />
-                        {paymentMethod === "no" && (
-                          <MDBCard
-                            className="shadow-2-strong mb-5"
-                            style={{
-                              borderRadius: "16px",
-                              background:
-                                "linear-gradient(to right, #3498db, #6bb9f0)",
-                              color: "white",
-                            }}
+                          <MDBBtn
+                            block
+                            size="lg mb-3"
+                            onClick={handleCheckout}
+                            disabled={noOfItems === 0} // Disable the button if noOfItems is 0
                           >
-                            <MDBTypography
-                              tag="h3"
-                              className="mb-2 pt-4 text-center fw-bold text-uppercase"
-                            >
-                              Payment
-                            </MDBTypography>
-                            <MDBCardBody className="p-4 justify-content-center align-center">
-                              <MDBCol>
-                                <MDBCol className="justify-content-center align-center">
-                                  <label>Name on Card</label>
-                                  <MDBInput
-                                    className="mb-2"
-                                    placeholder="John Smiths"
-                                    size="lg"
-                                  />
-                                  <label>Expiration</label>
-                                  <MDBInput
-                                    className="mb-2"
-                                    label=""
-                                    placeholder="MM/YY"
-                                    size="lg"
-                                    maxLength={7}
-                                    minLength={7}
-                                  />
-                                  <label>Card Number</label>
-                                  <MDBInput
-                                    className="mb-2"
-                                    placeholder="1111 2222 3333 4444"
-                                    size="lg"
-                                    minlength="19"
-                                    maxlength="19"
-                                  />
-                                  <label>Cvv</label>
-                                  <MDBInput
-                                    className="mb-2"
-                                    placeholder="&#9679;&#9679;&#9679;"
-                                    size="lg"
-                                    minlength="3"
-                                    maxlength="3"
-                                    type="password"
-                                  />
-                                </MDBCol>
-                              </MDBCol>
-                            </MDBCardBody>
-                          </MDBCard>
-                        )}
-                        <p className="mb-5">
-                          Lorem ipsum dolor sit amet consectetur, adipisicing
-                          elit
-                          <a href="#!"> obcaecati sapiente</a>.
-                        </p>
-
-                        <MDBBtn block size="lg mb-3" onClick={handleCheckout}>
-                          Checkout
-                        </MDBBtn>
+                            Checkout
+                          </MDBBtn>
 
                         <MDBTypography
                           tag="h5"
@@ -415,65 +298,6 @@ export default function ShoppingCart() {
                       </form>
                     </MDBCol>
                   </MDBRow>
-                  {/* <MDBCard
-                    className="shadow-2-strong mb-5 mb-lg-0"
-                    style={{ borderRadius: "16px", background: "linear-gradient(to right, #3498db, #6bb9f0)", color: "white", fontSize:"20px" }}
-                  >
-                    <MDBTypography
-                      tag="h3"
-                      className="mb-5 pt-4 text-center fw-bold text-uppercase"
-                    >
-                      Payment
-                    </MDBTypography>
-                    <MDBCardBody className="p-4">
-                      <MDBRow className="justify-content-center">
-                        <MDBCol md="6" lg="4" xl="6">
-                          <MDBRow>
-                            <MDBCol size="12" xl="6">
-                              <label style={{ marginBottom: '25px' }}>Name on Card</label>
-                              <MDBInput
-                                className="mb-4 mb-xl-5"
-                                // label="Name on card"
-                                placeholder="John Smiths"
-                                size="lg"
-                              />
-                              <label style={{ marginBottom: '25px' }}>Expiration</label>
-                              <MDBInput
-                                className="mb-4 mb-xl-5"
-                                label=""
-                                placeholder="MM/YY"
-                                size="lg"
-                                maxLength={7}
-                                minLength={7}
-                              />
-                            </MDBCol>
-
-                            <MDBCol size="12" xl="6">
-                              <label style={{ marginBottom: '25px' }}>Card Number</label>
-                              <MDBInput
-                                className="mb-4 mb-xl-5"
-                                // label="Card Number"
-                                placeholder="1111 2222 3333 4444"
-                                size="lg"
-                                minlength="19"
-                                maxlength="19"
-                              />
-                              <label style={{ marginBottom: '25px' }}>Cvv</label>
-                              <MDBInput
-                                className="mb-4 mb-xl-5"
-                                // label="Cvv"
-                                placeholder="&#9679;&#9679;&#9679;"
-                                size="lg"
-                                minlength="3"
-                                maxlength="3"
-                                type="password"
-                              />
-                            </MDBCol>
-                          </MDBRow>
-                        </MDBCol>
-                      </MDBRow>
-                    </MDBCardBody>
-                  </MDBCard> */}
                 </MDBCardBody>
               </MDBCard>
             </MDBCol>
