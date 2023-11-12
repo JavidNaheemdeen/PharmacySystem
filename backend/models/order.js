@@ -26,6 +26,11 @@ const orderProductSchema = new mongoose.Schema({
 });
 
 const orderSchema = new mongoose.Schema({
+  userId: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'User', // Assuming you have a Product model
+    required: true,
+  },
   products: [orderProductSchema],
   noOfItems: {
     type: Number,
@@ -46,6 +51,10 @@ const orderSchema = new mongoose.Schema({
   paymentMethod: {
     type: String,
     required: true,
+  },
+  orderStatus: {
+    type: String,
+    default: "Pending",
   },
   orderDate: {
     type: String,

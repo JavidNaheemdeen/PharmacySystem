@@ -5,6 +5,7 @@ const bcrypt = require("bcrypt");
 exports.addOrder = async (req, res) => {
   try {
     const {
+      userId,
       products,
       noOfItems,
       totalPrice,
@@ -14,6 +15,7 @@ exports.addOrder = async (req, res) => {
     } = req.body;
 
     const newOrder = new Order({
+      userId,
       products,
       noOfItems,
       totalPrice,
@@ -99,6 +101,22 @@ exports.getOrderCountByPharmacyId = async (req, res) => {
     });
 
     res.status(200).json({ count: orderCount });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: "Internal Server Error" });
+  }
+};
+
+// Get orders based on userId, sorted by the latest orderDate first
+exports.getOrdersByUserId = async (req, res) => {
+  try {
+    const { userId } = req.params;
+
+    // Find orders where userId matches
+    const orders = await Order.find({ userId })
+      .sort({ orderDate: -1 }); // Sort by orderDate in descending order (latest first)
+
+    res.status(200).json(orders);
   } catch (error) {
     console.error(error);
     res.status(500).json({ message: "Internal Server Error" });

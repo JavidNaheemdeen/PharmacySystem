@@ -73,7 +73,8 @@ export default function Checkout() {
         contactNumber,
         patientAddress,
         orderDate,
-        paymentMethod, // Include the selected payment method
+        paymentMethod, 
+        userId,
       };
 
       // Show a confirmation dialog

@@ -3,7 +3,7 @@ import SidenavAd from "../../components/admin/SidenavAd";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import ViewProductModal from "../../components/modals/ViewProductModal";
-import {BsFillHandThumbsUpFill } from 'react-icons/bs'
+import {BsFillHandThumbsUpFill, BsFillTrashFill} from 'react-icons/bs'
 import Swal from 'sweetalert2';
 
 export default function OrderManagement() {
@@ -37,8 +37,8 @@ export default function OrderManagement() {
 
   const handleDeleteOrder = (orderId) => {
      Swal.fire({
-       title: 'Order Dispatched',
-       text: 'Are you sure the order is dispatched?',
+       title: 'Delete Order',
+       text: 'Are you sure to delete the order?',
        icon: 'warning',
        showCancelButton: true,
        confirmButtonText: 'Yes',
@@ -54,7 +54,7 @@ export default function OrderManagement() {
  
              Swal.fire({
                title: 'Success',
-               text: 'Order Successfully Dispatched!',
+               text: 'Order Deleted Successfully!',
                icon: 'success',
              }).then(() => {
                window.location.reload();
@@ -66,6 +66,43 @@ export default function OrderManagement() {
        }
      });
    };
+
+   const handleDoneOrder = (orderId) => {
+    Swal.fire({
+      title: "Confirm Dispatch",
+      text: "Are you sure the order has been Dispatched?",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        // Update order status to "Dispatched"
+        axios
+          .put(`http://localhost:3000/api/order/updateorder/${orderId}`, {
+            orderStatus: "Dispatched",
+          })
+          .then(() => {
+            Swal.fire({
+              title: "Order Dispatched",
+              text: "Order Successfully Dispatched",
+              icon: "success",
+            }).then(() => {
+              window.location.reload();
+            });
+          })
+          .catch((error) => {
+            console.error("Error updating order status:", error);
+            Swal.fire({
+              title: "Error",
+              text: "Failed to update order status.",
+              icon: "error",
+            });
+          });
+      }
+    });
+  };
 
 
   return (
@@ -89,6 +126,7 @@ export default function OrderManagement() {
                 <th>Contact Number</th>
                 <th>Patient Address</th>
                 <th>Payment Method</th>
+                <th>Order Status</th>
                 <th>Products</th>
               </tr>
             </thead>
@@ -101,13 +139,21 @@ export default function OrderManagement() {
                   <td>{or.contactNumber}</td>
                   <td>{or.patientAddress}</td>
                   <td>{or.paymentMethod}</td>
+                  <td>{or.orderStatus}</td>
                   <td>
                     <ViewProductModal products={or.products} />
                     <button 
-                      onClick={() => handleDeleteOrder(or._id)}
-                      className="btn btn-success btn-sm"
+                      onClick={() => handleDoneOrder(or._id)}
+                      className="btn btn-success btn-sm me-1"
                     >
                       <BsFillHandThumbsUpFill/>
+                    </button>
+                    
+                    <button 
+                      onClick={() => handleDeleteOrder(or._id)}
+                      className="btn btn-danger btn-sm"
+                    >
+                      <BsFillTrashFill/>
                     </button>
                   </td>
                 </tr>

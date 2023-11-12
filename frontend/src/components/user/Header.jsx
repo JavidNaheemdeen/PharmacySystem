@@ -8,6 +8,7 @@ import { CgProfile } from 'react-icons/cg';
 import { SlLogout } from 'react-icons/sl';
 import Swal from 'sweetalert2';
 import axios from "axios";
+import ViewAllOrders from "../modals/ViewAllOrders";
 
 
 export default function Header() {
@@ -142,6 +143,10 @@ export default function Header() {
                          <div className="me-3">
                               {userId ? (
                                    <>
+                                        {/* <a href="/view" className="btn btn-def me-3">
+                                             View Orders
+                                        </a> */}
+                                        <ViewAllOrders/>
                                         <a href="/ShoppingCart" className="me-3" style={{ fontSize: '25px' }}>
                                              <AiOutlineShoppingCart />
                                         </a>
