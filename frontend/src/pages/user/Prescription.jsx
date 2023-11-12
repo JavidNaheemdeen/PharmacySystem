@@ -18,7 +18,7 @@ export default function Prescription() {
      const [choosepharmacy, setChoosepharmacy] = useState("");
      const [gender, setGender] = useState("");
      const [allergy, setAllergy] = useState("");
-     const [pic, setPic] = useState(""); 
+     const [pic, setPic] = useState("");
      const [isLoading, setIsLoading] = useState(false);
 
      const [pharmacy, setPharmacy] = useState([]);
@@ -38,116 +38,116 @@ export default function Prescription() {
      const handleImageChange = async (e) => {
           e.preventDefault();
           try {
-            setIsLoading(true);
-            const file = e.target.files[0];
-      
-            if (!file) return alert("File does not exist.");
-      
-            if (file.size > 1024 * 1024)
-              // 1MB
-              return alert("Size is too large!");
-      
-            if (file.type !== "image/jpeg" && file.type !== "image/png")
-              return alert("File format is incorrect.");
-      
-            let formData = new FormData();
-            formData.append("file", file);
-            formData.append("upload_preset", "ml_default");
-            formData.append("cloud_name", "dswsu55n9");
-      
-            const res = await axios.post(
-              "https://api.cloudinary.com/v1_1/dswsu55n9/image/upload",
-              formData,
-              {
-                method: "post",
-                body: formData,
-                headers: {
-                  "Content-Type": "multipart/form-data",
-                },
-              }
-            );
-      
-            console.log(res.data.url);
-            setPic(res.data.url); // Set the image URL in the state
-            setIsLoading(false);
-          } catch (err) {
-            console.log(err.response.data.msg);
-            setIsLoading(false);
-            console.log("Not uploaded");
-          }
-        };
+               setIsLoading(true);
+               const file = e.target.files[0];
 
-        const handleSubmit = (e) => {
-          e.preventDefault();
-        
-          if (
-            patientname.length === 0 ||
-            age.length === 0 ||
-            yourphone.length === 0 ||
-            address.length === 0 ||
-            choosepharmacy.length === 0 ||
-            gender.length === 0 ||
-            allergy.length === 0 ||
-            pic.length === 0
-          ) {
-            Swal.fire({
-              title: "Fields Cannot be empty!",
-              text: "Please enter all data!",
-              icon: "error",
-              confirmButtonText: "Ok",
-            });
-          } else {
-            const prescriptionData = {
-              patientname,
-              age,
-              yourphone,
-              address,
-              choosepharmacy,
-              gender,
-              allergy,
-              pic,
-              userId, 
-            };
-        
-            axios
-              .post(
-                "http://localhost:3000/api/prescription/addprescription",
-                prescriptionData
-              )
-              .then(function (res) {
-                setPatientname("");
-                setAge("");
-                setYourphone("");
-                setAddress("");
-                setChoosepharmacy("");
-                setGender("");
-                setAllergy("");
-                setPic("");
-        
-                Swal.fire({
-                  title: "Success!",
-                  text: "Prescription Uploaded Successfully",
-                  icon: "success",
-                  confirmButtonText: "Ok",
-                }).then((result) => {
-                  if (result.isConfirmed) {
-                    window.location.href = "/";
-                  }
-                });
-              })
-              .catch(function (error) {
-                console.log(error);
-                Swal.fire({
-                  title: "Failed!",
-                  text: "Prescription uploading Unsuccessful",
-                  icon: "error",
-                  confirmButtonText: "Ok",
-                });
-              });
+               if (!file) return alert("File does not exist.");
+
+               if (file.size > 1024 * 1024)
+                    // 1MB
+                    return alert("Size is too large!");
+
+               if (file.type !== "image/jpeg" && file.type !== "image/png")
+                    return alert("File format is incorrect.");
+
+               let formData = new FormData();
+               formData.append("file", file);
+               formData.append("upload_preset", "ml_default");
+               formData.append("cloud_name", "dswsu55n9");
+
+               const res = await axios.post(
+                    "https://api.cloudinary.com/v1_1/dswsu55n9/image/upload",
+                    formData,
+                    {
+                         method: "post",
+                         body: formData,
+                         headers: {
+                              "Content-Type": "multipart/form-data",
+                         },
+                    }
+               );
+
+               console.log(res.data.url);
+               setPic(res.data.url); // Set the image URL in the state
+               setIsLoading(false);
+          } catch (err) {
+               console.log(err.response.data.msg);
+               setIsLoading(false);
+               console.log("Not uploaded");
           }
-        };
-        
-        
+     };
+
+     const handleSubmit = (e) => {
+          e.preventDefault();
+
+          if (
+               patientname.length === 0 ||
+               age.length === 0 ||
+               yourphone.length === 0 ||
+               address.length === 0 ||
+               choosepharmacy.length === 0 ||
+               gender.length === 0 ||
+               allergy.length === 0 ||
+               pic.length === 0
+          ) {
+               Swal.fire({
+                    title: "Fields Cannot be empty!",
+                    text: "Please enter all data!",
+                    icon: "error",
+                    confirmButtonText: "Ok",
+               });
+          } else {
+               const prescriptionData = {
+                    patientname,
+                    age,
+                    yourphone,
+                    address,
+                    choosepharmacy,
+                    gender,
+                    allergy,
+                    pic,
+                    userId,
+               };
+
+               axios
+                    .post(
+                         "http://localhost:3000/api/prescription/addprescription",
+                         prescriptionData
+                    )
+                    .then(function (res) {
+                         setPatientname("");
+                         setAge("");
+                         setYourphone("");
+                         setAddress("");
+                         setChoosepharmacy("");
+                         setGender("");
+                         setAllergy("");
+                         setPic("");
+
+                         Swal.fire({
+                              title: "Success!",
+                              text: "Prescription Uploaded Successfully",
+                              icon: "success",
+                              confirmButtonText: "Ok",
+                         }).then((result) => {
+                              if (result.isConfirmed) {
+                                   window.location.href = "/";
+                              }
+                         });
+                    })
+                    .catch(function (error) {
+                         console.log(error);
+                         Swal.fire({
+                              title: "Failed!",
+                              text: "Prescription uploading Unsuccessful",
+                              icon: "error",
+                              confirmButtonText: "Ok",
+                         });
+                    });
+          }
+     };
+
+
 
      return (
           <div>
@@ -160,7 +160,7 @@ export default function Prescription() {
                                    {/* Left Column */}
                                    <div className="form-group">
                                         <label htmlFor="patientName">Patient Name:</label>
-                                        <input type="text" id="patientName" name="patientName" onChange={(e) => {setPatientname(e.target.value);}}/>
+                                        <input type="text" id="patientName" name="patientName" onChange={(e) => { setPatientname(e.target.value); }} />
                                    </div>
                                    {/* <div className="form-group">
                                         <label htmlFor="email">Email:</label>
@@ -168,24 +168,24 @@ export default function Prescription() {
                                    </div> */}
                                    <div className="form-group">
                                         <label htmlFor="age">Age:</label>
-                                        <input type="number" id="age" name="age" onChange={(e) => {setAge(e.target.value);}}/>
+                                        <input type="number" id="age" name="age" onChange={(e) => { setAge(e.target.value); }} />
                                    </div>
                                    <div className="form-group">
                                         <label htmlFor="yourPhone">Your Phone:</label>
-                                        <input type="tel" id="yourPhone" name="yourPhone" onChange={(e) => {setYourphone(e.target.value);}}/>
+                                        <input type="tel" id="yourPhone" name="yourPhone" onChange={(e) => { setYourphone(e.target.value); }} />
                                    </div>
                                    <div className="form-group">
                                         <label htmlFor="address">Address:</label>
-                                        <input type="text" id="address" name="address" onChange={(e) => {setAddress(e.target.value);}}/>
+                                        <input type="text" id="address" name="address" onChange={(e) => { setAddress(e.target.value); }} />
                                    </div>
                                    <div className="form-group">
-                                   <label htmlFor="deliveryLocation">Choose Pharmacy:</label>
-                                   <select id="deliveryLocation" name="deliveryLocation" value={choosepharmacy} onChange={(e) => { setChoosepharmacy(e.target.value); }}>
-                                        <option value="" disabled>Select Pharmacy</option>
-                                        {pharmacy.map((pm) => (
-                                             <option key={pm._id} value={pm._id}>{pm.name}</option>
-                                        ))}
-                                   </select>
+                                        <label htmlFor="deliveryLocation">Choose Pharmacy:</label>
+                                        <select id="deliveryLocation" name="deliveryLocation" value={choosepharmacy} onChange={(e) => { setChoosepharmacy(e.target.value); }}>
+                                             <option value="" disabled>Select Pharmacy</option>
+                                             {pharmacy.map((pm) => (
+                                                  <option key={pm._id} value={pm._id}>{pm.name}</option>
+                                             ))}
+                                        </select>
                                    </div>
                                    <div className="form-group">
                                         <label>Gender:</label>
@@ -200,7 +200,7 @@ export default function Prescription() {
                                         <label htmlFor="allergyNote">Do you have any Allergies? (Yes/No. If Yes, mention in detail):</label>
                                         <textarea id="allergyNote" name="allergyNote" onChange={(e) => setAllergy(e.target.value)}></textarea>
                                    </div>
-                              
+
                                    <div className="form-group">
                                         <label htmlFor="prescriptionFile">Attach your prescription (PDF, JPG, PNG):</label>
                                         <input type="file" id="prescriptionFile" name="prescriptionFile" accept=".pdf,.jpg,.png" onChange={handleImageChange} />
