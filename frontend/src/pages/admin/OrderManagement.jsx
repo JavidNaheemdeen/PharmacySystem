@@ -139,7 +139,7 @@ export default function OrderManagement() {
                   <td>{or.contactNumber}</td>
                   <td>{or.patientAddress}</td>
                   <td>{or.paymentMethod}</td>
-                  <td>{or.orderStatus}</td>
+                  <td className={or.orderStatus === "Pending" ? "text-danger" : "text-success"}>{or.orderStatus}</td>
                   <td>
                     <ViewProductModal products={or.products} />
                     <button 
