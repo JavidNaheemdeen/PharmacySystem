@@ -18,9 +18,9 @@ export default function OrderManagement() {
   const [selectedOrder, setSelectedOrder] = useState(null);
 
   useEffect(() => {
-    // Check if the user is already logged in (e.g., check if a token or user data exists in local storage)
+    // Check if the user is already logged in
     if (!pharmacyId) {
-      navigate("/Pharmlogin"); // Redirect to the dashboard if logged in
+      navigate("/Pharmlogin"); 
     }
   }, [navigate]);
 
