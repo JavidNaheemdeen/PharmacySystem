@@ -197,7 +197,7 @@ export default function Prescription() {
                                         </div>
                                    </div>
                                    <div className="form-group">
-                                        <label htmlFor="allergyNote">Do you Allergies? (Yes/No. If Yes, mention in detail):</label>
+                                        <label htmlFor="allergyNote">Do you have any Allergies? (Yes/No. If Yes, mention in detail):</label>
                                         <textarea id="allergyNote" name="allergyNote" onChange={(e) => setAllergy(e.target.value)}></textarea>
                                    </div>
                               

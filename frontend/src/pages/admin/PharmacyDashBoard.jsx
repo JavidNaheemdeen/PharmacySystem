@@ -53,6 +53,8 @@ export default function PharmacyDashboard() {
               title: 'Success',
               text: 'Pharmacy deleted successfully!',
               icon: 'success',
+            }).then(() => {
+              window.location.reload();
             });
           })
           .catch((err) => {

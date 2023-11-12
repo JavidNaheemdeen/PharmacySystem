@@ -63,7 +63,8 @@ export default function Checkout() {
         subtotal: item.product.unitprice * item.quantity,
       }));
 
-      const updatedTotalPrice = totalPrice + 200;
+      const updatedTotalPrice = (totalPrice + 200).toFixed(2);
+
 
       const orderData = {
         products: productsDetails,
@@ -127,125 +128,189 @@ export default function Checkout() {
       return (
         <div>
           <MDBCard
-                            className="shadow-2-strong mb-5"
-                            style={{
-                              borderRadius: "16px",
-                              background:
-                                "linear-gradient(to right, #3498db, #6bb9f0)",
-                              color: "white",
-                            }}
-                          >
-                            <MDBTypography
-                              tag="h3"
-                              className="mb-2 pt-4 text-center fw-bold text-uppercase"
-                            >
-                              Payment
-                            </MDBTypography>
-                            <MDBCardBody className="p-4 justify-content-center align-center">
-                              <MDBCol>
-                                <MDBCol className="justify-content-center align-center">
-                                  <label>Name on Card</label>
-                                  <MDBInput
-                                    className="mb-2"
-                                    placeholder="John Smiths"
-                                    size="lg"
-                                  />
-                                  <label>Expiration</label>
-                                  <MDBInput
-                                    className="mb-2"
-                                    label=""
-                                    placeholder="MM/YY"
-                                    size="lg"
-                                    maxLength={7}
-                                    minLength={7}
-                                  />
-                                  <label>Card Number</label>
-                                  <MDBInput
-                                    className="mb-2"
-                                    placeholder="1111 2222 3333 4444"
-                                    size="lg"
-                                    minlength="19"
-                                    maxlength="19"
-                                  />
-                                  <label>Cvv</label>
-                                  <MDBInput
-                                    className="mb-2"
-                                    placeholder="&#9679;&#9679;&#9679;"
-                                    size="lg"
-                                    minlength="3"
-                                    maxlength="3"
-                                    type="password"
-                                  />
-                                </MDBCol>
-                              </MDBCol>
-                            </MDBCardBody>
-                          </MDBCard>
+            className="shadow-2-strong mb-5 justify-content-center align-items-center text-center"
+            style={{
+              borderRadius: "16px",
+              background:
+                "linear-gradient(to right, #3498db, #6bb9f0)",
+              color: "white",
+              // width: "50%"
+            }}
+          >
+            <MDBTypography
+              tag="h3"
+              className="mb-2 pt-4 text-center fw-bold text-uppercase"
+            >
+              Payment
+            </MDBTypography>
+            <MDBCardBody className="d-flex justify-content-center align-items-center text-center">
+              <MDBCol className="text-center">
+                <MDBCol>
+                  <label>Name on Card</label>
+                  <MDBInput
+                    className="mb-2"
+                    placeholder="John Smiths"
+                    size="lg"
+                  />
+                  <label>Expiration</label>
+                  <MDBInput
+                    className="mb-2"
+                    label=""
+                    placeholder="MM/YY"
+                    size="lg"
+                    maxLength={7}
+                    minLength={7}
+                  />
+                  <label>Card Number</label>
+                  <MDBInput
+                    className="mb-2"
+                    placeholder="1111 2222 3333 4444"
+                    size="lg"
+                    minlength="19"
+                    maxlength="19"
+                  />
+                  <label>Cvv</label>
+                  <MDBInput
+                    className="mb-2"
+                    placeholder="&#9679;&#9679;&#9679;"
+                    size="lg"
+                    minlength="3"
+                    maxlength="3"
+                    type="password"
+                  />
+                </MDBCol>
+              </MDBCol>
+            </MDBCardBody>
+          </MDBCard>
         </div>
       );
     }
     return null;
   };
 
+  const tableCellStyle = {
+    padding: "10px",
+    textAlign: "left",
+  };
+
+
   return (
-    <div>
+    <div style={{backgroundColor:"#eee"}}>
       <Header />
-      <h1>Checkout Page</h1>
+      <br />
+      <br />
+      <br />
+      <div className="container" style={{ maxWidth: "600px", margin: "auto", backgroundColor: "white", borderRadius: "16px", marginTop: "12px", marginBottom: "12px" }}>
+        <h1 style={{ textAlign: "center" }}>Checkout</h1>
+        {/* <MDBInput
+          className="mb-5"
+          type="text"
+          size="lg"
+          placeholder="Address"
+          value={orderDate}
+          onChange={(e) => setOrderDate(e.target.value)}
+          disabled
+        /> */}
 
-      <h2>Cart Details:</h2>
-      <MDBInput
-        className="mb-5"
-        type="text"
-        size="lg"
-        placeholder="Address"
-        value={orderDate}
-        onChange={(e) => setOrderDate(e.target.value)}
-        disabled
-      />
+        <table className="table">
+          <thead className="thead-dark">
+            <tr>
+              <th style={tableCellStyle}>Product</th>
+              <th style={tableCellStyle}>Quantity</th>
+              <th style={tableCellStyle}>Subtotal</th>
+            </tr>
+          </thead>
+          <tbody>
+            {cart.map((item) => (
+              <tr key={item.product._id} style={{ borderBottom: "1px solid #ccc" }}>
+                <td style={tableCellStyle}>
+                  <strong>{item.product.productname}</strong>
+                </td>
+                <td style={tableCellStyle}>{item.quantity}</td>
+                <td style={tableCellStyle}>LKR {item.product.unitprice * item.quantity}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
 
-      <ul>
-        {cart.map((item) => (
-          <li key={item.product._id}>
-            {item.product.productname} - Quantity: {item.quantity} - Subtotal:{" "}
-            {item.product.unitprice * item.quantity}
-          </li>
-        ))}
-      </ul>
+        <table className="table thead-dark" style={{ marginTop: "20px", borderTop: "1px solid #ccc", paddingTop: "10px" }}>
+          <tbody>
+            <tr>
+              <th className="bold">Total Items:</th>
+              <td><b>{noOfItems}</b></td>
+            </tr>
+            <tr>
+              <th className="bold">Gross Price: </th>
+              <td><b>LKR {totalPrice}</b></td>
+            </tr>
+            <tr>
+              <th className="bold">Delivery Charge: </th>
+              <td>LKR 200</td>
+            </tr>
+            <tr>
+              <th style={{ fontSize: "25px" }} className="bold">Total Price:</th>
+              <td style={{ fontSize: "25px", color:"red" }}><b>LKR {(totalPrice + 200).toFixed(2)}</b></td>
+            </tr>
+            <tr>
+              <hr />
+            </tr>
+            <tr>
+              <th className="bold">Address:</th>
+              <td>{patientAddress}</td>
+            </tr>
+            <tr>
+              <th className="bold">Contact:</th>
+              <td>{contactNumber}</td>
+            </tr>
+          </tbody>
+        </table>
 
-      <div>
-        <p>Total Items: {noOfItems}</p>
-        <p>Gross Price: LKR {totalPrice}</p>
-        <p>Delivery Charge: LKR 200</p>
-        <p>Total Price: LKR {totalPrice + 200}</p>
-        <p>Address: {patientAddress}</p>
-        <p>Contact: {contactNumber}</p>
+<br />
+        
+        {/* <div style={{ marginTop: "20px", borderTop: "1px solid #ccc", paddingTop: "10px" }}>
+          <p>Total Items: {noOfItems}</p>
+          <p>Gross Price: LKR {totalPrice}</p>
+          <p>Delivery Charge: LKR 200</p>
+          <p>Total Price: LKR {(totalPrice + 200).toFixed(2)}</p>
+          <p>Address: {patientAddress}</p>
+          <p>Contact: {contactNumber}</p>
+        </div> */}
+
+        <h4 style={{ marginTop: "20px" }}>Select Payment Method</h4>
+        <div>
+          <label style={{ marginRight: "10px" }}>
+          <MDBRadio
+            label="Cash on Delivery"
+            id="cashOnDelivery"
+            name="paymentMethod"
+            value="cashOnDelivery"
+            onChange={() => setPaymentMethod("cashOnDelivery")}
+            checked={paymentMethod === "Cash On Delivery"}
+            />
+          </label>
+          <label>
+          <MDBRadio
+            label="Online Payment"
+            id="onlinePayment"
+            name="paymentMethod"
+            value="onlinePayment"
+            onChange={() => setPaymentMethod("onlinePayment")}
+            checked={paymentMethod === "Online Payment"}
+            />
+          </label>
+        </div>
+<br/>
+        <div className="d-flex justify-content-center align-items-center text-center">{renderCreditCardForm()}</div>
+
+        <div className="text-center">
+        <MDBBtn className="btn btn-def" block size="lg mb-3" onClick={handleCheckout} style={{ marginTop: "10px", width: "60%" }}>
+          Place Order
+          </MDBBtn>
+        </div>
+
+        
       </div>
-
-      <h3>Select Payment Method:</h3>
-      <div>
-        <MDBRadio
-          label="Cash on Delivery"
-          id="cashOnDelivery"
-          name="paymentMethod"
-          value="cashOnDelivery"
-          onChange={() => setPaymentMethod("cashOnDelivery")}
-          checked={paymentMethod === "Cash On Delivery"}
-        />
-        <MDBRadio
-          label="Online Payment"
-          id="onlinePayment"
-          name="paymentMethod"
-          value="onlinePayment"
-          onChange={() => setPaymentMethod("onlinePayment")}
-          checked={paymentMethod === "Online Payment"}
-        />
-      </div>
-
-      {renderCreditCardForm()}
-
-      <MDBBtn block size="lg mb-3" onClick={handleCheckout}>
-        Place Order
-      </MDBBtn>
       <Footer />
-    </div>
-  );
+    </div> 
+      );
 }

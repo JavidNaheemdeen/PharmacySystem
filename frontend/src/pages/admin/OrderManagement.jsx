@@ -56,6 +56,8 @@ export default function OrderManagement() {
                title: 'Success',
                text: 'Order Successfully Dispatched!',
                icon: 'success',
+             }).then(() => {
+               window.location.reload();
              });
            })
            .catch((err) => {

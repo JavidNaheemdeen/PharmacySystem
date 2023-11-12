@@ -31,6 +31,7 @@ export default function ViewProductModal(props) {
                         <tr>
                           <th>Product Name</th>
                           <th>Quantity</th>
+                          <th>Sub Total</th>
                         </tr>
                       </thead>
                       <tbody>
@@ -38,6 +39,7 @@ export default function ViewProductModal(props) {
                           <tr key={product._id}>
                             <td>{product.productname}</td>
                             <td>{product.quantity}</td>
+                            <td>{product.subtotal}</td>
                           </tr>
                         ))}
                       </tbody>
