@@ -156,7 +156,6 @@ export default function Checkout() {
                   <label>Expiration</label>
                   <MDBInput
                     className="mb-2"
-                    label=""
                     placeholder="MM/YY"
                     size="lg"
                     maxLength={7}
@@ -167,8 +166,8 @@ export default function Checkout() {
                     className="mb-2"
                     placeholder="1111 2222 3333 4444"
                     size="lg"
-                    minlength="19"
-                    maxlength="19"
+                    minlength="16"
+                    maxlength="16"
                   />
                   <label>Cvv</label>
                   <MDBInput
