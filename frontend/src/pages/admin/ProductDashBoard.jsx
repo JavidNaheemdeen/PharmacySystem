@@ -67,8 +67,7 @@ export default function ProductDashBoard() {
      };
 
      const filteredProducts = products.filter((pr) =>
-          pr.productname.toLowerCase().includes(searchTerm.toLowerCase()) || 
-          pr.batchnumber.toLowerCase().includes(searchTerm.toLowerCase())
+          pr.productname.toLowerCase().includes(searchTerm.toLowerCase())
 
      );
 
