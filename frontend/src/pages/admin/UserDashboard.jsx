@@ -5,6 +5,7 @@ import axios from "axios";
 import Swal from "sweetalert2";
 import { useNavigate } from "react-router-dom";
 import { BsFillTrashFill, BsFillPencilFill } from 'react-icons/bs'
+import GenerateUserRepo from "../../components/modals/GenerateUserRepo";
 
 export default function UserDashboard() {
   const [users, setUsers] = useState([]);
@@ -77,13 +78,16 @@ export default function UserDashboard() {
         <div className="col-md-8">
           <h2 className="text-center">User Dashboard</h2>
           <br />
-          <div className="text-center">
+          <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+            <div className="text-center" style={{ width: '50%' }}>
             <input
               type="text"
               placeholder="Search by name"
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
             />
+            </div>
+            <div><GenerateUserRepo /></div>
           </div>
           <br />
           <table className="table">

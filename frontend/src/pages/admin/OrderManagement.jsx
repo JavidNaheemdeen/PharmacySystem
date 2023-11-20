@@ -3,8 +3,9 @@ import SidenavAd from "../../components/admin/SidenavAd";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import ViewProductModal from "../../components/modals/ViewProductModal";
-import {BsFillHandThumbsUpFill, BsFillTrashFill} from 'react-icons/bs'
+import { BsFillHandThumbsUpFill, BsFillTrashFill } from 'react-icons/bs'
 import Swal from 'sweetalert2';
+import GenerOrderReport from "../../components/modals/GenerOrderReport";
 
 export default function OrderManagement() {
   const [orders, setOrders] = useState([]);
@@ -20,7 +21,7 @@ export default function OrderManagement() {
   useEffect(() => {
     // Check if the user is already logged in
     if (!pharmacyId) {
-      navigate("/Pharmlogin"); 
+      navigate("/Pharmlogin");
     }
   }, [navigate]);
 
@@ -36,38 +37,38 @@ export default function OrderManagement() {
   }, []);
 
   const handleDeleteOrder = (orderId) => {
-     Swal.fire({
-       title: 'Delete Order',
-       text: 'Are you sure to delete the order?',
-       icon: 'warning',
-       showCancelButton: true,
-       confirmButtonText: 'Yes',
-       cancelButtonText: 'No',
-     }).then((result) => {
-       if (result.isConfirmed) {
-         axios
-           .delete(`http://localhost:3000/api/order/deleteorder/${orderId}`)
-           .then(() => {
-               setOrders((prevOrder) =>
-               prevOrder.filter((or) => or._id !== pharmacyId)
-             );
- 
-             Swal.fire({
-               title: 'Success',
-               text: 'Order Deleted Successfully!',
-               icon: 'success',
-             }).then(() => {
-               window.location.reload();
-             });
-           })
-           .catch((err) => {
-             console.log(err);
-           });
-       }
-     });
-   };
+    Swal.fire({
+      title: 'Delete Order',
+      text: 'Are you sure to delete the order?',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonText: 'Yes',
+      cancelButtonText: 'No',
+    }).then((result) => {
+      if (result.isConfirmed) {
+        axios
+          .delete(`http://localhost:3000/api/order/deleteorder/${orderId}`)
+          .then(() => {
+            setOrders((prevOrder) =>
+              prevOrder.filter((or) => or._id !== pharmacyId)
+            );
 
-   const handleDoneOrder = (orderId) => {
+            Swal.fire({
+              title: 'Success',
+              text: 'Order Deleted Successfully!',
+              icon: 'success',
+            }).then(() => {
+              window.location.reload();
+            });
+          })
+          .catch((err) => {
+            console.log(err);
+          });
+      }
+    });
+  };
+
+  const handleDoneOrder = (orderId) => {
     Swal.fire({
       title: "Confirm Dispatch",
       text: "Are you sure the order has been Dispatched?",
@@ -104,6 +105,10 @@ export default function OrderManagement() {
     });
   };
 
+  const filteredOrder = orders.filter((or) =>
+    or.orderDate.toLowerCase().includes(searchTerm.toLowerCase())
+  );
+
 
   return (
     <div>
@@ -115,6 +120,17 @@ export default function OrderManagement() {
         <div className="col-md-8">
           <h2 className="text-center">Order Dashboard</h2>
           <br />
+          <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+            <div className="text-center" style={{ width: '50%' }}>
+              <input
+                type="text"
+                placeholder="Search by date"
+                value={searchTerm}
+                onChange={(e) => setSearchTerm(e.target.value)}
+              />
+            </div>
+            <div><GenerOrderReport /></div>
+          </div>
           <br />
           <table className="table">
             <thead className="thead-dark">
@@ -131,7 +147,7 @@ export default function OrderManagement() {
               </tr>
             </thead>
             <tbody>
-              {orders.map((or) => (
+              {filteredOrder.map((or) => (
                 <tr key={or._id}>
                   <td>{or.orderDate}</td>
                   <td>{or.noOfItems}</td>
@@ -142,18 +158,18 @@ export default function OrderManagement() {
                   <td className={or.orderStatus === "Pending" ? "text-danger" : "text-success"}>{or.orderStatus}</td>
                   <td>
                     <ViewProductModal products={or.products} />
-                    <button 
+                    <button
                       onClick={() => handleDoneOrder(or._id)}
                       className="btn btn-success btn-sm me-1"
                     >
-                      <BsFillHandThumbsUpFill/>
+                      <BsFillHandThumbsUpFill />
                     </button>
-                    
-                    <button 
+
+                    <button
                       onClick={() => handleDeleteOrder(or._id)}
                       className="btn btn-danger btn-sm"
                     >
-                      <BsFillTrashFill/>
+                      <BsFillTrashFill />
                     </button>
                   </td>
                 </tr>

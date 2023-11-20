@@ -38,9 +38,10 @@ export default function GeneratProReport() {
       });
   }, []);
 
-  const filteredProducts = products.filter((pr) =>
-    pr.productname.toLowerCase().includes(searchTerm.toLowerCase())
-  );
+     const filteredProducts = products.filter((pr) =>
+          pr.productname.toLowerCase().includes(searchTerm.toLowerCase())
+
+     );
 
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
@@ -53,7 +54,7 @@ export default function GeneratProReport() {
 
   return (
     <>
-      <Button className="btn btn-def me-3" onClick={handleShow}>
+            <Button className="btn btn-curved me-3" onClick={handleShow}>
         Report
       </Button>
 

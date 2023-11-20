@@ -5,6 +5,7 @@ import axios from "axios";
 import Swal from 'sweetalert2';
 import PrescriptionModal from "../../components/modals/PrescriptionModal";
 import { BsFillTrashFill, BsFillEyeFill } from 'react-icons/bs'
+import GeneratePrescrRepo from "../../components/modals/GeneratePrescrRepo";
 
 export default function PrescriptionManagement() {
 
@@ -77,12 +78,15 @@ export default function PrescriptionManagement() {
         <div className="col-md-8">
           <h2 className="text-center">Prescription Dashboard</h2>
           <br />
-          <div className="text-center">
+          <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+            <div className="text-center" style={{ width: '50%' }}>
             <input type="text"
               placeholder="Search by patient name"
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
             />
+            </div>
+            <div><GeneratePrescrRepo/></div>
           </div>
           <br />
           <table className="table">

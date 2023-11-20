@@ -5,7 +5,7 @@ import AddProdModal from '../../components/modals/AddProdModal'
 import UpdateProdModal from '../../components/modals/UpdateProdModal'
 import axios from "axios";
 import Swal from "sweetalert2";
-import { useNavigate  } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { BsFillTrashFill, BsFillPencilFill } from 'react-icons/bs'
 import GeneratProReport from "../../components/modals/GeneratProReport";
 
@@ -21,9 +21,9 @@ export default function ProductDashBoard() {
           // Check if the user is already logged in (e.g., check if a token or user data exists in local storage)
           const pharmacyId = localStorage.getItem('pharmacyId');
           if (!pharmacyId) {
-            navigate('/Pharmlogin'); // Redirect to the dashboard if logged in
+               navigate('/Pharmlogin'); // Redirect to the dashboard if logged in
           }
-        }, [navigate]);
+     }, [navigate]);
 
 
      useEffect(() => {
@@ -81,14 +81,19 @@ export default function ProductDashBoard() {
                     <div className="col-md-8">
                          <h2 className='text-center'>Product Dashboard</h2>
                          <br />
-                         <div className='text-center'><AddProdModal /><GeneratProReport/></div>
-                         <br/>
-                         <div className="text-center">
-                              <input type="text"
-                                   placeholder="Search by name"
-                                   value={searchTerm}
-                                   onChange={(e) => setSearchTerm(e.target.value)}
-                              />
+                         <div className='text-center'><AddProdModal /></div>
+                         <br />
+                         <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+                              <div className="text-center" style={{ width: '50%' }}>
+                                   <input type="text"
+                                        placeholder="Search by name"
+                                        value={searchTerm}
+                                        onChange={(e) => setSearchTerm(e.target.value)}
+                                   />
+                              </div>
+                              <div>
+                                   <GeneratProReport />
+                              </div>
                          </div>
                          <br />
                          <table className="table">
@@ -126,7 +131,7 @@ export default function ProductDashBoard() {
                                                        onClick={() => handleDeleteProduct(pr._id)}
                                                        className="btn btn-danger btn-sm"
                                                   >
-                                                       <BsFillTrashFill/>
+                                                       <BsFillTrashFill />
                                                   </button>
                                              </td>
                                         </tr>

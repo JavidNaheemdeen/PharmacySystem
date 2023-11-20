@@ -4,7 +4,8 @@ import UpdatePharmModal from "../../components/modals/UpdatePharmModal";
 import axios from "axios";
 import Swal from 'sweetalert2';
 import { BsFillTrashFill, BsFillPencilFill } from 'react-icons/bs'
-import { useNavigate  } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
+import GeneratePharmRepo from "../../components/modals/GeneratePharmRepo";
 
 export default function PharmacyDashboard() {
   const [pharmacy, setPharmacy] = useState([]);
@@ -81,12 +82,17 @@ export default function PharmacyDashboard() {
         <div className="col-md-8">
           <h2 className="text-center">Pharmacy Dashboard</h2>
           <br />
-          <div className="text-center">
-            <input type="text"
-              placeholder="Search by name or town"
-              value={searchTerm}
-              onChange={(e) => setSearchTerm(e.target.value)}
-            />
+          <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+            <div className="text-center" style={{ width: '50%' }}>
+              <input type="text"
+                placeholder="Search by name or town"
+                value={searchTerm}
+                onChange={(e) => setSearchTerm(e.target.value)}
+              />
+            </div>
+            <div>
+              <GeneratePharmRepo />
+            </div>
           </div>
           <br />
           <table className="table">
@@ -121,11 +127,11 @@ export default function PharmacyDashboard() {
                   <td>{pm.opentime}</td>
                   <td className="text-center">
                     <UpdatePharmModal pmid={pm._id} />
-                    <button 
+                    <button
                       onClick={() => handleDeletePharmacy(pm._id)}
                       className="btn btn-danger btn-sm"
                     >
-                      <BsFillTrashFill/>
+                      <BsFillTrashFill />
                     </button>
                   </td>
                 </tr>
