@@ -17,14 +17,6 @@ export default function GeneratProReport() {
   const pharmacyId = localStorage.getItem("pharmacyId");
 
   useEffect(() => {
-    // Check if the user is already logged in (e.g., check if a token or user data exists in local storage)
-    const pharmacyId = localStorage.getItem("pharmacyId");
-    if (!pharmacyId) {
-      navigate("/Pharmlogin"); // Redirect to the dashboard if logged in
-    }
-  }, [navigate]);
-
-  useEffect(() => {
     axios
       .get("http://localhost:3000/api/product/pharmacy/" + pharmacyId)
       .then((res) => {
