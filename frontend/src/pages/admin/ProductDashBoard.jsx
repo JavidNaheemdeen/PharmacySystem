@@ -7,6 +7,7 @@ import axios from "axios";
 import Swal from "sweetalert2";
 import { useNavigate  } from 'react-router-dom';
 import { BsFillTrashFill, BsFillPencilFill } from 'react-icons/bs'
+import GeneratProReport from "../../components/modals/GeneratProReport";
 
 export default function ProductDashBoard() {
 
@@ -80,7 +81,7 @@ export default function ProductDashBoard() {
                     <div className="col-md-8">
                          <h2 className='text-center'>Product Dashboard</h2>
                          <br />
-                         <div className='text-center'><AddProdModal /></div>
+                         <div className='text-center'><AddProdModal /><GeneratProReport/></div>
                          <br/>
                          <div className="text-center">
                               <input type="text"
