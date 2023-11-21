@@ -122,3 +122,29 @@ exports.getOrdersByUserId = async (req, res) => {
     res.status(500).json({ message: "Internal Server Error" });
   }
 };
+
+// Get total sales with orderStatus equal to "Dispatched"
+exports.getTotalSalesDispatched = async (req, res) => {
+  try {
+    const totalSalesDispatched = await Order.aggregate([
+      {
+        $match: { orderStatus: "Dispatched" }
+      },
+      {
+        $group: {
+          _id: null,
+          totalSales: { $sum: '$totalPrice' }
+        }
+      }
+    ]);
+
+    if (totalSalesDispatched.length === 0) {
+      return res.status(404).json({ message: 'No sales data found for orders with status "Dispatched".' });
+    }
+
+    res.status(200).json({ totalSales: totalSalesDispatched[0].totalSales });
+  } catch (error) {
+    console.error('Error fetching total sales for orders with status "Dispatched":', error);
+    res.status(500).json({ message: 'Internal server error.' });
+  }
+};

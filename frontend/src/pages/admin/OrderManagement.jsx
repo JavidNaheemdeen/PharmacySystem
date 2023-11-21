@@ -7,8 +7,12 @@ import { BsFillHandThumbsUpFill, BsFillTrashFill } from 'react-icons/bs'
 import Swal from 'sweetalert2';
 import GenerOrderReport from "../../components/modals/GenerOrderReport";
 
+
 export default function OrderManagement() {
   const [orders, setOrders] = useState([]);
+  const [totalSales, setTotalSales] = useState(0);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [chartData, setChartData] = useState(null);
 
   const [searchTerm, setSearchTerm] = useState("");
 
@@ -30,11 +34,18 @@ export default function OrderManagement() {
       .get("http://localhost:3000/api/order/pharmacy/" + pharmacyId)
       .then((res) => {
         setOrders(res.data);
+
+        // Calculate total sales for Dispatched orders and round to 2 decimal places
+        const sales = res.data
+          .filter((order) => order.orderStatus === "Dispatched")
+          .reduce((total, order) => total + order.totalPrice, 0);
+        const roundedSales = Math.round(sales * 100) / 100; // Round to 2 decimal places
+        setTotalSales(roundedSales);
       })
       .catch((err) => {
         console.log(err);
       });
-  }, []);
+  }, [pharmacyId]);
 
   const handleDeleteOrder = (orderId) => {
     Swal.fire({
@@ -130,6 +141,9 @@ export default function OrderManagement() {
               />
             </div>
             <div><GenerOrderReport /></div>
+            <div className="text-center" style={{background:"black", color:"yellow", padding:"10px", borderRadius:"15px", paddingBottom:"0px"}}>
+              <h4>Total Sales: {totalSales}</h4>
+            </div>
           </div>
           <br />
           <table className="table">
@@ -155,7 +169,17 @@ export default function OrderManagement() {
                   <td>{or.contactNumber}</td>
                   <td>{or.patientAddress}</td>
                   <td>{or.paymentMethod}</td>
-                  <td className={or.orderStatus === "Pending" ? "text-danger" : "text-success"}>{or.orderStatus}</td>
+                  <td><span style={{
+                    backgroundColor: or.orderStatus === "Pending" ? "red" : "green",
+                    color: "white",
+                    borderRadius: 6,
+                    fontWeight: 'bold',
+                    padding: 6,
+                    textAlign: "center",
+                  }}
+                  >
+                    {or.orderStatus}</span>
+                  </td>
                   <td>
                     <ViewProductModal products={or.products} />
                     <button

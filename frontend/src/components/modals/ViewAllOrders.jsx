@@ -63,7 +63,16 @@ export default function ViewAllOrders() {
                             <td>{or.orderDate}</td>
                             <td>{or.pharmacyName}</td>
                             <td>{or.totalPrice}</td>
-                            <td className={or.orderStatus === "Pending" ? "text-danger" : "text-success"}>{or.orderStatus}</td>
+                            <td ><span style={{
+                              backgroundColor: or.orderStatus === "Pending" ? "red" : "green",
+                              color: "white",
+                              borderRadius: 6,
+                              fontWeight: 'bold',
+                              padding: 6,
+                              textAlign: "center",
+                            }}
+                            >{or.orderStatus}</span>
+                            </td>
                           </tr>
                         ))}
                       </tbody>

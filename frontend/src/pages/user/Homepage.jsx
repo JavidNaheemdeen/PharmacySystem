@@ -205,7 +205,7 @@ export default function Homepage() {
                               style={{
                               position: 'fixed',
                               bottom: '20px',
-                              right: '20px',
+                              right: '70px',
                               background: 'yellow',
                               color: 'black',
                               fontSize: '22px',
