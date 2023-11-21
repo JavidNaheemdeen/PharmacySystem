@@ -51,8 +51,10 @@ export default function Checkout() {
     // Clear the interval when the component is unmounted
     return () => clearInterval(intervalId);
   }, []);
+  
 
   const handleCheckout = async () => {
+    
     try {
       // Create an array to hold details for each product in the cart
       const productsDetails = cart.map((item) => ({
@@ -73,7 +75,7 @@ export default function Checkout() {
         contactNumber,
         patientAddress,
         orderDate,
-        paymentMethod, 
+        paymentMethod,
         userId,
       };
 
@@ -90,22 +92,17 @@ export default function Checkout() {
 
       // Check if the user confirmed the order
       if (isConfirmed.isConfirmed) {
-        // Send a request to your server to create a new order
         const response = await axios.post("http://localhost:3000/api/order/addorder", orderData);
 
-        // Handle success or navigate to a success page
         console.log("Order created:", response.data);
 
-        // Delete the cart after placing the order
         await axios.delete("http://localhost:3000/api/cart/deletecart/" + userId);
 
-        // Show a SweetAlert success message
         Swal.fire({
           title: 'Order Placed!',
           text: 'Your order has been placed successfully.',
           icon: 'success',
         }).then(() => {
-          // Redirect to the home page
           window.location.href = "/";
         });
       }
@@ -127,15 +124,13 @@ export default function Checkout() {
   const renderCreditCardForm = () => {
     if (paymentMethod === "onlinePayment") {
       return (
-        <div>
+        <div className="d-flex justify-content-center align-items-center text-center">
           <MDBCard
             className="shadow-2-strong mb-5 justify-content-center align-items-center text-center"
             style={{
               borderRadius: "16px",
-              background:
-                "linear-gradient(to right, #3498db, #6bb9f0)",
+              background: "linear-gradient(to right, #3498db, #6bb9f0)",
               color: "white",
-              // width: "50%"
             }}
           >
             <MDBTypography
@@ -147,35 +142,39 @@ export default function Checkout() {
             <MDBCardBody className="d-flex justify-content-center align-items-center text-center">
               <MDBCol className="text-center">
                 <MDBCol>
-                  <label>Name on Card</label>
+                  <label htmlFor="nameOnCard">Name on Card</label>
                   <MDBInput
+                    id="nameOnCard"
                     className="mb-2"
                     placeholder="John Smiths"
                     size="lg"
                   />
-                  <label>Expiration</label>
+                  <label htmlFor="expiration">Expiration</label>
                   <MDBInput
+                    id="expiration"
                     className="mb-2"
                     placeholder="MM/YY"
                     size="lg"
                     maxLength={7}
                     minLength={7}
                   />
-                  <label>Card Number</label>
+                  <label htmlFor="cardNumber">Card Number</label>
                   <MDBInput
+                    id="cardNumber"
                     className="mb-2"
                     placeholder="1111 2222 3333 4444"
                     size="lg"
-                    minlength="16"
-                    maxlength="16"
+                    minLength="16"
+                    maxLength="16"
                   />
-                  <label>Cvv</label>
+                  <label htmlFor="cvv">CVV</label>
                   <MDBInput
+                    id="cvv"
                     className="mb-2"
                     placeholder="&#9679;&#9679;&#9679;"
                     size="lg"
-                    minlength="3"
-                    maxlength="3"
+                    minLength="3"
+                    maxLength="3"
                     type="password"
                   />
                 </MDBCol>
@@ -195,22 +194,13 @@ export default function Checkout() {
 
 
   return (
-    <div style={{backgroundColor:"#eee"}}>
+    <div style={{ backgroundColor: "#eee" }}>
       <Header />
       <br />
       <br />
       <br />
       <div className="container" style={{ maxWidth: "600px", margin: "auto", backgroundColor: "white", borderRadius: "16px", marginTop: "12px", marginBottom: "12px" }}>
         <h1 style={{ textAlign: "center" }}>Checkout</h1>
-        {/* <MDBInput
-          className="mb-5"
-          type="text"
-          size="lg"
-          placeholder="Address"
-          value={orderDate}
-          onChange={(e) => setOrderDate(e.target.value)}
-          disabled
-        /> */}
 
         <table className="table">
           <thead className="thead-dark">
@@ -249,7 +239,7 @@ export default function Checkout() {
             </tr>
             <tr>
               <th style={{ fontSize: "25px" }} className="bold">Total Price:</th>
-              <td style={{ fontSize: "25px", color:"red" }}><b>LKR {(totalPrice + 200).toFixed(2)}</b></td>
+              <td style={{ fontSize: "25px", color: "red" }}><b>LKR {(totalPrice + 200).toFixed(2)}</b></td>
             </tr>
             <tr>
               <hr />
@@ -265,52 +255,41 @@ export default function Checkout() {
           </tbody>
         </table>
 
-<br />
-        
-        {/* <div style={{ marginTop: "20px", borderTop: "1px solid #ccc", paddingTop: "10px" }}>
-          <p>Total Items: {noOfItems}</p>
-          <p>Gross Price: LKR {totalPrice}</p>
-          <p>Delivery Charge: LKR 200</p>
-          <p>Total Price: LKR {(totalPrice + 200).toFixed(2)}</p>
-          <p>Address: {patientAddress}</p>
-          <p>Contact: {contactNumber}</p>
-        </div> */}
+        <br />
 
         <h4 style={{ marginTop: "20px" }}>Select Payment Method</h4>
         <div>
           <label style={{ marginRight: "10px" }}>
-          <MDBRadio
-            label="Cash on Delivery"
-            id="cashOnDelivery"
-            name="paymentMethod"
-            value="cashOnDelivery"
-            onChange={() => setPaymentMethod("cashOnDelivery")}
-            checked={paymentMethod === "Cash On Delivery"}
+            <MDBRadio
+              label="Cash on Delivery"
+              id="cashOnDelivery"
+              name="paymentMethod"
+              value="cashOnDelivery"
+              onChange={() => setPaymentMethod("cashOnDelivery")}
+              checked={paymentMethod === "cashOnDelivery"}
             />
           </label>
           <label>
-          <MDBRadio
-            label="Online Payment"
-            id="onlinePayment"
-            name="paymentMethod"
-            value="onlinePayment"
-            onChange={() => setPaymentMethod("onlinePayment")}
-            checked={paymentMethod === "Online Payment"}
+            <MDBRadio
+              label="Online Payment"
+              id="onlinePayment"
+              name="paymentMethod"
+              value="onlinePayment"
+              onChange={() => setPaymentMethod("onlinePayment")}
+              checked={paymentMethod === "onlinePayment"}
             />
           </label>
         </div>
-<br/>
-        <div className="d-flex justify-content-center align-items-center text-center">{renderCreditCardForm()}</div>
+        <br />
+        {renderCreditCardForm()}
 
         <div className="text-center">
-        <MDBBtn className="btn btn-def" block size="lg mb-3" onClick={handleCheckout} style={{ marginTop: "10px", width: "60%" }}>
-          Place Order
+          <MDBBtn className="btn btn-def" block size="lg mb-3" onClick={handleCheckout} style={{ marginTop: "10px", width: "60%" }}>
+            Place Order
           </MDBBtn>
         </div>
-
-        
       </div>
       <Footer />
-    </div> 
-      );
+    </div>
+  );
 }

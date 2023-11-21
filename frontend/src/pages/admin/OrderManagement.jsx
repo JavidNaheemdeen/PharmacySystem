@@ -141,8 +141,8 @@ export default function OrderManagement() {
               />
             </div>
             <div><GenerOrderReport /></div>
-            <div className="text-center" style={{background:"black", color:"yellow", padding:"10px", borderRadius:"15px", paddingBottom:"0px"}}>
-              <h4>Total Sales: {totalSales}</h4>
+            <div className="text-center" style={{background:"black", color:"yellow", padding:"12px", borderRadius:"15px", paddingBottom:"0px"}}>
+              <h4 style={{ fontWeight:"bold"}}>Total Sales: {totalSales}</h4>
             </div>
           </div>
           <br />
