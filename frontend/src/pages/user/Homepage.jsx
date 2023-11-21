@@ -9,6 +9,7 @@ import { FaLocationDot } from 'react-icons/fa6';
 import { FcClock } from 'react-icons/fc';
 import { BsPrescription2 } from 'react-icons/bs';
 import axios from "axios";
+import { SiAcclaim } from "react-icons/si";
 // import Swal from 'sweetalert2';
 
 export default function Homepage() {
@@ -33,6 +34,14 @@ export default function Homepage() {
      const filteredPharmacies = pharmacy.filter((pm) =>
           pm.town.toLowerCase().includes(searchTerm.toLowerCase())
      );
+
+     const scrollToTop = () => {
+          window.scrollTo({
+               top: 0,
+               behavior: "smooth"
+          });
+     };
+
 
      return (
           <div>
@@ -209,6 +218,24 @@ export default function Homepage() {
                               <BsPrescription2 /> Prescription
                          </a>
                     )}
+                    <button
+                         className="btn btn-curve"
+                         onClick={scrollToTop}
+                         style={{
+                              position: 'fixed',
+                              bottom: '20px',
+                              right: '20px',
+                              background: 'yellow',
+                              color: 'black',
+                              fontSize: '22px',
+                              borderRadius: '3rem',
+                              padding: '10px',
+                              textAlign: 'center',
+                              cursor: 'pointer',
+                         }}
+                    >
+                         <SiAcclaim />
+                    </button>
 
                     <Footer />
 
