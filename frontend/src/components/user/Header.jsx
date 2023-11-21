@@ -34,7 +34,6 @@ export default function Header() {
      // );
 
      useEffect(() => {
-          // Filter the list of pharmacies based on the search term
           const filtered = pharmacy.filter((pm) =>
             pm.name.toLowerCase().includes(searchTerm.toLowerCase())
           );
@@ -52,16 +51,13 @@ export default function Header() {
                cancelButtonText: "No",
           }).then((result) => {
                if (result.isConfirmed) {
-                    // Remove the pharmacyId from local storage
                     localStorage.removeItem("userId");
 
-                    // Show a success Swal notification
                     Swal.fire({
                          icon: 'success',
                          title: 'Logout Successful',
                          text: 'You have been successfully logged out.',
                     }).then(() => {
-                         // Redirect the user to the login or home page
                          window.location.href = "/";
                     });
                }

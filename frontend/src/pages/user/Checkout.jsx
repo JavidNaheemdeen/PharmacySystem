@@ -22,7 +22,7 @@ export default function Checkout() {
   const location = useLocation();
   const { cart, noOfItems, totalPrice, contactNumber, patientAddress } = location.state;
   const [orderDate, setOrderDate] = useState(getSriLankanDateTime());
-  const [paymentMethod, setPaymentMethod] = useState("cashOnDelivery"); // Default to cash on delivery
+  const [paymentMethod, setPaymentMethod] = useState("cashOnDelivery");
 
   const userId = localStorage.getItem('userId');
 
@@ -51,12 +51,11 @@ export default function Checkout() {
     // Clear the interval when the component is unmounted
     return () => clearInterval(intervalId);
   }, []);
-  
+
 
   const handleCheckout = async () => {
-    
+
     try {
-      // Create an array to hold details for each product in the cart
       const productsDetails = cart.map((item) => ({
         productId: item.product._id,
         productname: item.product.productname,
@@ -79,7 +78,6 @@ export default function Checkout() {
         userId,
       };
 
-      // Show a confirmation dialog
       const isConfirmed = await Swal.fire({
         title: 'Confirm Order',
         text: 'Are you sure you want to place the order?',
@@ -148,6 +146,7 @@ export default function Checkout() {
                     className="mb-2"
                     placeholder="John Smiths"
                     size="lg"
+                    required="true"
                   />
                   <label htmlFor="expiration">Expiration</label>
                   <MDBInput

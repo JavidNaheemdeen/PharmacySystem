@@ -16,7 +16,7 @@ export default function UpdatePharmModal(props) {
   const [address, setAddress] = useState("");
   const [town, setTown] = useState("");
   const [contact, setContact] = useState("");
-  const [logo, setLogo] = useState(""); // Store the image URL here
+  const [logo, setLogo] = useState(""); 
   const [opentime, setOpentime] = useState("");
   const [isLoading, setIsLoading] = useState(false);
 
@@ -26,7 +26,7 @@ export default function UpdatePharmModal(props) {
     address,
     town,
     contact,
-    logo, // Include the logo URL
+    logo, 
     opentime,
   };
 
@@ -63,7 +63,7 @@ export default function UpdatePharmModal(props) {
       );
 
       console.log(res.data.url);
-      setLogo(res.data.url); // Set the image URL in the state
+      setLogo(res.data.url); 
       setIsLoading(false);
     } catch (err) {
       console.log(err.response.data.msg);
